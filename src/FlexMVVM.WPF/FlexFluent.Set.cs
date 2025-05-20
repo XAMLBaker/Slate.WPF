@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Windows;
 
 namespace FlexMVVM.WPF
 {
     public partial class FlexFluent
     {
-        public FlexFluent Window<T>(Func<T> window = null)
+        public FlexFluent Window<T>(Func<T> window) where T : Window
         {
-            if (window == null)
-                return this;
-            _register.RegisterMap["FlexFrameworkWindow"] = typeof (T);
+            _register.RegisterMap["FlexFrameworkWindow"] = window ().GetType();
             return this;
         }
 

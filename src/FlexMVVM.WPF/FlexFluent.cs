@@ -17,10 +17,12 @@ namespace FlexMVVM.WPF
         public FlexFluent()
         {
             this.builder = FlexApp.CreateBuilder ();
-            this.builder.Services.AddSingleton<ILayoutNavigator, LayoutNavigator> ();
+            this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator> ();
 
             _register = new Register ();
             _register.RegisterMap["FlexFrameworkWindow"] = typeof (FlexWindow);
+
+            RegisterProvider.SetRegister (this._register);
         }
 
         private IContainer CreateContainer()
@@ -28,7 +30,7 @@ namespace FlexMVVM.WPF
             builder.ModuleRegister ();
             foreach (var register in this._register.RegisterMap)
             {
-                builder.Services.TryAddSingleton (register.Value);
+                this.Services.TryAddSingleton (register.Value);
             }
             var container = new Container ();
             container.WithDependencyInjectionAdapter (this.Services);
@@ -44,11 +46,7 @@ namespace FlexMVVM.WPF
         public void Run()
         {
             this.Init ();
-            DependencyObject Shell = (DependencyObject)RegisterProvider.Window;
-            if (Shell is Window window)
-            {
-                window.Show ();
-            }
+            ((Window)RegisterProvider.Window).Show();
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
             if (this._register.NestedLayout != null)
@@ -64,7 +62,6 @@ namespace FlexMVVM.WPF
                     "초기 Layout이 설정되지 않았습니다. flex.StartWithLayout<T>()를 Render() 안에서 반드시 호출하세요."
                 );
 
-            RegisterProvider.SetRegister (this._register);
             IContainer container = this.CreateContainer ();
             RegisterProvider.SetContainer (container);
             RegisterProvider.SetServiceProvider (container.BuildServiceProvider());
@@ -74,5 +71,6 @@ namespace FlexMVVM.WPF
 
         public IModuleCatalog ModuleCatalog => this.builder.ModuleCatalog ();
         public IServiceCollection Services => this.builder.Services;
+        public IContainerRegistry ContainerRegistry => this.builder.ContainerRegistry;
     }
 }

@@ -20,14 +20,14 @@ namespace FlexMVVM.WPF
             this.Render ();
 
             this.ModuleContext (this.flex.ModuleCatalog);
-            this.RegisterService (this.flex.Services);
+            this.Register (this.flex.ContainerRegistry);
 
             OnInitialized ();
         }
 
         protected abstract void Render();
         protected virtual void ModuleContext(IModuleCatalog moduleCatalog){}
-        protected virtual void RegisterService(IServiceCollection services){}
+        protected virtual void Register(IContainerRegistry containerRegistry) {}
 
         protected virtual void OnInitialized()
         {
