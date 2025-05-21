@@ -1,5 +1,6 @@
 ﻿using FlexMVVM.Modularity;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace FlexMVVM.WPF

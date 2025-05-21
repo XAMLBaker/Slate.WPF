@@ -9,7 +9,7 @@ namespace FlexMVVM.Navigation
     public interface ILayoutNavigator
     {
         void SetRootLayout();
-        void RootLayout();
+        void Home();
         void NavigateTo(string url);
         UIElement CreateLayout(string url);
     }
@@ -31,12 +31,19 @@ namespace FlexMVVM.Navigation
             var layOutObject = (UIElement)this._container.Resolve (rootLayoutType);
             if (winObject is Window window)
             {
+                if(window.Content != null)
+                {
+                    if (window.Content is Panel panel)
+                    {
+                        panel.Children.Add (layOutObject);
+                        return;
+                    }
+                }
                 window.Content = layOutObject;
-                RootLayout ();
             }
         }
 
-        public void RootLayout()
+        public void Home()
         {
             Type rootLayoutType = RegisterProvider.GetDefineNestedLayout();
 
@@ -50,7 +57,7 @@ namespace FlexMVVM.Navigation
             if (layOutObject is DockPanel dockPanel)
             {
                 Contentemove (dockPanel);
-                bool _isGroupedWithRegion = IsGroupedWithRegion (rootLayoutType.Namespace);
+                bool _isGroupedWithRegion = IsGroupedWithContent (rootLayoutType.Namespace);
                 if (_isGroupedWithRegion == false)
                     return;
                 LayerPress (rootLayoutType);
@@ -66,9 +73,7 @@ namespace FlexMVVM.Navigation
             UIElement layout = CreateLayout (_url);
             if (rootLayoutType == null)
             {
-                Type winType = RegisterProvider.GetWindow();
-                var winObject = (UIElement)this._container.Resolve (winType);
-                if (winObject is Window window)
+                if (RegisterProvider.Window is Window window)
                 {
                     window.Content = layout;
                 }
@@ -91,14 +96,14 @@ namespace FlexMVVM.Navigation
                     throw new Exception ("Module 등록되지 않은 url 입니다.");
 
                 bool _isGroupedWithLayout = IsGroupedWithLayout (url);
-                bool _isGroupedWithRegion = IsGroupedWithRegion (url);
+                bool _isGroupedWithContent = IsGroupedWithContent (url);
 
-                if((_isGroupedWithLayout || _isGroupedWithRegion) == false)
-                    throw new Exception ("등록 된 Layout 또는 Page가 없습니다.");
+                if((_isGroupedWithLayout || _isGroupedWithContent) == false)
+                    throw new Exception ("등록 된 Layout 또는 Content가 없습니다.");
 
-                string typeNameSpace = _isGroupedWithLayout ? GetLayoutString (url) : GetRegionString(url);
+                string typeNameSpace = _isGroupedWithLayout ? GetLayoutString (url) : GetContentString(url);
                 Type contentType = RegisterProvider.GetType(typeNameSpace);
-                if (_isGroupedWithLayout && _isGroupedWithRegion)
+                if (_isGroupedWithLayout && _isGroupedWithContent)
                 {
                     LayerPress (contentType);
                 }
@@ -139,12 +144,12 @@ namespace FlexMVVM.Navigation
             return $"{url}.Layout";
         }
 
-        private string GetRegionString(string url)
+        private string GetContentString(string url)
         {
-            if (url.Split ('.').Last () == "Region")
+            if (url.Split ('.').Last () == "Content")
                 return url;
 
-            return $"{url}.Region";
+            return $"{url}.Content";
         }
 
         private bool IsGroupedWithLayout(string url)
@@ -153,17 +158,17 @@ namespace FlexMVVM.Navigation
                 return true;
             return RegisterProvider.IsUrlRegistered(GetLayoutString (url));
         }
-        private bool IsGroupedWithRegion(string url)
+        private bool IsGroupedWithContent(string url)
         {
-            if (url.Split ('.').Last () == "Region")
+            if (url.Split ('.').Last () == "Content")
                 return true;
-            return RegisterProvider.IsUrlRegistered (GetRegionString (url));
+            return RegisterProvider.IsUrlRegistered (GetContentString (url));
         }
 
         private void LayerPress(Type layoutType)
         {
             var _region = layoutType.Assembly.DefinedTypes.Where (x => x.Namespace == layoutType.Namespace)
-                                                         .First (x => x.Name == "Region");
+                                                         .First (x => x.Name == "Content");
 
             var layOutObject = (UIElement)this._container.Resolve (layoutType);
             var regionObject = (UIElement)this._container.Resolve (_region);

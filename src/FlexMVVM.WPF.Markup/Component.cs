@@ -1,0 +1,91 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+
+namespace FlexMVVM.WPF.Markup
+{
+    public interface  IComponent
+    {
+        void Render();
+    }
+
+    [INotifyPropertyChanged]
+    public abstract partial class Component : ContentControl, IComponent
+    {
+        public Component()
+        {
+            ComponentHost.Register (this);
+            this.DataContext = this;
+            this.Render();
+            this.Loaded += this.OnLoaded;
+        }
+
+        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        protected virtual void OnRender(object sender)
+        {
+
+        }
+
+        public void Render()
+        {
+            this.Content = this.Build ();
+
+            this.OnRender (this);
+        }
+        protected abstract Visual Build();
+    }
+
+    [INotifyPropertyChanged]
+    public abstract partial class LayoutComponent : DockPanel, IComponent
+    {
+        public LayoutComponent()
+        {
+            ComponentHost.Register (this);
+            this.DataContext = this;
+            this.Render ();
+            this.Loaded += this.OnLoaded;
+        }
+        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        protected virtual void OnRender(object sender)
+        {
+
+        }
+        public void Render()
+        {
+            List<UIElement> removeChildren = new List<UIElement> ();
+            foreach (UIElement child in this.Children)
+            {
+                // DockPanel.Dock 의 설정 상태를 확인
+                var valueSource = DependencyPropertyHelper.GetValueSource (child, DockPanel.DockProperty);
+
+                // Local 값으로 설정되지 않은 경우
+                if (valueSource.BaseValueSource.HasFlag (BaseValueSource.Local))
+                {
+                    removeChildren.Add (child);
+                }
+            }
+            foreach (UIElement child in removeChildren)
+            {
+                this.Children.Remove(child);
+            }
+
+            var elements = this.Build ();
+            int i = 0;
+            foreach (var element in elements)
+            {
+                this.Children.Insert (i++,element);
+            }
+            this.OnRender (this);
+        }
+        protected abstract IEnumerable<UIElement> Build();
+    }
+}
