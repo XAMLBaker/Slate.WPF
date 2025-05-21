@@ -8,19 +8,42 @@ namespace FlexMVVM.WPF.Markup
 {
     public static class BindingExtensions
     {
-        public static T Link<T>(this T control, DependencyProperty property, string path) where T : FrameworkElement
+        public static T Link<T>(
+                        this T control,
+                        DependencyProperty property,
+                        string path,
+                        object source = null,
+                        IValueConverter? converter = null) where T : FrameworkElement
         {
-            control.SetBinding (property, new Binding (path));
+            var binding = new Binding (path)
+            {
+                Source = source,
+                Converter = converter
+            };
+
+            control.SetBinding (property, binding);
             return control;
         }
-        public static ContentControl Link(this ContentControl control, string viewModelProperty)
+
+
+        public static ContentControl Link(this ContentControl control, string viewModelProperty, IValueConverter? converter = null)
         {
-            control.SetBinding (ContentControl.ContentProperty, new Binding (viewModelProperty));
+            var binding = new Binding (viewModelProperty);
+
+            if (converter != null)
+                binding.Converter = converter;
+
+            control.SetBinding (ContentControl.ContentProperty, binding);
             return control;
         }
-        public static TextBlock Link(this TextBlock control, string viewModelProperty)
+        public static TextBlock Link(this TextBlock control, string viewModelProperty, IValueConverter? converter = null)
         {
-            control.SetBinding(TextBlock.TextProperty, new Binding (viewModelProperty));
+            var binding = new Binding (viewModelProperty);
+
+            if (converter != null)
+                binding.Converter = converter;
+
+            control.SetBinding (TextBlock.TextProperty, binding);
             return control;
         }
         public static ItemsControl Link(this ItemsControl control, string viewModelProperty)
