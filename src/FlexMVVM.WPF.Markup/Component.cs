@@ -9,6 +9,33 @@ namespace FlexMVVM.WPF.Markup
     {
         void Render();
     }
+    [INotifyPropertyChanged]
+    public abstract partial class BaseComponent : ContentControl, IComponent
+    {
+        public BaseComponent()
+        {
+            ComponentHost.Register (this);
+            this.DataContext = this;
+            this.Loaded += this.OnLoaded;
+            if (this.ComponentStyleKey != null)
+                this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
+        }
+
+        public object? ComponentStyleKey { get; set; }
+
+        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Render ();
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized (e);
+        }
+
+        public abstract void Render();
+    }
+
 
     [INotifyPropertyChanged]
     public abstract partial class Component : ContentControl, IComponent
@@ -17,15 +44,22 @@ namespace FlexMVVM.WPF.Markup
         {
             ComponentHost.Register (this);
             this.DataContext = this;
-            this.Render();
             this.Loaded += this.OnLoaded;
+            if (this.ComponentStyleKey != null)
+                this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
         }
+
+        public object? ComponentStyleKey { get; set; }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
-
+            this.Render ();
         }
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized (e);
+        }
         protected virtual void OnRender(object sender)
         {
 
@@ -46,13 +80,16 @@ namespace FlexMVVM.WPF.Markup
         public LayoutComponent()
         {
             ComponentHost.Register (this);
-            this.DataContext = this;
-            this.Render ();
+            this.DataContext = this;       
             this.Loaded += this.OnLoaded;
+
+            if (this.ComponentStyleKey != null)
+                this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
         }
+        public object? ComponentStyleKey { get; set; }
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
-
+            this.Render ();
         }
 
         protected virtual void OnRender(object sender)

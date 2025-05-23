@@ -9,7 +9,7 @@ namespace FlexMVVM
         public static FlexAppBuilder CreateBuilder()
         {
             return new FlexAppBuilder (new ContainerRegistry<DependencyObject>(),
-                                       new ModuleCatalog<IModule>());
+                                       new ModuleCatalog());
         }
     }
 }
