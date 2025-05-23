@@ -14,7 +14,6 @@ namespace FlexMVVM.WPF.Markup
     {
         public BaseComponent()
         {
-            ComponentHost.Register (this);
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
             if (this.ComponentStyleKey != null)
@@ -42,7 +41,6 @@ namespace FlexMVVM.WPF.Markup
     {
         public Component()
         {
-            ComponentHost.Register (this);
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
             if (this.ComponentStyleKey != null)
@@ -79,7 +77,6 @@ namespace FlexMVVM.WPF.Markup
     {
         public LayoutComponent()
         {
-            ComponentHost.Register (this);
             this.DataContext = this;       
             this.Loaded += this.OnLoaded;
 

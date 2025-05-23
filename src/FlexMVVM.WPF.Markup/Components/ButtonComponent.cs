@@ -71,8 +71,10 @@ namespace FlexMVVM.WPF.Markup
         {
             this.OnHover (() =>
             {
-                Background = _hoverBackgroundBrush;
-                Foreground = _hoverForegroundBrush;
+                if (_hoverBackgroundBrush != null)
+                    Background = _hoverBackgroundBrush;
+                if (_hoverForegroundBrush != null)
+                    Foreground = _hoverForegroundBrush;
             })
             .OnRelease (() =>
             {

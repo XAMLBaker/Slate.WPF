@@ -1,9 +1,12 @@
 ﻿
 using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 
-[assembly: System.Reflection.Metadata.MetadataUpdateHandler  (typeof (FlexMVVM.WPF.Markup.HotReloadManager))]
+[assembly: System.Reflection.Metadata.MetadataUpdateHandler (typeof (FlexMVVM.WPF.Markup.HotReloadManager))]
 
 namespace FlexMVVM.WPF.Markup
 {
@@ -21,17 +24,44 @@ namespace FlexMVVM.WPF.Markup
             {
                 if (types is null)
                     return;
-                foreach (var component in ComponentHost.GetActiveComponents ())
+                foreach (var window in Application.Current.Windows)
                 {
-                    var componentType = component.GetType ();
-
-                    // 변경된 타입 목록 중에 일치하는 것이 있는 경우만 Build()
-                    if (types.Any (t => t == componentType))
+                    if (window.ToString () == "Microsoft.VisualStudio.DesignTools.WpfTap.WpfVisualTreeService.Adorners.AdornerWindow")
                     {
-                        component.Render ();
+                        continue;
+                    }
+                    foreach (Type type in types)
+                    {
+                        if (type.GetInterfaces ().Any (x => x.Name == "IComponent"))
+                        {
+                            RenderAllOfType ((DependencyObject)((Window)window).Content, type);
+                        }
                     }
                 }
             });
+        }
+        private static void RenderAllOfType(DependencyObject root, Type targetType)
+        {
+            if (root == null)
+                return;
+
+            int count = VisualTreeHelper.GetChildrenCount (root);
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild (root, i);
+
+                if (child == null)
+                    continue;
+
+                // 원하는 타입이면 Render 호출
+                if (targetType.IsInstanceOfType (child) && child is IComponent component)
+                {
+                    component.Render ();
+                }
+
+                // 재귀 탐색
+                RenderAllOfType (child, targetType);
+            }
         }
     }
 }

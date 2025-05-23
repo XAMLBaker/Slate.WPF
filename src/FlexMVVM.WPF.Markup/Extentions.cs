@@ -270,17 +270,6 @@ namespace FlexMVVM.WPF.Markup
             fe.Child = element;
             return fe;
         }
-        public static TParent Children<TParent, TPanel>(this TParent parent, params UIElement[] children)
-             where TParent : Decorator
-             where TPanel : Panel, new()
-        {
-            var panel = new TPanel ();
-            foreach (var child in children)
-                panel.Children.Add (child);
-
-            parent.Child = panel;
-            return parent;
-        }
     }
 
     public static class BorderExtentions
@@ -313,6 +302,22 @@ namespace FlexMVVM.WPF.Markup
             bdr.Padding = new Thickness (left, top, right, bottom);
             return bdr;
         }
+        public static T CornerRadius<T>(this T bdr, double marginAll = 0) where T : Border
+        {
+            bdr.CornerRadius = new CornerRadius (marginAll, marginAll, marginAll, marginAll);
+            return bdr;
+        }
+        public static T CornerRadius<T>(this T bdr, double leftright = 0, double topbottom = 0) where T : Border
+        {
+            bdr.CornerRadius = new CornerRadius (leftright, topbottom, leftright, topbottom);
+            return bdr;
+        }
+        public static T CornerRadius<T>(this T bdr, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : Border
+        {
+            bdr.CornerRadius = new CornerRadius (left, top, right, bottom);
+            return bdr;
+        }
+
         public static T Brush<T>(this T bdr, string colorString) where T : Border
         {
             bdr.BorderBrush = new SolidColorBrush (ColorTool.Get (colorString));
@@ -340,6 +345,20 @@ namespace FlexMVVM.WPF.Markup
     }
     public static class ShapeExtentions
     {
+        public static T Fill<T>(this T shape, string colorString) where T : Shape
+        {
+            shape.Stroke = BrushTool.Get (colorString);
+
+            return shape;
+        }
+
+        public static T Fill<T>(this T shape, Color color) where T : Shape
+        {
+            shape.Stroke = new SolidColorBrush (color);
+
+            return shape;
+
+        }
         public static T Brush<T>(this T shape, string colorString) where T : Shape
         {
             shape.Stroke = BrushTool.Get (colorString);

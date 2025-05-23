@@ -7,7 +7,7 @@ namespace FlexMVVM.WPF
     {
         public FlexFluent Window<T>(Func<T> window) where T : Window
         {
-            _register.RegisterMap["FlexFrameworkWindow"] = window ().GetType();
+            _register.RegisterMap["FlexFrameworkWindow"] = typeof (T);
             return this;
         }
 
