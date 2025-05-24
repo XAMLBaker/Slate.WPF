@@ -1,10 +1,6 @@
-﻿
-using System;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.Collections;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Media;
 
 [assembly: System.Reflection.Metadata.MetadataUpdateHandler (typeof (FlexMVVM.WPF.Markup.HotReloadManager))]
 
@@ -30,38 +26,14 @@ namespace FlexMVVM.WPF.Markup
                     {
                         continue;
                     }
-                    foreach (Type type in types)
+                    var content = (DependencyObject)((Window)window).Content;
+
+                    if (content != null && content is IComponent c && types.Any(x=>x.GetInterfaces().Any(y=>y.Name == "IComponent")))
                     {
-                        if (type.GetInterfaces ().Any (x => x.Name == "IComponent"))
-                        {
-                            RenderAllOfType ((DependencyObject)((Window)window).Content, type);
-                        }
+                        c.Render ();
                     }
                 }
             });
-        }
-        private static void RenderAllOfType(DependencyObject root, Type targetType)
-        {
-            if (root == null)
-                return;
-
-            int count = VisualTreeHelper.GetChildrenCount (root);
-            for (int i = 0; i < count; i++)
-            {
-                var child = VisualTreeHelper.GetChild (root, i);
-
-                if (child == null)
-                    continue;
-
-                // 원하는 타입이면 Render 호출
-                if (targetType.IsInstanceOfType (child) && child is IComponent component)
-                {
-                    component.Render ();
-                }
-
-                // 재귀 탐색
-                RenderAllOfType (child, targetType);
-            }
         }
     }
 }

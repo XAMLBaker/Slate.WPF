@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
 {
@@ -34,7 +32,6 @@ namespace FlexMVVM.WPF.Markup
 
             return component;
         }
-
         public static T Foreground<T>(this T component, string forgroundHexString, string hoverForegroundHexString) where T : ButtonComponent
         {
             component.Foreground = BrushTool.Get (forgroundHexString);

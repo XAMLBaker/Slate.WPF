@@ -172,7 +172,15 @@ namespace FlexMVVM.WPF.Markup
             return element;
         }
     }
+    public static class TextBoxExtentions
+    {
+        public static TextBox OnPreviewText(this TextBox tb, Action action)
+        {
+            tb.PreviewTextInput += (_, __) => action ();
 
+            return tb;
+        }
+    }
     public static class ControlExtentions
     {
         public static T Background<T>(this T ctrl, string colorString) where T : Control
