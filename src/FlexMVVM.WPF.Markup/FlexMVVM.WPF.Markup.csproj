@@ -11,6 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\FlexMVVM\src\FlexMVVM\FlexMVVM.csproj" />
+    <ProjectReference Include="..\FlexMVVM.WPF\FlexMVVM.WPF.csproj" />
   </ItemGroup>
 
 </Project>

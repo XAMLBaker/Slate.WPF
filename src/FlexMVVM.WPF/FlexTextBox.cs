@@ -4,8 +4,19 @@ using System.Windows.Media;
 
 namespace FlexMVVM.WPF
 {
-    public class FlexTextBox : ContentControl
+    public class FlexTextBox : TextBox
     {
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue (CornerRadiusProperty); }
+            set { SetValue (CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register ("CornerRadius", typeof (CornerRadius), typeof (FlexTextBox), new PropertyMetadata (new CornerRadius (0)));
+
+
         public string WaterMarkText
         {
             get { return (string)GetValue (WaterMarkTextProperty); }
@@ -24,13 +35,56 @@ namespace FlexMVVM.WPF
             set { SetValue (WaterMarkTextColorProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for WaterMarkTextColorProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WaterMarkTextColorProperty =
-            DependencyProperty.Register ("WaterMarkTextColor", typeof (Brush), typeof (FlexTextBox), new PropertyMetadata (Colors.LightGray));
+            DependencyProperty.Register ("WaterMarkTextColor", typeof (Brush), typeof (FlexTextBox), new PropertyMetadata (new SolidColorBrush(Colors.LightGray)));
+
+        public Brush HoverBrush
+        {
+            get { return (Brush)GetValue (HoverBrushProperty); }
+            set { SetValue (HoverBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FocusBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HoverBrushProperty =
+            DependencyProperty.Register ("HoverBrush", typeof (Brush), typeof (FlexTextBox), new PropertyMetadata (new SolidColorBrush (Colors.LightGray)));
+
 
         static FlexTextBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata (typeof (FlexTextBox), new FrameworkPropertyMetadata (typeof (FlexTextBox)));
+        }
+
+        public FlexTextBox()
+        {
+        }
+        private Brush baseBrush;
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate ();
+
+            this.baseBrush = this.BorderBrush;
+            this.MouseEnter += (s, e) =>
+            {
+                if (this.IsSelectionActive)
+                    return;
+                this.BorderBrush = this.HoverBrush;
+            };
+
+            this.MouseLeave += (s, e) =>
+            {
+                if (this.IsSelectionActive)
+                    return;
+                this.BorderBrush = this.baseBrush;
+            };
+            this.GotFocus += (s, e) =>
+            {
+                this.BorderBrush = SelectionBrush;
+            };
+            this.LostFocus += (s, e) =>
+            {
+                this.BorderBrush = baseBrush;
+            };
         }
     }
 }

@@ -6,11 +6,14 @@ namespace FlexMVVM.WPF.Markup
     {
         public static Color Get(string hexString)
         {
-            return (Color)ColorConverter.ConvertFromString (hexString);
+            var temp = hexString.Replace ("#", "");
+            if (temp.Length != 8)
+            {
+                temp.PadLeft (8, 'F');
+            }
+            temp = "#" + temp;
+            return (Color)ColorConverter.ConvertFromString (temp);
         }
-        
-
-       
     }
 
     public static class BrushTool
