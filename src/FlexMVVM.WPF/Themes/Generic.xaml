@@ -46,12 +46,13 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:FlexCheckBox}">
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:FlexCheckBox}">
-                    <Grid>
+                    <Grid Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="auto" />
@@ -62,15 +63,18 @@
                             Height="{Binding CheckBoxSize, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             Padding="{TemplateBinding Padding}"
                             local:PaddingSize.TrackPaddingContentSize="True"
-                            Background="{TemplateBinding Background}"
+                            Background="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                            <Viewbox Width="{Binding (local:PaddingSize.ContentWidth), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}" Height="{Binding (local:PaddingSize.ContentHeight), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}">
+                            <Viewbox
+                                Width="{Binding (local:PaddingSize.ContentWidth), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                                Height="{Binding (local:PaddingSize.ContentHeight), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Border}}"
+                                Stretch="Fill">
                                 <Grid>
                                     <Path
                                         x:Name="CheckMark"
-                                        Fill="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        Fill="{Binding ForeColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         SnapsToDevicePixels="False"
                                         Stroke="{Binding ForeColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         StrokeEndLineCap="Round"
@@ -79,7 +83,7 @@
                                         Visibility="Collapsed" />
                                     <Path
                                         x:Name="InderminateMark"
-                                        Fill="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        Fill="{Binding ForeColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         SnapsToDevicePixels="False"
                                         Stroke="{Binding ForeColor, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         StrokeEndLineCap="Round"

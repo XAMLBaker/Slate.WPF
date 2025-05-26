@@ -7,6 +7,15 @@ namespace FlexMVVM.WPF
 {
     public class FlexCheckBox : CheckBox
     {
+        public Brush HoverBrush
+        {
+            get { return (Brush)GetValue (HoverBrushProperty); }
+            set { SetValue (HoverBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FocusBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HoverBrushProperty =
+            DependencyProperty.Register ("HoverBrush", typeof (Brush), typeof (FlexCheckBox), new PropertyMetadata (new SolidColorBrush (Colors.LightGray)));
         public double CheckBoxSize
         {
             get { return (double)GetValue (CheckBoxSizeProperty); }
@@ -99,7 +108,7 @@ namespace FlexMVVM.WPF
         {
             base.OnChecked (e);
         }
-
+        private Brush baseBrush;
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate ();
@@ -115,6 +124,16 @@ namespace FlexMVVM.WPF
                 inderminate.Data = PathExtentions.Data ("M 0 7 L 7 0");
                 _inderminateMarkPath = inderminate;
             }
+            this.baseBrush = this.BorderBrush;
+            this.MouseEnter += (s, e) =>
+            {
+                this.BorderBrush = this.HoverBrush;
+            };
+
+            this.MouseLeave += (s, e) =>
+            {
+                this.BorderBrush = this.baseBrush;
+            };
         }
     }
 }

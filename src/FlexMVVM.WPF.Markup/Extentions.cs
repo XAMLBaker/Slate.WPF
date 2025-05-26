@@ -1,9 +1,7 @@
-﻿using System.Security.Permissions;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -236,47 +234,10 @@ namespace FlexMVVM.WPF.Markup
             element.LostFocus += (_, __) => action (element);
             return element;
         }
-        public static T OnHover<T>(this T element, Action<T> action) where T : TextBox
-        {
-            element.MouseEnter += (_, __) => action (element);
-            return element;
-        }
-        public static T OnRelease<T>(this T element, Action<T> action) where T : TextBox
-        {
-            element.MouseLeave += (_, __) => action (element);
-            return element;
-        }
         public static T OnPreviewText<T>(this T tb, Action action) where T : TextBox
         {
             tb.PreviewTextInput += (_, __) => action ();
 
-            return tb;
-        }
-        public static T BorderThickness<T>(this T tb, double marginAll = 0) where T : TextBox
-        {
-            tb.BorderThickness = new Thickness (marginAll, marginAll, marginAll, marginAll);
-            return tb;
-        }
-        public static T BorderThickness<T>(this T tb, double leftright = 0, double topbottom = 0) where T : TextBox
-        {
-            tb.BorderThickness = new Thickness (leftright, topbottom, leftright, topbottom);
-            return tb;
-        }
-        public static T BorderThickness<T>(this T tb, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : TextBox
-        {
-            tb.BorderThickness = new Thickness (left, top, right, bottom);
-
-            return tb;
-        }
-        public static T BorderBrush<T>(this T tb, string colorString) where T : TextBox
-        {
-            tb.BorderBrush = new SolidColorBrush (ColorTool.Get (colorString));
-
-            return tb;
-        }
-        public static T BorderBrush<T>(this T tb, Color color) where T : TextBox
-        {
-            tb.BorderBrush = new SolidColorBrush (color);
             return tb;
         }
         public static T SelectionBrush<T>(this T tb, string colorString) where T : TextBox
@@ -328,7 +289,7 @@ namespace FlexMVVM.WPF.Markup
             return ctrl;
         }
 
-        public static T Fontsize<T>(this T ctrl, double size) where T : Control
+        public static T FontSize<T>(this T ctrl, double size) where T : Control
         {
             ctrl.FontSize = size;
 
@@ -356,10 +317,66 @@ namespace FlexMVVM.WPF.Markup
         }
         public static T FontStretch<T>(this T ctrl, FontStretch stretch) where T : Control
         {
-
             ctrl.FontStretch = stretch;
 
             return ctrl;
+        }
+        public static T BorderBrush<T>(this T tb, string colorString) where T : Control
+        {
+            tb.BorderBrush = new SolidColorBrush (ColorTool.Get (colorString));
+
+            return tb;
+        }
+        public static T BorderBrush<T>(this T tb, Color color) where T : Control
+        {
+            tb.BorderBrush = new SolidColorBrush (color);
+            return tb;
+        }
+        public static T BorderThickness<T>(this T tb, double marginAll = 0) where T : Control
+        {
+            tb.BorderThickness = new Thickness (marginAll, marginAll, marginAll, marginAll);
+            return tb;
+        }
+        public static T BorderThickness<T>(this T tb, double leftright = 0, double topbottom = 0) where T : Control
+        {
+            tb.BorderThickness = new Thickness (leftright, topbottom, leftright, topbottom);
+            return tb;
+        }
+        public static T BorderThickness<T>(this T tb, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : Control
+        {
+            tb.BorderThickness = new Thickness (left, top, right, bottom);
+
+            return tb;
+        }
+        public static T BorderThickness<T>(this T tb, Thickness value) where T : Control
+        {
+            if (value == null)
+                return tb;
+            tb.BorderThickness = value;
+
+            return tb;
+        }
+        public static T Padding<T>(this T bdr, double marginAll = 0) where T : Control
+        {
+            bdr.Padding = new Thickness (marginAll, marginAll, marginAll, marginAll);
+            return bdr;
+        }
+        public static T Padding<T>(this T bdr, double leftright = 0, double topbottom = 0) where T : Control
+        {
+            bdr.Padding = new Thickness (leftright, topbottom, leftright, topbottom);
+            return bdr;
+        }
+        public static T Padding<T>(this T bdr, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : Control
+        {
+            bdr.Padding = new Thickness (left, top, right, bottom);
+            return bdr;
+        }
+        public static T Padding<T>(this T bdr, Thickness thickness) where T : Control
+        {
+            if (thickness == null)
+                return bdr;
+            bdr.Padding = thickness;
+            return bdr;
         }
     }
 
@@ -367,26 +384,10 @@ namespace FlexMVVM.WPF.Markup
     {
         public static T Content<T>(this T ctrl, object content) where T : ContentControl
         {
-
             ctrl.Content = content;
 
             return ctrl;
-        }
-        public static T Padding<T>(this T bdr, double marginAll = 0) where T : ContentControl
-        {
-            bdr.Padding = new Thickness (marginAll, marginAll, marginAll, marginAll);
-            return bdr;
-        }
-        public static T Padding<T>(this T bdr, double leftright = 0, double topbottom = 0) where T : ContentControl
-        {
-            bdr.Padding = new Thickness (leftright, topbottom, leftright, topbottom);
-            return bdr;
-        }
-        public static T Padding<T>(this T bdr, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : ContentControl
-        {
-            bdr.Padding = new Thickness (left, top, right, bottom);
-            return bdr;
-        }
+        }       
     }
 
     public static class ImageExtentions
@@ -672,10 +673,74 @@ namespace FlexMVVM.WPF.Markup
 
             return ftb;
         }
+        public static T BorderBrush<T>(this T tb, string baseColor, string hoverColor) where T : FlexTextBox
+        {
+            tb.BorderBrush (baseColor);
+            tb.HoverBrush(hoverColor);
+
+            return tb;
+        }
+        public static T BorderBrush<T>(this T tb, string baseColor, Color hoverColor) where T : FlexTextBox
+        {
+            tb.BorderBrush (baseColor);
+            tb.HoverBrush (hoverColor);
+
+            return tb;
+        }
+        public static T BorderBrush<T>(this T tb, Color baseColor, string hoverColor) where T : FlexTextBox
+        {
+            tb.BorderBrush (baseColor);
+            tb.HoverBrush (hoverColor);
+
+            return tb;
+        }
+        public static T BorderBrush<T>(this T tb, Color baseColor, Color hoverColor) where T : FlexTextBox
+        {
+            tb.BorderBrush (baseColor);
+            tb.HoverBrush (hoverColor);
+
+            return tb;
+        }
     }
 
     public static class FlexCheckBoxExtentions
     {
+        public static T CheckBoxColor<T>(this T fcb, Color color) where T : FlexCheckBox
+        {
+            fcb.Color = new SolidColorBrush (color);
+            return fcb;
+        }
+        public static T CheckBoxColor<T>(this T fcb, string color) where T : FlexCheckBox
+        {
+            fcb.Color = BrushTool.Get (color);
+            return fcb;
+        }
+
+        public static T CheckBoxColor<T>(this T fcb, Brush color) where T : FlexCheckBox
+        {
+            if (color == null)
+                return fcb;
+            fcb.Color = color;
+            return fcb;
+        }
+        public static T CheckColor<T>(this T fcb, Color color) where T : FlexCheckBox
+        {
+            fcb.ForeColor = new SolidColorBrush (color);
+            return fcb;
+        }
+        public static T CheckColor<T>(this T fcb, string color) where T : FlexCheckBox
+        {
+            fcb.ForeColor = BrushTool.Get (color);
+            return fcb;
+        }
+        public static T CheckColor<T>(this T fcb, Brush color) where T : FlexCheckBox
+        {
+            if (color == null)
+                return fcb;
+            fcb.ForeColor = color;
+            return fcb;
+        }
+
         public static T CheckBoxSize<T>(this T fcb, double value) where T : FlexCheckBox
         {
             fcb.CheckBoxSize = value;
@@ -695,6 +760,73 @@ namespace FlexMVVM.WPF.Markup
         {
             fcb.CornerRadius = new CornerRadius (left, top, right, bottom);
 
+            return fcb;
+        }
+
+        public static T CornerRadius<T>(this T fcb, CornerRadius radius) where T : FlexCheckBox
+        {
+            fcb.CornerRadius = radius;
+
+            return fcb;
+        }
+        public static T HoverBrush<T>(this T fcb, string color) where T : FlexCheckBox
+        {
+            fcb.HoverBrush = BrushTool.Get (color);
+
+            return fcb;
+        }
+
+        public static T HoverBrush<T>(this T fcb, Color color) where T : FlexCheckBox
+        {
+            fcb.HoverBrush = new SolidColorBrush (color);
+
+            return fcb;
+        }
+        public static T BorderBrush<T>(this T fcb, string baseColor, string hoverColor) where T : FlexCheckBox
+        {
+            fcb.BorderBrush (baseColor);
+            fcb.HoverBrush (hoverColor);
+
+            return fcb;
+        }
+        public static T BorderBrush<T>(this T fcb, string baseColor, Color hoverColor) where T : FlexCheckBox
+        {
+            fcb.BorderBrush (baseColor);
+            fcb.HoverBrush (hoverColor);
+
+            return fcb;
+        }
+        public static T BorderBrush<T>(this T fcb, Color baseColor, string hoverColor) where T : FlexCheckBox
+        {
+            fcb.BorderBrush (baseColor);
+            fcb.HoverBrush (hoverColor);
+
+            return fcb;
+        }
+        public static T BorderBrush<T>(this T fcb, Color baseColor, Color hoverColor) where T : FlexCheckBox
+        {
+            fcb.BorderBrush (baseColor);
+            fcb.HoverBrush (hoverColor);
+
+            return fcb;
+        }
+        public static T BorderBrush<T>(this T fcb, Brush baseColor, Brush hoverColor) where T : FlexCheckBox
+        {
+            fcb.BorderBrush = baseColor;
+            fcb.HoverBrush = hoverColor;
+
+            return fcb;
+        }
+        public static T BoxStyle<T>(this T fcb, Func<FlexCheckBoxModel> action) where T : FlexCheckBox
+        {
+            var model = action ();
+            fcb.Padding (model.PaddingValue);
+            fcb.CheckBoxColor (model.BackColorValue);
+            fcb.CheckColor (model.CheckColorValue);
+            fcb.BorderThickness (model.ThicknessValue);
+            fcb.CheckBoxSize (model.SizeValue);
+            fcb.CornerRadius (model.CornerRadiusValue);
+            fcb.BorderBrush (model.BorderBrushValue, model.HoverBorderBrushValue);
             return fcb;
         }
     }
