@@ -37,7 +37,7 @@ namespace FlexMVVM.WPF
 
         // Using a DependencyProperty as the backing store for WaterMarkTextColorProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WaterMarkTextColorProperty =
-            DependencyProperty.Register ("WaterMarkTextColor", typeof (Brush), typeof (FlexTextBox), new PropertyMetadata (new SolidColorBrush(Colors.LightGray)));
+            DependencyProperty.Register ("WaterMarkTextColor", typeof (Brush), typeof (FlexTextBox), new PropertyMetadata (new SolidColorBrush(Colors.Red)));
 
         public Brush HoverBrush
         {

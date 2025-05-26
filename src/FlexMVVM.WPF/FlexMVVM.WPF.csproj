@@ -9,6 +9,9 @@
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="attached\PaddingSize.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\FlexMVVM\src\FlexMVVM\FlexMVVM.csproj" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Security.Permissions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -362,6 +363,32 @@ namespace FlexMVVM.WPF.Markup
         }
     }
 
+    public static class ContentControlExtentions
+    {
+        public static T Content<T>(this T ctrl, object content) where T : ContentControl
+        {
+
+            ctrl.Content = content;
+
+            return ctrl;
+        }
+        public static T Padding<T>(this T bdr, double marginAll = 0) where T : ContentControl
+        {
+            bdr.Padding = new Thickness (marginAll, marginAll, marginAll, marginAll);
+            return bdr;
+        }
+        public static T Padding<T>(this T bdr, double leftright = 0, double topbottom = 0) where T : ContentControl
+        {
+            bdr.Padding = new Thickness (leftright, topbottom, leftright, topbottom);
+            return bdr;
+        }
+        public static T Padding<T>(this T bdr, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : ContentControl
+        {
+            bdr.Padding = new Thickness (left, top, right, bottom);
+            return bdr;
+        }
+    }
+
     public static class ImageExtentions
     {
         public static T Source<T>(this T image, string Source) where T : Image
@@ -592,21 +619,7 @@ namespace FlexMVVM.WPF.Markup
             return shape;
         }
     }
-    public static class PathExtentions
-    {
-        // 봉인 클래스라서 확장이안된다네 ..ㅠ
-        //public static T Data<T>(this T path, string pathData) where T : Path
-        //{
-        //    Geometry geometry = Geometry.Parse (pathData);
-        //    path.Data = geometry;
-        //    return path;
-        //}
-
-        public static Geometry Data(string pathData)
-        {
-            return Geometry.Parse (pathData);
-        }
-    }
+    
 
     public static class FlexTextBoxExtentions
     {
@@ -658,6 +671,31 @@ namespace FlexMVVM.WPF.Markup
             ftb.CornerRadius = new CornerRadius (left, top, right, bottom);
 
             return ftb;
+        }
+    }
+
+    public static class FlexCheckBoxExtentions
+    {
+        public static T CheckBoxSize<T>(this T fcb, double value) where T : FlexCheckBox
+        {
+            fcb.CheckBoxSize = value;
+            return fcb;
+        }
+        public static T CornerRadius<T>(this T fcb, double marginAll = 0) where T : FlexCheckBox
+        {
+            fcb.CornerRadius = new CornerRadius (marginAll, marginAll, marginAll, marginAll);
+            return fcb;
+        }
+        public static T CornerRadius<T>(this T fcb, double leftright = 0, double topbottom = 0) where T : FlexCheckBox
+        {
+            fcb.CornerRadius = new CornerRadius (leftright, topbottom, leftright, topbottom);
+            return fcb;
+        }
+        public static T CornerRadius<T>(this T fcb, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : FlexCheckBox
+        {
+            fcb.CornerRadius = new CornerRadius (left, top, right, bottom);
+
+            return fcb;
         }
     }
 }
