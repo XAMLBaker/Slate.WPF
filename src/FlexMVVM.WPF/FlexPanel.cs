@@ -55,11 +55,6 @@ namespace FlexMVVM.WPF
         public static readonly DependencyProperty AddHeightProperty =
             DependencyProperty.Register ("AddHeight", typeof (double), typeof (FlexPanel), new PropertyMetadata (0.0));
 
-
-        static FlexPanel()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata (typeof (FlexPanel), new FrameworkPropertyMetadata (typeof (FlexPanel)));
-        }
         protected override Size MeasureOverride(Size constraint)
         {
             if (this.Children.Count == 0)

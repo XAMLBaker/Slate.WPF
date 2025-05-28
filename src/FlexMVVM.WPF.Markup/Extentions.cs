@@ -1,13 +1,32 @@
-﻿using System.Windows;
+﻿using System.Runtime.CompilerServices;
+using System.Security.Permissions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.WebRequestMethods;
 
 namespace FlexMVVM.WPF.Markup
 {
+    public readonly struct AnimatableColor
+    {
+        public Color Color { get; }
+        public AnimatableColor(string hex) => Color = ParseColor (hex);
+        public AnimatableColor(Color color) => Color = color;
+
+        private static Color ParseColor(string hex)
+        {
+            return ColorTool.Get (hex);
+        }
+
+        public static implicit operator AnimatableColor(string hex) => new (hex);
+        public static implicit operator AnimatableColor(Color color) => new (color);
+    }
+
     public static class BindingExtensions
     {
         public static T Link<T>(
@@ -148,6 +167,34 @@ namespace FlexMVVM.WPF.Markup
     }
     public static class ControlExtentions
     {
+        private static ColorAnimation GetColorAnimation(Color changeColor, int milliseconds = 200)
+        {
+            ColorAnimation colorAnimation = new ColorAnimation ();
+            colorAnimation.Duration = new Duration (new TimeSpan (0, 0, 0, 0, milliseconds));
+            colorAnimation.To = changeColor;
+
+            return colorAnimation;
+        }
+
+        public static T BackgroundHoverAnimate<T>(this T ctrl, Color changeColor, int milliseconds=200) where  T : Control
+        {
+            
+
+            //// 4. 이벤트 핸들러를 연결하여 상태 전환 트리거
+            //ctrl.MouseEnter += (s, e) =>
+            //{
+            //    // MouseEnter 시 MouseOver 상태로 전환
+            //    VisualStateManager.GoToState (ctrl, "MouseOver", true); // true는 애니메이션 사용 여부
+            //    var aa = VisualStateManager.GetVisualStateGroups (ctrl);
+            //};
+
+            //ctrl.MouseLeave += (s, e) =>
+            //{
+            //    // MouseLeave 시 Normal 상태로 전환
+            //    VisualStateManager.GoToState (ctrl, "Normal", true); // true는 애니메이션 사용 여부
+            //};
+            return ctrl;
+        }
         public static T Background<T>(this T ctrl, string colorString) where T : Control
         {
             ctrl.Background(ColorTool.Get (colorString));
@@ -525,89 +572,6 @@ namespace FlexMVVM.WPF.Markup
             return shape;
         }
     }
-    
-
-    public static class FlexTextBoxExtentions
-    {
-        public static T WaterMarkText<T>(this T ftb, string text) where T : FlexTextBox
-        {
-            ftb.WaterMarkText = text;
-            return ftb;
-        }
-        public static T WaterMarkTextColor<T>(this T ftb, string colorString) where T : FlexTextBox
-        {
-            ftb.WaterMarkTextColor = BrushTool.Get (colorString);
-
-            return ftb;
-        }
-
-        public static T WaterMarkTextColor<T>(this T ftb, Color color) where T : FlexTextBox
-        {
-            ftb.WaterMarkTextColor = new SolidColorBrush (color);
-
-            return ftb;
-        }
-
-        public static T HoverBrush<T>(this T ftb, string colorString) where T : FlexTextBox
-        {
-            ftb.HoverBrush = BrushTool.Get (colorString);
-
-            return ftb;
-        }
-
-        public static T HoverBrush<T>(this T ftb, Color color) where T : FlexTextBox
-        {
-            ftb.HoverBrush = new SolidColorBrush (color);
-
-            return ftb;
-        }
-
-        public static T CornerRadius<T>(this T ftb, double marginAll = 0) where T : FlexTextBox
-        {
-            ftb.CornerRadius = new CornerRadius (marginAll, marginAll, marginAll, marginAll);
-            return ftb;
-        }
-        public static T CornerRadius<T>(this T ftb, double leftright = 0, double topbottom = 0) where T : FlexTextBox
-        {
-            ftb.CornerRadius = new CornerRadius (leftright, topbottom, leftright, topbottom);
-            return ftb;
-        }
-        public static T CornerRadius<T>(this T ftb, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : FlexTextBox
-        {
-            ftb.CornerRadius = new CornerRadius (left, top, right, bottom);
-
-            return ftb;
-        }
-        public static T BorderBrush<T>(this T tb, string baseColor, string hoverColor) where T : FlexTextBox
-        {
-            tb.BorderBrush (baseColor);
-            tb.HoverBrush(hoverColor);
-
-            return tb;
-        }
-        public static T BorderBrush<T>(this T tb, string baseColor, Color hoverColor) where T : FlexTextBox
-        {
-            tb.BorderBrush (baseColor);
-            tb.HoverBrush (hoverColor);
-
-            return tb;
-        }
-        public static T BorderBrush<T>(this T tb, Color baseColor, string hoverColor) where T : FlexTextBox
-        {
-            tb.BorderBrush (baseColor);
-            tb.HoverBrush (hoverColor);
-
-            return tb;
-        }
-        public static T BorderBrush<T>(this T tb, Color baseColor, Color hoverColor) where T : FlexTextBox
-        {
-            tb.BorderBrush (baseColor);
-            tb.HoverBrush (hoverColor);
-
-            return tb;
-        }
-    }
-
     public static class FlexCheckBoxExtentions
     {
         public static T CheckBoxColor<T>(this T fcb, Color color) where T : FlexCheckBox
@@ -760,6 +724,87 @@ namespace FlexMVVM.WPF.Markup
         {
             fp.Align = align;
             return fp;
+        }
+    }
+
+    public static class FlexControlExtentions
+    {
+        public static T WaterMarkText<T>(this T ftb, string text) where T : FlexTextBox
+        {
+            ftb.WaterMarkText = text;
+            return ftb;
+        }
+        public static T WaterMarkTextColor<T>(this T ftb, string colorString) where T : FlexTextBox
+        {
+            ftb.WaterMarkTextColor = BrushTool.Get (colorString);
+
+            return ftb;
+        }
+
+        public static T WaterMarkTextColor<T>(this T ftb, Color color) where T : FlexTextBox
+        {
+            ftb.WaterMarkTextColor = new SolidColorBrush (color);
+
+            return ftb;
+        }
+
+        public static T CornerRadius<T>(this T fc, double marginAll = 0) where T : IFlexControl
+        {
+            fc.CornerRadius = new CornerRadius (marginAll, marginAll, marginAll, marginAll);
+            return fc;
+        }
+        public static T CornerRadius<T>(this T fc, double leftright = 0, double topbottom = 0) where T : IFlexControl
+        {
+            fc.CornerRadius = new CornerRadius (leftright, topbottom, leftright, topbottom);
+            return fc;
+        }
+        public static T CornerRadius<T>(this T fc, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : IFlexControl
+        {
+            fc.CornerRadius = new CornerRadius (left, top, right, bottom);
+
+            return fc;
+        }
+
+        public static T HoverBackgroundAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
+        {
+            fc.HoverBackground = color;
+            fc.HoverBackgroundAnimationInterval = interval;
+            return fc;
+        }
+
+        public static T HoverBackgroundAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
+        {
+            fc.HoverBackground = ColorTool.Get (color);
+            fc.HoverBackgroundAnimationInterval = interval;
+            return fc;
+        }
+
+        public static T HoverBorderBrushAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
+        {
+            fc.HoverBorderBrush = color;
+            fc.HoverBorderBrushAnimationInterval = interval;
+            return fc;
+        }
+
+        public static T HoverBorderBrushAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
+        {
+            fc.HoverBorderBrush = ColorTool.Get(color);
+            fc.HoverBorderBrushAnimationInterval = interval;
+            return fc;
+        }
+
+        public static T FocusBorderBrushAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
+        {
+            fc.FocusBorderBrush = color;
+            fc.FocusBorderBrushAnimationInterval = interval;
+            return fc;
+        }
+
+        public static T FocusBorderBrushAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
+        {
+            fc.FocusBorderBrush = ColorTool.Get (color);
+            fc.FocusBorderBrushAnimationInterval = interval;
+            return fc;
         }
     }
 }

@@ -102,6 +102,7 @@ namespace FlexMVVM.WPF
         }
         public FlexCheckBox()
         {
+
         }
 
         protected override void OnChecked(RoutedEventArgs e)
