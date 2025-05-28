@@ -45,9 +45,6 @@ namespace FlexMVVM.WPF
         public static readonly DependencyProperty AlignProperty =
             DependencyProperty.Register ("Align", typeof (AlignContent), typeof (FlexPanel), new PropertyMetadata (AlignContent.Center));
 
-
-
-
         public double AddHeight
         {
             get { return (double)GetValue (AddHeightProperty); }
