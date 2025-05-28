@@ -54,122 +54,6 @@ namespace FlexMVVM.WPF.Markup
             return control;
         }
     }
-    public static class UIElementExtensions
-    {
-        public static T Width<T>(this T element, double value) where T : FrameworkElement
-        {
-            element.Width = value;
-            return element;
-        }
-
-        public static T Height<T>(this T element, double value) where T : FrameworkElement
-        {
-            element.Height = value;
-            return element;
-        }
-
-        public static T SetDock<T>(this T fe, Dock dock) where T : FrameworkElement
-        {
-            DockPanel.SetDock(fe, dock);
-            return fe;
-        }
-
-        public static T Row<T>(this T fe, int idx) where T : FrameworkElement
-        {
-            Grid.SetRow(fe, idx);
-            return fe;
-        }
-
-        public static T Column<T>(this T fe, int idx) where T : FrameworkElement
-        {
-            Grid.SetColumn (fe, idx);
-            return fe;
-        }
-        public static T Margin<T>(this T fe, double marginAll = 0) where T : FrameworkElement
-        {
-            fe.Margin = new Thickness (marginAll, marginAll, marginAll, marginAll);
-            return fe;
-        }
-        public static T Margin<T>(this T fe, double leftright = 0, double topbottom = 0) where T : FrameworkElement
-        {
-            fe.Margin = new Thickness (leftright, topbottom, leftright, topbottom);
-            return fe;
-        }
-        public static T Margin<T>(this T fe, double left = 0, double top =0, double right =0, double bottom =0) where T : FrameworkElement
-        {
-            fe.Margin = new Thickness(left,top,right,bottom);
-            return fe;
-        }
-        public static T Center<T>(this T fe) where T : FrameworkElement
-        {
-            fe.VerticalAlignment = VerticalAlignment.Center;
-            fe.HorizontalAlignment = HorizontalAlignment.Center;
-            return fe;
-        }
-        public static T VCenter<T>(this T fe) where T : FrameworkElement
-        {
-            fe.VerticalAlignment = VerticalAlignment.Center;
-            return fe;
-        }
-        public static T HCenter<T>(this T fe) where T : FrameworkElement
-        {
-            fe.HorizontalAlignment = HorizontalAlignment.Center;
-            return fe;
-        }
-        public static T Left<T>(this T fe) where T : FrameworkElement
-        {
-            fe.HorizontalAlignment = HorizontalAlignment.Left;
-            return fe;
-        }
-        public static T Right<T>(this T fe) where T : FrameworkElement
-        {
-            fe.HorizontalAlignment = HorizontalAlignment.Right;
-            return fe;
-        }
-        public static T Top<T>(this T fe) where T : FrameworkElement
-        {
-            fe.VerticalAlignment = VerticalAlignment.Top;
-            return fe;
-        }
-        public static T Bottom<T>(this T fe) where T : FrameworkElement
-        {
-            fe.VerticalAlignment = VerticalAlignment.Bottom;
-            return fe;
-        }
-        
-        public static T MinWidth<T>(this T fe, double value) where T : FrameworkElement
-        {
-            fe.MinWidth = value;
-            return fe;
-        }
-        public static T MaxWidth<T>(this T fe, double value) where T : FrameworkElement
-        {
-            fe.MaxWidth = value;
-            return fe;
-        }
-        public static T MinHeight<T>(this T fe, double value) where T : FrameworkElement
-        {
-            fe.MinHeight = value;
-            return fe;
-        }
-        public static T MaxHeight<T>(this T fe, double value) where T : FrameworkElement
-        {
-            fe.MaxHeight = value;
-            return fe;
-        }
-        public static T Tag<T>(this T fe, object value) where T : FrameworkElement
-        {
-            fe.Tag = value;
-            return fe;
-        }
-
-        public static T UseLayoutRounding<T>(this T fe) where T : FrameworkElement
-        {
-            fe.UseLayoutRounding = true;
-            return fe;
-        }
-    }
-
     public static class CommonElementExtentions
     {
         public static UIElement OnTapped(this UIElement element, Action action)
@@ -452,6 +336,27 @@ namespace FlexMVVM.WPF.Markup
             return pnl;
         }
     }
+
+    public static class UniformExtentions
+    {
+        public static T Columns<T>(this T panel, int columnCount) where T : UniformGrid
+        {
+            panel.Columns = columnCount;
+            return panel;
+        }
+        public static T Rows<T>(this T panel, int columnCount) where T : UniformGrid
+        {
+            panel.Rows = columnCount;
+            return panel;
+        }
+
+        public static T FirstColumn<T>(this T panel, int startColumnIndex) where T : UniformGrid
+        {
+            panel.FirstColumn = startColumnIndex;
+            return panel;
+        }
+    }
+
     public static class DecoratorExtnetions
     {
         public static T Child<T>(this T fe, UIElement element) where T : Decorator
@@ -828,6 +733,33 @@ namespace FlexMVVM.WPF.Markup
             fcb.CornerRadius (model.CornerRadiusValue);
             fcb.BorderBrush (model.BorderBrushValue, model.HoverBorderBrushValue);
             return fcb;
+        }
+    }
+
+    public static class FlexPanelExtentions
+    {
+        /// <summary>
+        /// height가 설정되었거나 되지 않아도 height값을 추가적으로 더할 수 있습니다.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fp"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static T AddHeight<T>(this T fp, double value) where T : FlexPanel
+        {
+            fp.AddHeight = value;
+            return fp;
+        }
+        public static T Justify<T>(this T fp, JustifyContent justify) where T : FlexPanel
+        {
+            fp.Justify = justify;
+            return fp;
+        }
+
+        public static T Align<T>(this T fp, AlignContent align) where T : FlexPanel
+        {
+            fp.Align = align;
+            return fp;
         }
     }
 }
