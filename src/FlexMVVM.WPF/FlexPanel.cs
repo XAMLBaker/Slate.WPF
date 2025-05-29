@@ -151,32 +151,32 @@ namespace FlexMVVM.WPF
 
             if (InternalChildren.Count == 1)
             {
-                UIElement child = InternalChildren[0];
+                FrameworkElement child = (FrameworkElement)this.Children[0];
                 child.Arrange (new Rect (0, 0, child.DesiredSize.Width, child.DesiredSize.Height));
                 if (Align == AlignContent.Start)
                 {
-                    child.Top ();
+                    child.SetValue(VerticalAlignmentProperty, VerticalAlignment.Top);
                 }
                 else if (Align == AlignContent.Center)
                 {
-                    child.VCenter ();
+                    child.SetValue (VerticalAlignmentProperty, VerticalAlignment.Center);
                 }
                 else if (Align == AlignContent.End)
                 {
-                    child.Bottom ();
+                    child.SetValue (VerticalAlignmentProperty, VerticalAlignment.Bottom);
                 }
 
                 if (Justify == JustifyContent.Start)
                 {
-                    child.Left ();
+                    child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Left);
                 }
                 else if (Justify == JustifyContent.Center)
                 {
-                    child.HCenter ();
+                    child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Center);
                 }
                 else if (Justify == JustifyContent.End)
                 {
-                    child.Right ();
+                    child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Right);
                 }
 
                 return finalSize;
@@ -238,7 +238,7 @@ namespace FlexMVVM.WPF
 
             for (int i = 0; i < childrenCount; i++)
             {
-                UIElement child = this.Children[i];
+                FrameworkElement child = (FrameworkElement)this.Children[i];
 
                 Rect childRect = new Rect (xOffset, 0, child.DesiredSize.Width, finalSize.Height);
 
@@ -246,15 +246,15 @@ namespace FlexMVVM.WPF
 
                 if (Align == AlignContent.Start)
                 {
-                    child.Top ();
+                    child.SetValue (VerticalAlignmentProperty, VerticalAlignment.Top);
                 }
                 else if (Align == AlignContent.Center)
                 {
-                    child.VCenter ();
+                    child.SetValue (VerticalAlignmentProperty, VerticalAlignment.Center);
                 }
                 else if (Align == AlignContent.End)
                 {
-                    child.Bottom ();
+                    child.SetValue (VerticalAlignmentProperty, VerticalAlignment.Bottom);
                 }
 
                 xOffset += child.DesiredSize.Width + spacing;
@@ -314,23 +314,23 @@ namespace FlexMVVM.WPF
 
             for (int i = 0; i < childrenCount; i++)
             {
-                UIElement child = this.Children[i];
+                FrameworkElement child = (FrameworkElement)this.Children[i];
 
-                Rect childRect = new Rect (yOffset, 0, finalSize.Width, child.DesiredSize.Height);
+                Rect childRect = new Rect (0, yOffset, finalSize.Width, child.DesiredSize.Height);
 
                 child.Arrange (childRect);
 
                 if (Align == AlignContent.Start)
                 {
-                    child.Left ();
+                    child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Left);
                 }
                 else if (Align == AlignContent.Center)
                 {
-                    child.Center ();
+                    child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Center);
                 }
                 else if (Align == AlignContent.End)
                 {
-                    child.Right ();
+                    child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Right);
                 }
 
                 yOffset += child.DesiredSize.Height + spacing;

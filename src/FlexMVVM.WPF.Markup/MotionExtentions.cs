@@ -131,22 +131,26 @@ namespace FlexMVVM.WPF.Markup
     {
         public static T WithAnimation<T>(this T brush, Color value, double durationValue = 300) where T : Brush
         {
+            var mutableBrush = brush.IsFrozen ? brush.Clone () : brush;
+
             ColorAnimation animation = new ColorAnimation ();
             animation.To = value;
             animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
 
-            brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+            mutableBrush.BeginAnimation (SolidColorBrush.ColorProperty, animation);
 
             return brush;
         }
 
         public static T WithAnimation<T>(this T brush, string value, double durationValue = 300) where T : Brush
         {
+            var mutableBrush = brush.IsFrozen ? brush.Clone () : brush;
+
             ColorAnimation animation = new ColorAnimation ();
-            animation.To = ColorTool.Get(value);
+            animation.To = ColorTool.Get (value);
             animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
 
-            brush.BeginAnimation (SolidColorBrush.ColorProperty, animation);
+            mutableBrush.BeginAnimation (SolidColorBrush.ColorProperty, animation);
 
             return brush;
         }

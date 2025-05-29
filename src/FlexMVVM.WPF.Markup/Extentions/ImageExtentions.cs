@@ -1,22 +1,27 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace FlexMVVM.WPF
+namespace FlexMVVM.WPF.Markup
 {
     public static class ImageExtentions
     {
         public static T Source<T>(this T image, string Source) where T : Image
         {
-            image.Source = SetImageSource (Source);
+            image.SetValue(Image.SourceProperty, SetImageSource (Source));
             return image;
         }
 
         public static T Stretch<T>(this T image, Stretch stretch) where T : Image
         {
-            image.Stretch = stretch;
+            image.SetValue (Image.StretchProperty, stretch);
+            return image;
+        }
+
+        public static T StretchDirection<T>(this T image, StretchDirection stretchDirection) where T : Image
+        {
+            image.SetValue (Image.StretchDirectionProperty, stretchDirection);
             return image;
         }
 

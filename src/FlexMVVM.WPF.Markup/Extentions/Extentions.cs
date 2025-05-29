@@ -3,7 +3,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace FlexMVVM.WPF.Markup
 {
@@ -49,7 +48,7 @@ namespace FlexMVVM.WPF.Markup
         }
         public static ItemsControl Link(this ItemsControl control, string viewModelProperty)
         {
-            control.SetBinding (Selector.ItemsSourceProperty, new Binding (viewModelProperty));
+            control.SetBinding (ItemsControl.ItemsSourceProperty, new Binding (viewModelProperty));
             return control;
         }
     }
@@ -94,11 +93,6 @@ namespace FlexMVVM.WPF.Markup
             element.MouseLeave += (_, __) => action (element);
             return element;
         }
-    }
-
-    public static class TextBloxExtentions
-    {
-
     }
     public static class TextBoxExtentions
     {
@@ -157,15 +151,12 @@ namespace FlexMVVM.WPF.Markup
     {
         public static T CheckBoxColor<T>(this T fcb, Color color) where T : FlexCheckBox
         {
-            fcb.Color = new SolidColorBrush (color);
-            return fcb;
+            return fcb.CheckBoxColor (BrushTool.Get (color));
         }
         public static T CheckBoxColor<T>(this T fcb, string color) where T : FlexCheckBox
         {
-            fcb.Color = BrushTool.Get (color);
-            return fcb;
+            return fcb.CheckBoxColor(BrushTool.Get (color));
         }
-
         public static T CheckBoxColor<T>(this T fcb, Brush color) where T : FlexCheckBox
         {
             if (color == null)
@@ -175,13 +166,11 @@ namespace FlexMVVM.WPF.Markup
         }
         public static T CheckColor<T>(this T fcb, Color color) where T : FlexCheckBox
         {
-            fcb.ForeColor = new SolidColorBrush (color);
-            return fcb;
+            return fcb.CheckColor (BrushTool.Get (color));
         }
         public static T CheckColor<T>(this T fcb, string color) where T : FlexCheckBox
         {
-            fcb.ForeColor = BrushTool.Get (color);
-            return fcb;
+            return fcb.CheckColor (BrushTool.Get (color));
         }
         public static T CheckColor<T>(this T fcb, Brush color) where T : FlexCheckBox
         {
@@ -196,27 +185,25 @@ namespace FlexMVVM.WPF.Markup
             fcb.CheckBoxSize = value;
             return fcb;
         }
+
         public static T CornerRadius<T>(this T fcb, double marginAll = 0) where T : FlexCheckBox
         {
-            fcb.CornerRadius = new CornerRadius (marginAll, marginAll, marginAll, marginAll);
-            return fcb;
+            return fcb.CornerRadius (new CornerRadius (marginAll, marginAll, marginAll, marginAll));
         }
+
         public static T CornerRadius<T>(this T fcb, double leftright = 0, double topbottom = 0) where T : FlexCheckBox
         {
-            fcb.CornerRadius = new CornerRadius (leftright, topbottom, leftright, topbottom);
-            return fcb;
+            return fcb.CornerRadius (new CornerRadius (leftright, topbottom, leftright, topbottom));
         }
+
         public static T CornerRadius<T>(this T fcb, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : FlexCheckBox
         {
-            fcb.CornerRadius = new CornerRadius (left, top, right, bottom);
-
-            return fcb;
+            return fcb.CornerRadius(new CornerRadius (left, top, right, bottom));
         }
 
         public static T CornerRadius<T>(this T fcb, CornerRadius radius) where T : FlexCheckBox
         {
-            fcb.CornerRadius = radius;
-
+            fcb.SetValue(FlexCheckBox.CornerRadiusProperty, radius);
             return fcb;
         }
         public static T HoverBrush<T>(this T fcb, string color) where T : FlexCheckBox
@@ -351,42 +338,6 @@ namespace FlexMVVM.WPF.Markup
             fc.CornerRadius = new CornerRadius (left, top, right, bottom);
 
             return fc;
-        }
-
-        public static T HoverBackgroundAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
-        {
-            fc.HoverBackground = color;
-            fc.HoverBackgroundAnimationInterval = interval;
-            return fc;
-        }
-
-        public static T HoverBackgroundAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
-        {
-            return fc.HoverBackgroundAnimation (ColorTool.Get (color), interval);
-        }
-
-        public static T HoverBorderBrushAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
-        {
-            fc.HoverBorderBrush = color;
-            fc.HoverBorderBrushAnimationInterval = interval;
-            return fc;
-        }
-
-        public static T HoverBorderBrushAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
-        {
-            return fc.HoverBorderBrushAnimation (ColorTool.Get (color), interval);
-        }
-
-        public static T FocusBorderBrushAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
-        {
-            fc.FocusBorderBrush = color;
-            fc.FocusBorderBrushAnimationInterval = interval;
-            return fc;
-        }
-
-        public static T FocusBorderBrushAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
-        {
-            return fc.FocusBorderBrushAnimation (ColorTool.Get (color), interval);
         }
 
         public static T Orientation<T>(this T fd, Orientation orientation) where T : FlexDivider

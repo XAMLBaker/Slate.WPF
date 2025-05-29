@@ -39,14 +39,6 @@
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Grid>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="FlexCommonStates">
-                                <VisualState x:Name="FlexNormal" />
-                                <VisualState x:Name="FlexMouseOver" />
-                                <VisualState x:Name="FlexFocused" />
-                                <VisualState x:Name="FlexUnFocused" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -154,14 +146,6 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             RecognizesAccessKey="True" />
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="FlexCommonStates">
-                                <VisualState x:Name="FlexNormal" />
-                                <VisualState x:Name="FlexMouseOver" />
-                                <VisualState x:Name="FlexFocused" />
-                                <VisualState x:Name="FlexUnFocused" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

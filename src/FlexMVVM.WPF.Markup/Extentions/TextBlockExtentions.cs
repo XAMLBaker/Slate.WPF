@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace FlexMVVM.WPF
+namespace FlexMVVM.WPF.Markup
 {
     public static class TextBlockExtentions
     {
@@ -12,39 +12,28 @@ namespace FlexMVVM.WPF
             return tb;
         }
 
-        public static T TextColor<T>(this T tb, string color) where T : TextBlock
+        public static T Foreground<T>(this T tb, Brush color) where T : TextBlock
         {
-            tb.TextColor(ColorTool.Get(color));
+            tb.SetValue (TextBlock.ForegroundProperty, color);
+
             return tb;
         }
 
-        public static T TextColor<T>(this T tb, Color color) where T : TextBlock
-        {
-            tb.TextColor(new SolidColorBrush (color));
-            return tb;
-        }
-        public static T TextColor<T>(this T tb, Brush color) where T : TextBlock
-        {
-            tb.Foreground = color;
-            return tb;
-        }
-        public static T Background<T>(this T tb, string color) where T : TextBlock
-        {
-            tb.Background (ColorTool.Get (color));
-            return tb;
-        }
+        public static T Foreground<T>(this T tb, string color) where T : TextBlock
+             => tb.Foreground (BrushTool.Get (color));
 
-        public static T Background<T>(this T tb, Color color) where T : TextBlock
-        {
-            tb.Background(new SolidColorBrush(color));
-            return tb;
-        }
+        public static T Foreground<T>(this T tb, Color color) where T : TextBlock
+            => tb.Foreground (BrushTool.Get (color));
 
         public static T Background<T>(this T tb, Brush color) where T : TextBlock
         {
-            tb.Background = color;
+            tb.SetValue (TextBlock.BackgroundProperty, color);
             return tb;
         }
+        public static T Background<T>(this T tb, string color) where T : TextBlock
+            => tb.Background (BrushTool.Get (color));
+        public static T Background<T>(this T tb, Color color) where T : TextBlock
+            => tb.Background (BrushTool.Get (color));
 
         public static T FontSize<T>(this T element, double size) where T : TextBlock
         {

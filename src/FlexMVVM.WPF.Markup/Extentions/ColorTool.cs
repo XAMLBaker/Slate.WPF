@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace FlexMVVM.WPF
+namespace FlexMVVM.WPF.Markup
 {
     public static class ColorTool
     {

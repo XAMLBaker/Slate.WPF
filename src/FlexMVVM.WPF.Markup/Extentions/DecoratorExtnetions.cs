@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace FlexMVVM.WPF
+namespace FlexMVVM.WPF.Markup
 {
     public static class DecoratorExtnetions
     {
