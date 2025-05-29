@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -153,6 +154,27 @@ namespace FlexMVVM.WPF.Markup
             mutableBrush.BeginAnimation (SolidColorBrush.ColorProperty, animation);
 
             return brush;
+        }
+
+        public static T WidthAnimation<T>(this T element, double value, double durationValue = 300) where T : FrameworkElement
+        {
+            DoubleAnimation animation = new DoubleAnimation ();
+            animation.To = value;
+            animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
+
+            element.BeginAnimation(FrameworkElement.WidthProperty, animation);
+
+            return element;
+        }
+        public static T HeightAnimation<T>(this T element, double value, double durationValue = 300) where T : FrameworkElement
+        {
+            DoubleAnimation animation = new DoubleAnimation ();
+            animation.To = value;
+            animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
+
+            element.BeginAnimation (FrameworkElement.HeightProperty, animation);
+
+            return element;
         }
     }
 }
