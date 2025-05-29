@@ -126,4 +126,29 @@ namespace FlexMVVM.WPF.Markup
             return tcs.Task;
         }
     }
+
+    public static partial class MotionExtentions
+    {
+        public static T WithAnimation<T>(this T brush, Color value, double durationValue = 300) where T : Brush
+        {
+            ColorAnimation animation = new ColorAnimation ();
+            animation.To = value;
+            animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
+
+            brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+
+            return brush;
+        }
+
+        public static T WithAnimation<T>(this T brush, string value, double durationValue = 300) where T : Brush
+        {
+            ColorAnimation animation = new ColorAnimation ();
+            animation.To = ColorTool.Get(value);
+            animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
+
+            brush.BeginAnimation (SolidColorBrush.ColorProperty, animation);
+
+            return brush;
+        }
+    }
 }

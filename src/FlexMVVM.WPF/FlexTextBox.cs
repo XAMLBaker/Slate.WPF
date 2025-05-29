@@ -190,7 +190,7 @@ namespace FlexMVVM.WPF
                         .OfType<VisualState> ()
                         .FirstOrDefault (s => s.Name == "FlexFocused");
 
-                    if (hoverState != null && focuseState.Storyboard == null && (FocusBackground != null || FocusBorderBrush != null))
+                    if (focuseState != null && focuseState.Storyboard == null && (FocusBackground != null || FocusBorderBrush != null))
                     {
                         var storyboard = new Storyboard ();
 

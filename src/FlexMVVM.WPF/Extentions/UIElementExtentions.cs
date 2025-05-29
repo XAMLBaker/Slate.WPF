@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 namespace FlexMVVM.WPF
 {
@@ -118,6 +119,12 @@ namespace FlexMVVM.WPF
             return element;
         }
 
+        public static T  Cursor<T>(this T element, Cursor value) where T : UIElement
+        {
+            element.SetValue (FrameworkElement.CursorProperty, value);
+            return element;
+        }
+
         public static T Column<T>(this T element, int idx) where T : UIElement
         {
             Grid.SetColumn (element, idx);
@@ -126,10 +133,9 @@ namespace FlexMVVM.WPF
 
         public static T Background<T>(this T element, string color) where T : Control
         {
-            element.Background(ColorTool.Get (color));
-
-            return element;
+            return element.Background (ColorTool.Get (color));
         }
+
         public static T Background<T>(this T element, Color color) where T : Control
         {
             element.SetValue (Control.BackgroundProperty, new SolidColorBrush (color));
@@ -137,9 +143,7 @@ namespace FlexMVVM.WPF
         }
         public static T Foreground<T>(this T element, string color) where T : Control
         {
-            element.Foreground(ColorTool.Get (color));
-
-            return element;
+            return element.Foreground (ColorTool.Get (color));
         }
         public static T Foreground<T>(this T element, Color color) where T : Control
         {
@@ -161,9 +165,9 @@ namespace FlexMVVM.WPF
             return element;
         }
 
-        public static T FontWeight<T>(this T element, FontWeight size) where T : Control
+        public static T FontWeight<T>(this T element, FontWeight value) where T : Control
         {
-            element.SetValue (Control.FontWeightProperty, size);
+            element.SetValue (Control.FontWeightProperty, value);
             return element;
         }
         public static T FontStyle<T>(this T element, FontStyle style) where T : Control

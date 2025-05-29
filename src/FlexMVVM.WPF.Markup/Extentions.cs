@@ -84,16 +84,21 @@ namespace FlexMVVM.WPF.Markup
             element.MouseLeave += (_, __) => action ();
             return element;
         }
-        public static UIElement OnHover(this UIElement element, Action<UIElement> action)
+        public static T OnHover<T>(this T element, Action<T> action) where T : UIElement
         {
             element.MouseEnter += (_, __) => action (element);
             return element;
         }
-        public static UIElement OnRelease(this UIElement element, Action<UIElement> action)
+        public static T OnRelease<T>(this T element, Action<T> action) where T : UIElement
         {
             element.MouseLeave += (_, __) => action (element);
             return element;
         }
+    }
+
+    public static class TextBloxExtentions
+    {
+
     }
     public static class TextBoxExtentions
     {
@@ -301,6 +306,12 @@ namespace FlexMVVM.WPF.Markup
             fp.Align = align;
             return fp;
         }
+
+        public static T Orientation<T>(this T fp, Orientation orientation) where T : FlexPanel
+        {
+            fp.Orientation = orientation;
+            return fp;
+        }
     }
 
     public static class FlexControlExtentions
@@ -334,6 +345,7 @@ namespace FlexMVVM.WPF.Markup
             fc.CornerRadius = new CornerRadius (leftright, topbottom, leftright, topbottom);
             return fc;
         }
+
         public static T CornerRadius<T>(this T fc, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : IFlexControl
         {
             fc.CornerRadius = new CornerRadius (left, top, right, bottom);
@@ -350,9 +362,7 @@ namespace FlexMVVM.WPF.Markup
 
         public static T HoverBackgroundAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
         {
-            fc.HoverBackground = ColorTool.Get (color);
-            fc.HoverBackgroundAnimationInterval = interval;
-            return fc;
+            return fc.HoverBackgroundAnimation (ColorTool.Get (color), interval);
         }
 
         public static T HoverBorderBrushAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
@@ -364,9 +374,7 @@ namespace FlexMVVM.WPF.Markup
 
         public static T HoverBorderBrushAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
         {
-            fc.HoverBorderBrush = ColorTool.Get(color);
-            fc.HoverBorderBrushAnimationInterval = interval;
-            return fc;
+            return fc.HoverBorderBrushAnimation (ColorTool.Get (color), interval);
         }
 
         public static T FocusBorderBrushAnimation<T>(this T fc, Color color, int interval) where T : IFlexControl
@@ -378,9 +386,7 @@ namespace FlexMVVM.WPF.Markup
 
         public static T FocusBorderBrushAnimation<T>(this T fc, string color, int interval) where T : IFlexControl
         {
-            fc.FocusBorderBrush = ColorTool.Get (color);
-            fc.FocusBorderBrushAnimationInterval = interval;
-            return fc;
+            return fc.FocusBorderBrushAnimation (ColorTool.Get (color), interval);
         }
 
         public static T Orientation<T>(this T fd, Orientation orientation) where T : FlexDivider

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls.Primitives;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace FlexMVVM.WPF
 {
-    public class FlexButton : ButtonBase, IFlexControl
+    public class FlexButton : Button, IFlexControl
     {
         public CornerRadius CornerRadius
         {
@@ -113,38 +113,6 @@ namespace FlexMVVM.WPF
             };
         }
 
-        public void UpdateStoryBoard(VisualState visualState)
-        {
-            var storyboard = new Storyboard ();
-
-            if (HoverBackground != null)
-            {
-                var anim = new ColorAnimation
-                {
-                    To = HoverBackground,
-                    Duration = TimeSpan.FromMilliseconds (HoverBackgroundAnimationInterval)
-                };
-
-                Storyboard.SetTargetName (anim, "Border");
-                Storyboard.SetTargetProperty (anim, new PropertyPath ("(Border.Background).(SolidColorBrush.Color)"));
-
-                storyboard.Children.Add (anim);
-            }
-            if (HoverBorderBrush != null)
-            {
-                var anim = new ColorAnimation
-                {
-                    To = HoverBorderBrush,
-                    Duration = TimeSpan.FromMilliseconds (HoverBorderBrushAnimationInterval)
-                };
-
-                Storyboard.SetTargetName (anim, "Border");
-                Storyboard.SetTargetProperty (anim, new PropertyPath ("(Border.BorderBrush).(SolidColorBrush.Color)"));
-
-                storyboard.Children.Add (anim);
-            }
-            visualState.Storyboard = storyboard;
-        }
         private FrameworkElement root;
         public override void OnApplyTemplate()
         {
@@ -188,7 +156,7 @@ namespace FlexMVVM.WPF
                         .OfType<VisualState> ()
                         .FirstOrDefault (s => s.Name == "FlexFocused");
 
-                    if (hoverState != null && focuseState.Storyboard == null && (FocusBackground != null || FocusBorderBrush != null))
+                    if (focuseState != null && focuseState.Storyboard == null && (FocusBackground != null || FocusBorderBrush != null))
                     {
                         var storyboard = new Storyboard ();
 
@@ -216,30 +184,12 @@ namespace FlexMVVM.WPF
             }
             this.MouseEnter += (s, e) =>
             {
-                if (this.IsKeyboardFocused)
-                {
-                    return;
-                }
-
                 VisualStateManager.GoToState (this, "FlexMouseOver", true);
             };
 
             this.MouseLeave += (s, e) =>
             {
-                if (this.IsKeyboardFocused)
-                    return;
-
                 VisualStateManager.GoToState (this, "FlexNormal", true);
-            };
-
-            this.GotFocus += (s, e) =>
-            {
-                VisualStateManager.GoToState (this, "FlexFocused", true);
-            };
-
-            this.LostFocus += (s, e) =>
-            {
-                VisualStateManager.GoToState (this, "FlexUnFocused", true);
             };
         }
     }
