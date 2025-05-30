@@ -151,6 +151,19 @@ namespace FlexMVVM.WPF
             return finalSize;
         }
 
+        protected override void OnChildDesiredSizeChanged(UIElement child)
+        {
+            base.OnChildDesiredSizeChanged (child);
+            Arrange (this.RenderSize);
+        }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged (sizeInfo);
+            Arrange (this.RenderSize);
+        }
+
+
         private void Arrange(Size finalSize)
         {
             if (InternalChildren.Count == 0)

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DryIoc;
+using System.Collections;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 
@@ -28,9 +30,13 @@ namespace FlexMVVM.WPF.Markup
                     }
                     var content = (DependencyObject)((Window)window).Content;
 
-                    if (content != null && content is IComponent c && types.Any(x=>x.GetInterfaces().Any(y=>y.Name == "IComponent")))
+                    foreach (Type type in types)
                     {
-                        c.Render ();
+                        if (type.GetInterfaces ().Any (x => x.Name == "IComponent"))
+                        {
+                            var temp = RegisterProvider.Container.Resolve (type);
+                            ((IComponent)temp).Render ();
+                        }
                     }
                 }
             });

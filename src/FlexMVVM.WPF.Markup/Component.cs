@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public interface  IComponent
+    public interface IComponent
     {
         void Render();
     }
@@ -62,7 +62,7 @@ namespace FlexMVVM.WPF.Markup
 
         public void Render()
         {
-            Visual visual = this.Build();
+            Visual visual = this.Build ();
             if (visual != null)
             {
                 this.Content = visual;
@@ -99,6 +99,7 @@ namespace FlexMVVM.WPF.Markup
         public void Render()
         {
             List<UIElement> removeChildren = new List<UIElement> ();
+
             foreach (UIElement child in this.Children)
             {
                 // DockPanel.Dock 의 설정 상태를 확인
@@ -112,7 +113,7 @@ namespace FlexMVVM.WPF.Markup
             }
             foreach (UIElement child in removeChildren)
             {
-                this.Children.Remove(child);
+                this.Children.Remove (child);
             }
 
             var elements = this.Build ();
@@ -121,7 +122,7 @@ namespace FlexMVVM.WPF.Markup
                 int i = 0;
                 foreach (var element in elements)
                 {
-                    this.Children.Insert (i++,element);
+                    this.Children.Insert (i++, element);
                 }
             }
             this.OnRender (this);
