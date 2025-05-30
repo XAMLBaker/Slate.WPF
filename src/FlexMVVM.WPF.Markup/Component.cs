@@ -39,14 +39,6 @@ namespace FlexMVVM.WPF.Markup
     [INotifyPropertyChanged]
     public abstract partial class Component : ContentControl, IComponent
     {
-        public Component()
-        {
-            this.DataContext = this;
-            this.Loaded += this.OnLoaded;
-            if (this.ComponentStyleKey != null)
-                this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
-        }
-
         public object? ComponentStyleKey { get; set; }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
@@ -57,6 +49,11 @@ namespace FlexMVVM.WPF.Markup
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized (e);
+
+            this.DataContext = this;
+            this.Loaded += this.OnLoaded;
+            if (this.ComponentStyleKey != null)
+                this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
         }
         protected virtual void OnRender(object sender)
         {
@@ -75,9 +72,11 @@ namespace FlexMVVM.WPF.Markup
     [INotifyPropertyChanged]
     public abstract partial class LayoutComponent : DockPanel, IComponent
     {
-        public LayoutComponent()
+        protected override void OnInitialized(EventArgs e)
         {
-            this.DataContext = this;       
+            base.OnInitialized (e);
+
+            this.DataContext = this;
             this.Loaded += this.OnLoaded;
 
             if (this.ComponentStyleKey != null)

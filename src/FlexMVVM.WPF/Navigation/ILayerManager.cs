@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace FlexMVVM.WPF.Navigation
+namespace FlexMVVM.WPF
 {
     public interface ILayerManager
     {

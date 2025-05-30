@@ -1,7 +1,6 @@
 ﻿using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using FlexMVVM.Modularity;
-using FlexMVVM.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -18,6 +17,7 @@ namespace FlexMVVM.WPF
         {
             this.builder = FlexApp.CreateBuilder ();
             this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator> ();
+            this.Services.AddSingleton<IWindowManager, WindowManager> ();
 
             _register = new Register ();
             _register.RegisterMap["FlexFrameworkWindow"] = typeof (FlexWindow);

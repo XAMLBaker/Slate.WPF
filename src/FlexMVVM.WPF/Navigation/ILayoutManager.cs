@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace FlexMVVM.WPF.Navigation
+namespace FlexMVVM.WPF
 {
     public interface ILayoutManager
     {
