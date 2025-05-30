@@ -10,7 +10,7 @@ namespace FlexMVVM.WPF.Markup
         void Render();
     }
     [INotifyPropertyChanged]
-    public abstract partial class BaseComponent : ContentControl, IComponent
+    public abstract partial class BaseComponent : FlexComponent, IComponent
     {
         public BaseComponent()
         {
@@ -62,7 +62,11 @@ namespace FlexMVVM.WPF.Markup
 
         public void Render()
         {
-            this.Content = this.Build ();
+            Visual visual = this.Build();
+            if (visual != null)
+            {
+                this.Content = visual;
+            }
 
             this.OnRender (this);
         }
@@ -112,10 +116,13 @@ namespace FlexMVVM.WPF.Markup
             }
 
             var elements = this.Build ();
-            int i = 0;
-            foreach (var element in elements)
+            if (elements != null)
             {
-                this.Children.Insert (i++,element);
+                int i = 0;
+                foreach (var element in elements)
+                {
+                    this.Children.Insert (i++,element);
+                }
             }
             this.OnRender (this);
         }

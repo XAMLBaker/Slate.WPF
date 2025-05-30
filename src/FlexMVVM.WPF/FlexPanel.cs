@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DryIoc;
+using System;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -135,9 +136,9 @@ namespace FlexMVVM.WPF
                 return;
             try
             {
-                var FlexDivider = ((FlexDivider)d);
+                var FlexPanel = ((FlexPanel)d);
 
-                
+                FlexPanel.Arrange (FlexPanel.RenderSize);
             }
             catch(Exception ex)
             {
@@ -146,8 +147,14 @@ namespace FlexMVVM.WPF
         }
         protected override Size ArrangeOverride(Size finalSize)
         {
+            Arrange (finalSize);
+            return finalSize;
+        }
+
+        private void Arrange(Size finalSize)
+        {
             if (InternalChildren.Count == 0)
-                return finalSize;
+                return;
 
             if (InternalChildren.Count == 1)
             {
@@ -155,7 +162,7 @@ namespace FlexMVVM.WPF
                 child.Arrange (new Rect (0, 0, child.DesiredSize.Width, child.DesiredSize.Height));
                 if (Align == AlignContent.Start)
                 {
-                    child.SetValue(VerticalAlignmentProperty, VerticalAlignment.Top);
+                    child.SetValue (VerticalAlignmentProperty, VerticalAlignment.Top);
                 }
                 else if (Align == AlignContent.Center)
                 {
@@ -179,15 +186,18 @@ namespace FlexMVVM.WPF
                     child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Right);
                 }
 
-                return finalSize;
+                return;
             }
 
             if (Orientation == Orientation.Horizontal)
             {
-                return Make (finalSize);
+                 Make (finalSize);
+                return;
             }
-            return VerticalMake(finalSize);
+             VerticalMake (finalSize);
+            return;
         }
+
 
         private Size Make(Size finalSize)
         {
@@ -205,18 +215,29 @@ namespace FlexMVVM.WPF
             double remainWidth = finalSize.Width - (maxWidth * childrenCount);
             if (Justify == JustifyContent.SpaceBetween)
             {
-                spacing = remainWidth / (childrenCount - 1);
+                UIElement firstElement = this.Children[0];
+                UIElement lastElement = this.Children[childrenCount - 1];
+
+                totalWidth = totalWidth - (firstElement.DesiredSize.Width + lastElement.DesiredSize.Width); // 실제 컨트롤 Width
+
+                var temp = finalSize.Width - (firstElement.DesiredSize.Width + lastElement.DesiredSize.Width); // 전체 크기에서 첫번째와 마지막 컨트롤 뺀 크기
+
+                var temp2 = temp - totalWidth;  // 실제 남는 공간
+                spacing = temp2 / (childrenCount - 1);
             }
             else if (Justify == JustifyContent.SpaceAround)
             {
-                spacing = remainWidth / (childrenCount * 2);
-                xOffset = spacing;
-                spacing = spacing * 2;
+                var temp = finalSize.Width - totalWidth; // 남는 공간
+
+                xOffset = temp / (childrenCount * 2);
+                spacing = xOffset * 2;
             }
             else if (Justify == JustifyContent.SpaceEvenly)
             {
-                spacing = remainWidth / (childrenCount + 1);
-                xOffset = spacing;
+                var temp = finalSize.Width - totalWidth; // 남는 공간
+
+                xOffset = temp / (childrenCount + 1);
+                spacing = xOffset;
             }
             else if (Justify == JustifyContent.SpaceAuto)
             {

@@ -162,10 +162,11 @@ namespace FlexMVVM.WPF.Markup
             animation.To = value;
             animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
 
-            element.BeginAnimation(FrameworkElement.WidthProperty, animation);
+            element.BeginAnimation (FrameworkElement.WidthProperty, animation);
 
             return element;
         }
+
         public static T HeightAnimation<T>(this T element, double value, double durationValue = 300) where T : FrameworkElement
         {
             DoubleAnimation animation = new DoubleAnimation ();
@@ -173,6 +174,37 @@ namespace FlexMVVM.WPF.Markup
             animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
 
             element.BeginAnimation (FrameworkElement.HeightProperty, animation);
+
+            return element;
+        }
+
+        public static T TransitionXAnimation<T>(this T element, double value = 2.0, double durationValue = 300) where T : FrameworkElement
+        {
+            // 기존 RenderTransform이 TranslateTransform인지 확인
+            if (element.RenderTransform is not TranslateTransform translate)
+            {
+                translate = new TranslateTransform ();
+                element.RenderTransform = translate;
+            }
+
+            var animation = new DoubleAnimation (value, TimeSpan.FromMilliseconds (durationValue));
+            translate.BeginAnimation (TranslateTransform.XProperty, animation);
+
+            return element;
+        }
+
+        public static T TransitionYAnimation<T>(this T element, double value = 2.0, double durationValue = 300) where T : FrameworkElement
+        {
+            // 기존 RenderTransform이 TranslateTransform인지 확인
+            if (element.RenderTransform is not TranslateTransform translate)
+            {
+                translate = new TranslateTransform ();
+                element.RenderTransform = translate;
+            }
+
+            var animation = new DoubleAnimation (value, TimeSpan.FromMilliseconds (durationValue));
+
+            translate.BeginAnimation (TranslateTransform.YProperty, animation);
 
             return element;
         }

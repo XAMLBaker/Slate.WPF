@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
@@ -52,24 +53,88 @@ namespace FlexMVVM.WPF.Markup
             return control;
         }
     }
+    public static class ButtonBaseExtentions
+    {
+        //public static T OnTapped<T>(this T bb, Action action) where T : ButtonBase
+        //{
+        //    bb.MouseLeftButtonDown += (_, __) => action ();
+        //    return bb;
+        //}
+
+        //public static T OnTappedAsync<T>(this T bb, Func<Task> asyncAction) where T : ButtonBase
+        //{
+        //    bb.MouseLeftButtonDown += async (_, __) => await asyncAction ();
+
+        //    return bb;
+        //}
+
+        //public static T OnTapped<T>(this T bb, Action<T> action) where T : ButtonBase
+        //{
+        //    bb.MouseLeftButtonDown += (_, __) => action (bb);
+        //    return bb;
+        //}
+
+        //public static T OnTappedRelease<T>(this T bb, Action action) where T : ButtonBase
+        //{
+        //    bb.MouseLeftButtonUp += (_, __) => action ();
+        //    return bb;
+        //}
+        //public static T OnTappedReleaseAsync<T>(this T bb, Func<Task> asyncAction) where T : ButtonBase
+        //{
+        //    bb.MouseLeftButtonUp += async (_, __) => await asyncAction ();
+
+        //    return bb;
+        //}
+        //public static T OnTappedRelease<T>(this T bb, Action<T> action) where T : ButtonBase
+        //{
+        //    bb.MouseLeftButtonUp += (_, __) => action (bb);
+        //    return bb;
+        //}
+    }
     public static class CommonElementExtentions
     {
-        public static UIElement OnTapped(this UIElement element, Action action)
+        public static T OnTapped<T>(this T element, Action action) where T : UIElement
         {
-            if (element.GetType ().BaseType == typeof (ButtonBase))
-            {
-                ((ButtonBase)element).Click += (_, __) => action ();
-                return element;
-            }
-            element.MouseLeftButtonDown += (_, __) => action ();
+            element.MouseDown += (_, __) => action ();
 
             return element;
         }
-
-        public static UIElement OnTappedAsync(this UIElement element, Func<Task> asyncAction)
+        public static T OnTappedAsync<T>(this T element, Func<Task> asyncAction) where T : UIElement
         {
-            element.MouseLeftButtonDown += async (_, __) => await asyncAction ();
+            element.MouseDown += async (_, __) => await asyncAction ();
 
+            return element;
+        }
+        public static T OnTapped<T>(this T element, Action<T> action) where T : UIElement
+        {
+            element.MouseDown += (_, __) =>
+            {
+                Mouse.Capture (element); // 캡처 추가
+                action (element);
+            };
+            return element;
+        }
+        public static T OnTappedRelease<T>(this T element, Action action) where T : UIElement
+        {
+            element.MouseUp += (_, __) => action ();
+            return element;
+        }
+        public static T OnTappedReleaseAsync<T>(this T element, Func<Task> asyncAction) where T : UIElement
+        {
+            element.MouseUp += async (_, __) => await asyncAction ();
+
+            return element;
+        }
+        public static T OnTappedRelease<T>(this T element, Action<T> action) where T : UIElement
+        {
+            element.MouseUp += (_, __) =>
+            {
+                if (Mouse.Captured == element)
+                {
+                    Mouse.Capture (null); // 캡처 해제
+                    action (element);
+                }
+            };
             return element;
         }
 

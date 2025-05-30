@@ -18,7 +18,7 @@ namespace FlexMVVM.WPF.Markup
 
         public static T Stroke<T>(this T shape, Brush color) where T : Shape
         {
-            shape.SetValue (Shape.StretchProperty, color);
+            shape.SetValue (Shape.StrokeProperty, color);
             return shape;
         }
 
