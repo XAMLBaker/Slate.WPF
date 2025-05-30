@@ -95,45 +95,46 @@ namespace FlexMVVM.WPF.Markup
     {
         public static T OnTapped<T>(this T element, Action action) where T : UIElement
         {
-            element.MouseDown += (_, __) => action ();
+            element.PreviewMouseDown += (_, __) => action ();
 
             return element;
         }
         public static T OnTappedAsync<T>(this T element, Func<Task> asyncAction) where T : UIElement
         {
-            element.MouseDown += async (_, __) => await asyncAction ();
+            element.PreviewMouseDown += async (_, __) => await asyncAction ();
 
             return element;
         }
-        public static T OnTapped<T>(this T element, Action<T> action) where T : UIElement
+        public static T OnTapped<T>(this T element, MouseButtonEventHandler action) where T : UIElement
         {
-            element.MouseDown += (_, __) =>
+            element.PreviewMouseDown += (sender, e) =>
             {
-                Mouse.Capture (element); // 캡처 추가
-                action (element);
+                action (sender, e);
+                Mouse.Capture (element);
             };
             return element;
         }
         public static T OnTappedRelease<T>(this T element, Action action) where T : UIElement
         {
-            element.MouseUp += (_, __) => action ();
+            element.PreviewMouseUp += (_, __) => action ();
             return element;
         }
         public static T OnTappedReleaseAsync<T>(this T element, Func<Task> asyncAction) where T : UIElement
         {
-            element.MouseUp += async (_, __) => await asyncAction ();
+            element.PreviewMouseUp += async (_, __) => await asyncAction ();
 
             return element;
         }
-        public static T OnTappedRelease<T>(this T element, Action<T> action) where T : UIElement
+        public static T OnTappedRelease<T>(this T element, MouseButtonEventHandler action) where T : UIElement
         {
-            element.MouseUp += (_, __) =>
+            element.MouseUp += (sender, e) =>
             {
+                if (e.ButtonState != MouseButtonState.Released)
+                    return;
                 if (Mouse.Captured == element)
-                {
                     Mouse.Capture (null); // 캡처 해제
-                    action (element);
-                }
+                                          // ...기타 작업
+                action (sender, e);
             };
             return element;
         }

@@ -187,13 +187,13 @@ namespace FlexMVVM.WPF.Markup
                 element.RenderTransform = translate;
             }
 
-            var animation = new DoubleAnimation (value, TimeSpan.FromMilliseconds (durationValue));
+            var animation = new DoubleAnimation (translate.X, value, TimeSpan.FromMilliseconds (durationValue));
             translate.BeginAnimation (TranslateTransform.XProperty, animation);
 
             return element;
         }
 
-        public static T TransitionYAnimation<T>(this T element, double value = 2.0, double durationValue = 300) where T : FrameworkElement
+        public static T TransitionYAnimation<T>(this T element, double value = 2.0, EasingMode easingMode = EasingMode.EaseInOut, double durationValue = 300) where T : FrameworkElement
         {
             // 기존 RenderTransform이 TranslateTransform인지 확인
             if (element.RenderTransform is not TranslateTransform translate)
@@ -202,8 +202,8 @@ namespace FlexMVVM.WPF.Markup
                 element.RenderTransform = translate;
             }
 
-            var animation = new DoubleAnimation (value, TimeSpan.FromMilliseconds (durationValue));
-
+            var animation = new DoubleAnimation (translate.Y, value, TimeSpan.FromMilliseconds (durationValue));
+            animation.EasingFunction = new CubicEase { EasingMode = easingMode };
             translate.BeginAnimation (TranslateTransform.YProperty, animation);
 
             return element;
