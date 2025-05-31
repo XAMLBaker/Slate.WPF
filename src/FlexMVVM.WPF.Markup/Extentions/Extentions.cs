@@ -473,11 +473,5 @@ namespace FlexMVVM.WPF.Markup
             fd.Thickness = value;
             return fd;
         }
-
-        public static T Spacing<T>(this T fs, double value) where T : FlexStack
-        {
-            fs.Spacing = value;
-            return fs;
-        }
     }
 }

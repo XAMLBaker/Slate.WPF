@@ -10,25 +10,26 @@ namespace FlexMVVM.WPF
             this.Orientation = Orientation.Vertical;
             
         }
-        protected override void Arrange(Size finalSize)
+        protected override Size ArrangeOverride(Size finalSize)
         {
-            if (InternalChildren.Count == 0)
-                return;
-
-            if (InternalChildren.Count == 1)
-                return;
-            double offset = 0.0;
-
-            for (int i = 0; i < InternalChildren.Count; i++)
+            double offset = 0;
+            foreach (UIElement child in InternalChildren)
             {
-                FrameworkElement child = (FrameworkElement)this.Children[i];
+                if (child == null)
+                    continue;
 
-                Rect childRect = new Rect (0, offset, child.DesiredSize.Width, finalSize.Height);
+                Size childSize = child.DesiredSize;
 
-                child.Arrange (childRect);
-                child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Center);
-                offset += child.DesiredSize.Height + Spacing;
+                child.Arrange (new Rect (0, offset, finalSize.Width, childSize.Height));
+                offset += childSize.Height + Spacing;
             }
+
+            if (InternalChildren.Count > 0)
+                offset -= Spacing;
+
+            return Orientation == Orientation.Vertical
+                ? new Size (finalSize.Width, offset)
+                : new Size (offset, finalSize.Height);
         }
     }
 }

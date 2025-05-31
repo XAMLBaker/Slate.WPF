@@ -178,6 +178,27 @@ namespace FlexMVVM.WPF.Markup
             return element;
         }
 
+        public static T MarginAnimation<T>(this T element, Thickness thickness, double durationValue = 300) where T : FrameworkElement
+        {
+            ThicknessAnimation animation = new ThicknessAnimation ();
+            animation.To = thickness;
+            animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
+
+            element.BeginAnimation (FrameworkElement.MarginProperty, animation);
+
+            return element;
+        }
+
+        public static T MarginAnimation<T>(this T element, double leftright = 0.0, double topbottom = 0.0, double durationValue = 300) where T : FrameworkElement
+            => element.MarginAnimation (new Thickness (leftright, topbottom, leftright, topbottom));
+
+        public static T MarginAnimation<T>(this T element, double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0, double durationValue = 300) where T : FrameworkElement
+            => element.MarginAnimation (new Thickness (left, top, right, bottom));
+
+        public static T MarginAnimation<T>(this T element, double all, double durationValue = 300) where T : FrameworkElement
+            => element.MarginAnimation (new Thickness (all, all, all, all));
+
+
         public static T TransitionXAnimation<T>(this T element, double value = 2.0, double durationValue = 300) where T : FrameworkElement
         {
             // 기존 RenderTransform이 TranslateTransform인지 확인
