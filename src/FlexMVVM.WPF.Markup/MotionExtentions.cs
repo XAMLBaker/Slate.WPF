@@ -177,6 +177,16 @@ namespace FlexMVVM.WPF.Markup
 
             return element;
         }
+        public static T OpacityAnimation<T>(this T element, double value, double durationValue = 300) where T : FrameworkElement
+        {
+            DoubleAnimation animation = new DoubleAnimation ();
+            animation.To = value;
+            animation.Duration = new Duration (TimeSpan.FromMilliseconds (durationValue));
+
+            element.BeginAnimation (FrameworkElement.OpacityProperty, animation);
+
+            return element;
+        }
 
         public static T MarginAnimation<T>(this T element, Thickness thickness, double durationValue = 300) where T : FrameworkElement
         {
@@ -190,13 +200,13 @@ namespace FlexMVVM.WPF.Markup
         }
 
         public static T MarginAnimation<T>(this T element, double leftright = 0.0, double topbottom = 0.0, double durationValue = 300) where T : FrameworkElement
-            => element.MarginAnimation (new Thickness (leftright, topbottom, leftright, topbottom));
+            => element.MarginAnimation (new Thickness (leftright, topbottom, leftright, topbottom), durationValue);
 
         public static T MarginAnimation<T>(this T element, double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0, double durationValue = 300) where T : FrameworkElement
-            => element.MarginAnimation (new Thickness (left, top, right, bottom));
+            => element.MarginAnimation (new Thickness (left, top, right, bottom), durationValue);
 
         public static T MarginAnimation<T>(this T element, double all, double durationValue = 300) where T : FrameworkElement
-            => element.MarginAnimation (new Thickness (all, all, all, all));
+            => element.MarginAnimation (new Thickness (all, all, all, all), durationValue);
 
 
         public static T TransitionXAnimation<T>(this T element, double value = 2.0, double durationValue = 300) where T : FrameworkElement
