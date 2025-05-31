@@ -114,7 +114,6 @@ namespace FlexMVVM.WPF
         }
         protected FlexStack()
         {
-            this.ClipToBounds = true;
         }
     }
     public class HStack : FlexStack
