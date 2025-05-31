@@ -331,6 +331,11 @@ namespace FlexMVVM.WPF.Markup
             fcb.BorderBrush (model.BorderBrushValue, model.HoverBorderBrushValue);
             return fcb;
         }
+        public static T Orientation<T>(this T fp, Orientation orientation) where T : StackPanel
+        {
+            fp.Orientation = orientation;
+            return fp;
+        }
     }
 
     public static class FlexPanelExtentions
@@ -364,6 +369,7 @@ namespace FlexMVVM.WPF.Markup
             fp.Orientation = orientation;
             return fp;
         }
+        
     }
 
     public static class FlexControlExtentions

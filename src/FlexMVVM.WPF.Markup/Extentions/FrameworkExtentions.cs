@@ -4,110 +4,115 @@ namespace FlexMVVM.WPF.Markup
 {
     public static class FrameworkExtentions
     {
-        public static T Margin<T>(this T element, Thickness thickness) where T : FrameworkElement
+        public static T Name<T>(this T fe, object value) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.MarginProperty, thickness);
-            return element;
+            fe.SetValue (FrameworkElement.NameProperty, value);
+            return fe;
         }
-        public static T Margin<T>(this T element, double marginAll = 0) where T : FrameworkElement
+        public static T Margin<T>(this T fe, Thickness thickness) where T : FrameworkElement
+        {
+            fe.SetValue (FrameworkElement.MarginProperty, thickness);
+            return fe;
+        }
+        public static T Margin<T>(this T fe, double marginAll = 0) where T : FrameworkElement
         {
             var temp = new Thickness (marginAll, marginAll, marginAll, marginAll);
-            return element.Margin (temp);
+            return fe.Margin (temp);
         }
-        public static T Margin<T>(this T element, double leftright = 0, double topbottom = 0) where T : FrameworkElement
+        public static T Margin<T>(this T fe, double leftright = 0, double topbottom = 0) where T : FrameworkElement
         {
             var temp = new Thickness (leftright, topbottom, leftright, topbottom);
-            return element.Margin (temp);
+            return fe.Margin (temp);
         }
-        public static T Margin<T>(this T element, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : FrameworkElement
+        public static T Margin<T>(this T fe, double left = 0, double top = 0, double right = 0, double bottom = 0) where T : FrameworkElement
         {
             var temp = new Thickness (left, top, right, bottom);
-            return element.Margin (temp);
+            return fe.Margin (temp);
         }
-        public static T Center<T>(this T element) where T : FrameworkElement
+        public static T Center<T>(this T fe) where T : FrameworkElement
         {
-            element.VCenter ();
-            element.HCenter ();
-            return element;
+            fe.VCenter ();
+            fe.HCenter ();
+            return fe;
         }
-        public static T VCenter<T>(this T element) where T : FrameworkElement
+        public static T VCenter<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
-            return element;
+            fe.SetValue (FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+            return fe;
         }
-        public static T HCenter<T>(this T element) where T : FrameworkElement
+        public static T HCenter<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
-            return element;
+            fe.SetValue (FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            return fe;
         }
-        public static T Left<T>(this T element) where T : FrameworkElement
+        public static T Left<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Left);
-            return element;
+            fe.SetValue (FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Left);
+            return fe;
         }
-        public static T Right<T>(this T element) where T : FrameworkElement
+        public static T Right<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Right);
-            return element;
+            fe.SetValue (FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Right);
+            return fe;
         }
-        public static T Top<T>(this T element) where T : FrameworkElement
+        public static T Top<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Top);
-            return element;
+            fe.SetValue (FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Top);
+            return fe;
         }
-        public static T Bottom<T>(this T element) where T : FrameworkElement
+        public static T Bottom<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Bottom);
-            return element;
-        }
-
-        public static T MinWidth<T>(this T element, double value) where T : FrameworkElement
-        {
-            element.SetValue(FrameworkElement.MinWidthProperty, value);
-            return element;
-        }
-        public static T MaxWidth<T>(this T element, double value) where T : FrameworkElement
-        {
-            element.SetValue (FrameworkElement.MaxWidthProperty, value);
-            return element;
-        }
-        public static T MinHeight<T>(this T element, double value) where T : FrameworkElement
-        {
-            element.SetValue (FrameworkElement.MinHeightProperty, value);
-            return element;
-        }
-        public static T MaxHeight<T>(this T element, double value) where T : FrameworkElement
-        {
-            element.SetValue (FrameworkElement.MaxHeightProperty, value);
-
-            return element;
-        }
-        public static T Tag<T>(this T element, object value) where T : FrameworkElement
-        {
-            element.SetValue (FrameworkElement.TagProperty, value);
-            return element;
+            fe.SetValue (FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Bottom);
+            return fe;
         }
 
-        public static T UseLayoutRounding<T>(this T element) where T : FrameworkElement
+        public static T MinWidth<T>(this T fe, double value) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.UseLayoutRoundingProperty, true);
-            return element;
+            fe.SetValue(FrameworkElement.MinWidthProperty, value);
+            return fe;
         }
-        public static T Width<T>(this T element, double value) where T : FrameworkElement
+        public static T MaxWidth<T>(this T fe, double value) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.WidthProperty, value);
-            return element;
+            fe.SetValue (FrameworkElement.MaxWidthProperty, value);
+            return fe;
+        }
+        public static T MinHeight<T>(this T fe, double value) where T : FrameworkElement
+        {
+            fe.SetValue (FrameworkElement.MinHeightProperty, value);
+            return fe;
+        }
+        public static T MaxHeight<T>(this T fe, double value) where T : FrameworkElement
+        {
+            fe.SetValue (FrameworkElement.MaxHeightProperty, value);
+
+            return fe;
+        }
+        public static T Tag<T>(this T fe, object value) where T : FrameworkElement
+        {
+            fe.SetValue (FrameworkElement.TagProperty, value);
+            return fe;
         }
 
-        public static T Height<T>(this T element, double value) where T : FrameworkElement
+        public static T UseLayoutRounding<T>(this T fe) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.HeightProperty, value);
-            return element;
+            fe.SetValue (FrameworkElement.UseLayoutRoundingProperty, true);
+            return fe;
         }
-        public static T  Cursor<T>(this T element, Cursor value) where T : FrameworkElement
+        public static T Width<T>(this T fe, double value) where T : FrameworkElement
         {
-            element.SetValue (FrameworkElement.CursorProperty, value);
-            return element;
+            fe.SetValue (FrameworkElement.WidthProperty, value);
+            return fe;
+        }
+
+        public static T Height<T>(this T fe, double value) where T : FrameworkElement
+        {
+            fe.SetValue (FrameworkElement.HeightProperty, value);
+            return fe;
+        }
+        public static T  Cursor<T>(this T fe, Cursor value) where T : FrameworkElement
+        {
+            fe.SetValue (FrameworkElement.CursorProperty, value);
+            return fe;
         }
     }
 }
