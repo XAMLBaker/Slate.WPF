@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -138,12 +139,12 @@ namespace FlexMVVM.WPF.Markup
             return element;
         }
 
-        public static UIElement OnHover(this UIElement element, Action action)
+        public static T OnHover<T>(this T element, Action action) where T : UIElement
         {
             element.MouseEnter += (_, __) => action ();
             return element;
         }
-        public static UIElement OnRelease(this UIElement element, Action action)
+        public static T OnRelease<T>(this T element, Action action) where T : UIElement
         {
             element.MouseLeave += (_, __) => action ();
             return element;
@@ -158,6 +159,43 @@ namespace FlexMVVM.WPF.Markup
             element.MouseLeave += (_, __) => action (element);
             return element;
         }
+
+        public static T OnChecked<T>(this T tb, Action action) where T : ToggleButton
+        {
+            tb.Checked += (_, __) => action ();
+            return tb;
+        }
+
+        public static T OnUnchecked<T>(this T tb, Action action) where T : ToggleButton
+        {
+            tb.Unchecked += (_, __) => action ();
+            return tb;
+        }
+
+        public static T OnIndeterminate<T>(this T tb, Action action) where T : ToggleButton
+        {
+            tb.Indeterminate += (_, __) => action ();
+            return tb;
+
+        }
+        public static T OnChecked<T>(this T tb, Action<T> action) where T : ToggleButton
+        {
+            tb.Checked += (_, __) => action (tb);
+            return tb;
+        }
+
+        public static T OnUnchecked<T>(this T tb, Action<T> action) where T : ToggleButton
+        {
+            tb.Unchecked += (_, __) => action (tb);
+            return tb;
+        }
+
+        public static T OnIndeterminate<T>(this T tb, Action<T> action) where T : ToggleButton
+        {
+            tb.Indeterminate += (_, __) => action (tb);
+            return tb;
+        }
+
     }
     public static class TextBoxExtentions
     {
@@ -208,6 +246,7 @@ namespace FlexMVVM.WPF.Markup
             tb.SelectionTextBrush = new SolidColorBrush (color);
             return tb;
         }
+
     }
 
     

@@ -26,7 +26,7 @@ namespace FlexMVVM.WPF
                 Rect childRect = new Rect (0, offset, child.DesiredSize.Width, finalSize.Height);
 
                 child.Arrange (childRect);
-
+                child.SetValue (HorizontalAlignmentProperty, HorizontalAlignment.Center);
                 offset += child.DesiredSize.Height + Spacing;
             }
         }

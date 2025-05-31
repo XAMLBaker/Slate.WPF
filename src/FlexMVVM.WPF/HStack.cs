@@ -71,10 +71,27 @@ namespace FlexMVVM.WPF
                 maxDesiredWidth = Math.Max (maxDesiredWidth, childDesiredSize.Width);
                 totalDesiredHeight += childDesiredSize.Height;
             }
-            return new Size (
-                                double.IsPositiveInfinity (constraint.Width) ? maxDesiredWidth : Math.Min (maxDesiredWidth, constraint.Width),
-                                double.IsPositiveInfinity (constraint.Height) ? totalDesiredHeight : Math.Min (totalDesiredHeight, constraint.Height)
-                            );
+            double width = 0.0;
+            if(Double.IsInfinity(this.Width) || Double.IsInfinity(this.Width) || Double.IsNaN(this.Width))
+            {
+                if (double.IsPositiveInfinity (constraint.Width))
+                {
+                    width = maxDesiredWidth;
+                }
+                else
+                {
+                    width = Math.Min (maxDesiredWidth, constraint.Width);
+                }
+            }
+            else
+            {
+                width = this.Width;
+            }
+
+                return new Size (
+                                   width,
+                                    double.IsPositiveInfinity (constraint.Height) ? totalDesiredHeight : Math.Min (totalDesiredHeight, constraint.Height)
+                                );
 
         }
 
@@ -90,12 +107,6 @@ namespace FlexMVVM.WPF
             Arrange (this.RenderSize);
         }
 
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
-            base.OnRenderSizeChanged (sizeInfo);
-            Arrange (this.RenderSize);
-        }
-
         protected abstract void Arrange(Size finalSize);
         private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -105,7 +116,7 @@ namespace FlexMVVM.WPF
             {
                 var FlexStack = ((FlexStack)d);
 
-                FlexStack.InvalidateVisual ();
+                FlexStack.Arrange (FlexStack.RenderSize);
             }
             catch (Exception ex)
             {
