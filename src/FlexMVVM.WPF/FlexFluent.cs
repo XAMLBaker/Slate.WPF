@@ -1,6 +1,5 @@
 ﻿using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
-using FlexMVVM.Modularity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;

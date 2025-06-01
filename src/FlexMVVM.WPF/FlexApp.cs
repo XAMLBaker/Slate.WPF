@@ -1,5 +1,4 @@
-﻿using FlexMVVM.Modularity;
-using FlexMVVM.WPF;
+﻿using FlexMVVM.WPF;
 using System.Windows;
 
 namespace FlexMVVM

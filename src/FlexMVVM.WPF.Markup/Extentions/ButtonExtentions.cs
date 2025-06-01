@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls.Primitives;
 
-namespace FlexMVVM.WPF.Markup.Extentions
+namespace FlexMVVM.WPF.Markup
 {
     public static class ButtonExtentions
     {
