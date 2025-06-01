@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 
 [assembly: System.Reflection.Metadata.MetadataUpdateHandler (typeof (FlexMVVM.WPF.Markup.HotReloadManager))]
 
@@ -22,24 +23,50 @@ namespace FlexMVVM.WPF.Markup
             {
                 if (types is null)
                     return;
-                foreach (var window in Application.Current.Windows)
+                foreach (var type in types)
                 {
-                    if (window.ToString () == "Microsoft.VisualStudio.DesignTools.WpfTap.WpfVisualTreeService.Adorners.AdornerWindow")
-                    {
+                    if (!typeof (IComponent).IsAssignableFrom (type))
                         continue;
-                    }
-                    var content = (DependencyObject)((Window)window).Content;
 
-                    foreach (Type type in types)
+                    foreach (Window window in Application.Current.Windows)
                     {
-                        if (type.GetInterfaces ().Any (x => x.Name == "IComponent"))
+                        if (window.ToString ().Contains ("AdornerWindow"))
+                            continue;
+
+                        var root = (DependencyObject)window.Content;
+
+                        foreach (var element in FindVisualChildren (root))
                         {
-                            var temp = RegisterProvider.Container.Resolve (type);
-                            ((IComponent)temp).Render ();
+                            if (element == null)
+                                continue;
+
+                            if (type.IsInstanceOfType (element) && element is IComponent comp)
+                            {
+                                comp.Render ();
+                            }
                         }
                     }
                 }
             });
+        }
+        private static IEnumerable<DependencyObject> FindVisualChildren(DependencyObject parent)
+        {
+            if (parent == null)
+                yield break;
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount (parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild (parent, i);
+                if (child == null)
+                    continue;
+
+                yield return child;
+
+                foreach (var grandChild in FindVisualChildren (child))
+                {
+                    yield return grandChild;
+                }
+            }
         }
     }
 }
