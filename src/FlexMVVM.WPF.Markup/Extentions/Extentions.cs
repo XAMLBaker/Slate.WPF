@@ -225,6 +225,19 @@ namespace FlexMVVM.WPF.Markup
 
             return tb;
         }
+        public static T OnTextChanged<T>(this T tb, Action action) where T : TextBox
+        {
+            tb.TextChanged += (_, __) => action ();
+
+            return tb;
+        }
+
+        public static T OnTextChanged<T>(this T tb, TextChangedEventHandler action) where T : TextBox
+        {
+            tb.TextChanged += (_, __) => action (_, __);
+
+            return tb;
+        }
         public static T SelectionBrush<T>(this T tb, string colorString) where T : TextBox
         {
             tb.SelectionBrush (ColorTool.Get (colorString));

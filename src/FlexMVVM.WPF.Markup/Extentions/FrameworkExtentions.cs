@@ -2,7 +2,7 @@
 using System.Windows.Input;
 namespace FlexMVVM.WPF.Markup
 {
-    public static class FrameworkExtentions
+    public static partial class FrameworkExtentions
     {
         public static T Name<T>(this T fe, object value) where T : FrameworkElement
         {

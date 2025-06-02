@@ -62,6 +62,7 @@ namespace FlexMVVM.WPF.Markup
 
         public void Render()
         {
+            this.InitilzedForms ();
             Visual visual = this.Build ();
             if (visual != null)
             {
@@ -69,6 +70,10 @@ namespace FlexMVVM.WPF.Markup
             }
 
             this.OnRender (this);
+        }
+        protected virtual void InitilzedForms()
+        {
+
         }
         protected abstract Visual Build();
     }
@@ -96,8 +101,13 @@ namespace FlexMVVM.WPF.Markup
         {
 
         }
+        protected virtual void InitilzedForms()
+        {
+
+        }
         public void Render()
         {
+            this.InitilzedForms ();
             List<UIElement> removeChildren = new List<UIElement> ();
 
             foreach (UIElement child in this.Children)
