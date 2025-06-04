@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -65,15 +66,41 @@ namespace FlexMVVM.WPF
         {
             DefaultStyleKeyProperty.OverrideMetadata (typeof (FlexDivider), new FrameworkPropertyMetadata (typeof (FlexDivider)));
         }
-
         private Line _line;
+        private double lastValue = 0.0;
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate ();
 
             _line =  this.GetTemplateChild ("lineGeometry") as Line;
 
-            this.Loaded += (s, e) => this.DividerMake ();
+            this.LayoutUpdated += (s, e) =>
+            {
+                // 부모 Width가 유효한지 확인
+                var parent = GetVisualParent (this);
+                if (parent == null)
+                    return;
+                if (Orientation == Orientation.Horizontal)
+                {
+                    if (parent.ActualWidth > 0)
+                    {
+                        if (lastValue >= parent.ActualWidth)
+                            return;
+                        DividerMake ();
+                        lastValue = parent.ActualWidth;
+                    }
+                }
+                else if (Orientation == Orientation.Vertical)
+                {
+                    if (parent.ActualHeight > 0)
+                    {
+                        if (lastValue >= parent.ActualHeight)
+                            return;
+                        DividerMake ();
+                        lastValue = parent.ActualHeight;
+                    }
+                }
+            };
         }
 
         private void DividerMake()
@@ -82,6 +109,7 @@ namespace FlexMVVM.WPF
                 return;
             var translateTransform = new TranslateTransform ();
             var EndData = 0.0;
+
             if (Orientation == Orientation.Horizontal)
             {
                 EndData = this.ActualWidth - (this.StartIndent + this.EndIndent);
@@ -111,5 +139,15 @@ namespace FlexMVVM.WPF
             _line.X2 = 0;
             this.RenderTransform = translateTransform;
         }
+        public FrameworkElement? GetVisualParent(DependencyObject child)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent (child);
+            while (parent != null && !(parent is FrameworkElement))
+            {
+                parent = VisualTreeHelper.GetParent (parent);
+            }
+            return parent as FrameworkElement;
+        }
+
     }
 }

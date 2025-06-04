@@ -32,5 +32,15 @@ namespace FlexMVVM.WPF.Markup
             element.SetValue (UIElement.OpacityProperty, opacity);
             return element;
         }
+
+        public static T Visibility<T>(this T element, Visibility visibility) where T : UIElement
+        {
+            element.SetValue (UIElement.VisibilityProperty, visibility);
+            return element;
+        }
+        public static T Visibility<T>(this T element) where T : UIElement
+        {
+            return element;
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace FlexMVVM.WPF.Markup
 
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
+            this.InitilzedForms ();
             if (this.ComponentStyleKey != null)
                 this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
         }
@@ -87,6 +88,7 @@ namespace FlexMVVM.WPF.Markup
 
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
+            this.InitilzedForms ();
 
             if (this.ComponentStyleKey != null)
                 this.SetResourceReference (StyleProperty, this.ComponentStyleKey);

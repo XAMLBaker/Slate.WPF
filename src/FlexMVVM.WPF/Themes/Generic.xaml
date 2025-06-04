@@ -159,10 +159,7 @@
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
                         Background="{TemplateBinding Background}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Line x:Name="lineGeometry" Grid.Column="0" />
+                        <Line x:Name="lineGeometry" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

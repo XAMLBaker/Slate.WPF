@@ -170,13 +170,11 @@ namespace FlexMVVM.WPF
             var _region = layoutType.Assembly.DefinedTypes.Where (x => x.Namespace == layoutType.Namespace)
                                                          .First (x => x.Name == "Content");
 
-            var layOutObject = (UIElement)this._container.Resolve (layoutType);
-            var regionObject = (UIElement)this._container.Resolve (_region);
-            if (layOutObject is DockPanel dockPanel)
-            {
-                Contentemove (dockPanel);
-                dockPanel.Children.Add(regionObject);
-            }
+            var layOutObject = (DockPanel)this._container.Resolve (layoutType);
+            var regionObject = (FrameworkElement)this._container.Resolve (_region);
+
+            Contentemove (layOutObject);
+            layOutObject.Children.Add (regionObject);
         }
 
         private void Contentemove(UIElement dockPanel) {

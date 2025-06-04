@@ -14,13 +14,30 @@ namespace FlexMVVM.WPF.Markup
                         DependencyProperty property,
                         string path,
                         object source = null,
+                        RelativeSource relativeSource = null,
+                        UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
                         IValueConverter? converter = null) where T : FrameworkElement
         {
-            var binding = new Binding (path)
+            var binding = new Binding (path);
+            if(source != null)
             {
-                Source = source,
-                Converter = converter
-            };
+                binding.Source = source;
+            }
+
+            if(relativeSource != null)
+            {
+                binding.RelativeSource = relativeSource;
+            }
+
+            if (converter != null)
+            {
+                binding.Converter = converter;
+            }
+
+            if( updateSourceTrigger != null)
+            {
+                binding.UpdateSourceTrigger = updateSourceTrigger;
+            }
 
             control.SetBinding (property, binding);
             return control;
@@ -238,28 +255,58 @@ namespace FlexMVVM.WPF.Markup
 
             return tb;
         }
-        public static T SelectionBrush<T>(this T tb, string colorString) where T : TextBox
+        public static T SelectionBrush<T>(this T tb, string color) where T : TextBox
         {
-            tb.SelectionBrush (ColorTool.Get (colorString));
+            tb.SelectionBrush (BrushTool.Get (color));
             return tb;
         }
         public static T SelectionBrush<T>(this T tb, Color color) where T : TextBox
         {
-            tb.SelectionBrush = new SolidColorBrush (color);
+            tb.SelectionBrush (BrushTool.Get (color));
             return tb;
         }
-        public static T SelectionTextBrush<T>(this T tb, string colorString) where T : TextBox
+        public static T SelectionBrush<T>(this T tb, Brush brush) where T : TextBox
         {
-            tb.SelectionTextBrush(ColorTool.Get (colorString));
+            tb.SelectionBrush = brush;
+            return tb;
+        }
+
+        public static T SelectionTextBrush<T>(this T tb, string color) where T : TextBox
+        {
+            tb.SelectionTextBrush(BrushTool.Get (color));
 
             return tb;
         }
         public static T SelectionTextBrush<T>(this T tb, Color color) where T : TextBox
         {
-            tb.SelectionTextBrush = new SolidColorBrush (color);
+            tb.SelectionTextBrush (BrushTool.Get (color));
             return tb;
         }
 
+        public static T SelectionTextBrush<T>(this T tb, Brush brush) where T : TextBox
+        {
+            tb.SelectionTextBrush = brush;
+            return tb;
+        }
+
+        public static T CaretBrush<T>(this T tb, string color) where T : TextBox
+        {
+            tb.CaretBrush (BrushTool.Get (color));
+
+            return tb;
+        }
+
+        public static T CaretBrush<T>(this T tb, Color color) where T : TextBox
+        {
+            tb.CaretBrush (BrushTool.Get (color));
+            return tb;
+        }
+
+        public static T CaretBrush<T>(this T tb, Brush brush) where T : TextBox
+        {
+            tb.CaretBrush = brush;
+            return tb;
+        }
     }
 
     
