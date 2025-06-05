@@ -51,7 +51,7 @@ namespace FlexMVVM.WPF
             if (this._register.NestedLayout != null)
                 navi.SetRootLayout ();
 
-            navi.NavigateTo (this._register.InitialLayout.Namespace);
+            navi.NavigateToAsync (this._register.InitialLayout.Namespace);
         }
 
         private void Init()

@@ -4,6 +4,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace FlexMVVM.WPF.Markup
 {
@@ -180,6 +181,11 @@ namespace FlexMVVM.WPF.Markup
         public static T OnChecked<T>(this T tb, Action action) where T : ToggleButton
         {
             tb.Checked += (_, __) => action ();
+            return tb;
+        }
+        public static T OnCheckedAsync<T>(this T tb, Func<Task> asyncAction) where T : ToggleButton
+        {
+            tb.Checked += async (_, __) => await asyncAction ();
             return tb;
         }
 

@@ -37,13 +37,13 @@ namespace FlexMVVM.WPF.Markup
 
 
     [INotifyPropertyChanged]
-    public abstract partial class Component : ContentControl, IComponent
+    public abstract partial class Component : ContentControl, IComponent, IShellComponent
     {
         public object? ComponentStyleKey { get; set; }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
-            this.Render ();
+
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -53,9 +53,11 @@ namespace FlexMVVM.WPF.Markup
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
             this.InitilzedForms ();
+            this.Render ();
             if (this.ComponentStyleKey != null)
                 this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
         }
+
         protected virtual void OnRender(object sender)
         {
 
@@ -77,68 +79,10 @@ namespace FlexMVVM.WPF.Markup
 
         }
         protected abstract Visual Build();
-    }
 
-    [INotifyPropertyChanged]
-    public abstract partial class LayoutComponent : DockPanel, IComponent
-    {
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized (e);
-
-            this.DataContext = this;
-            this.Loaded += this.OnLoaded;
-            this.InitilzedForms ();
-
-            if (this.ComponentStyleKey != null)
-                this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
-        }
-        public object? ComponentStyleKey { get; set; }
-        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            this.Render ();
-        }
-
-        protected virtual void OnRender(object sender)
+        public virtual void RegionAttached()
         {
 
         }
-        protected virtual void InitilzedForms()
-        {
-
-        }
-        public void Render()
-        {
-            this.InitilzedForms ();
-            List<UIElement> removeChildren = new List<UIElement> ();
-
-            foreach (UIElement child in this.Children)
-            {
-                // DockPanel.Dock 의 설정 상태를 확인
-                var valueSource = DependencyPropertyHelper.GetValueSource (child, DockPanel.DockProperty);
-
-                // Local 값으로 설정되지 않은 경우
-                if (valueSource.BaseValueSource.HasFlag (BaseValueSource.Local))
-                {
-                    removeChildren.Add (child);
-                }
-            }
-            foreach (UIElement child in removeChildren)
-            {
-                this.Children.Remove (child);
-            }
-
-            var elements = this.Build ();
-            if (elements != null)
-            {
-                int i = 0;
-                foreach (var element in elements)
-                {
-                    this.Children.Insert (i++, element);
-                }
-            }
-            this.OnRender (this);
-        }
-        protected abstract IEnumerable<UIElement> Build();
     }
 }

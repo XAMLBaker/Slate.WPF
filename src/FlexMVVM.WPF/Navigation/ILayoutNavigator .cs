@@ -1,9 +1,9 @@
 ﻿using DryIoc;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace FlexMVVM.WPF
 {
@@ -11,7 +11,7 @@ namespace FlexMVVM.WPF
     {
         void SetRootLayout();
         void Home();
-        void NavigateTo(string url);
+        Task NavigateToAsync(string url);
         FrameworkElement CreateLayout(string url);
     }
 
@@ -65,9 +65,9 @@ namespace FlexMVVM.WPF
             }
         }
 
-        public void NavigateTo(string url)
+        public async Task NavigateToAsync(string url)
         {
-            if(url[0] == '/' || url[0] == '.')
+            if (url[0] == '/' || url[0] == '.')
             {
                 url = url.Remove (0,1);
             }
@@ -75,12 +75,12 @@ namespace FlexMVVM.WPF
 
             Type rootLayoutType = RegisterProvider.GetDefineNestedLayout();
 
-            FrameworkElement layout = CreateLayout (_url);
+            var currentElement = CreateLayout (_url);
             if (rootLayoutType == null)
             {
                 if (RegisterProvider.Window is Window window)
                 {
-                    window.Content = layout;
+                    window.Content = currentElement;
                 }
                 return;
             }
@@ -89,9 +89,9 @@ namespace FlexMVVM.WPF
             if (layOutObject is DockPanel dockPanel)
             {
                 Contentemove (dockPanel);
-                dockPanel.Children.Add (layout);
+                dockPanel.Children.Add (currentElement);
             }
-       }
+        }
 
         public FrameworkElement CreateLayout(string url)
         {
@@ -103,19 +103,21 @@ namespace FlexMVVM.WPF
                 bool _isGroupedWithContent = IsGroupedWithContent (url);
                 string typeNameSpace = _isGroupedWithLayout ? GetLayoutString (url) : GetContentString (url);
                 Type contentType = RegisterProvider.GetType (typeNameSpace);
-
                 string moduleName = contentType.Assembly.GetName ().Name;
                 int layoutCnt = (contentType.Namespace.Split ('.').Length - moduleName.Split ('.').Length);
 
-                FrameworkElement rootLayout = layout;
-                string parentFolderUrl = RemoveLastSegment (contentType.Namespace);
-                for (int i = 0; i < layoutCnt; i++)
+                for(int i=0; i< layoutCnt - 1; i++)
                 {
-                    rootLayout = ParentPress (parentFolderUrl, rootLayout);
-                    parentFolderUrl = RemoveLastSegment (parentFolderUrl);
+                    var str = RemoveLastSegment (contentType.Namespace);
+                    layout = GetLayout (str);
                 }
 
-                return rootLayout;
+                FrameworkElement element = GetTopLayout (moduleName);
+                if (element == null)
+                {
+                    return layout;
+                }
+                return element;
             }
             catch (Exception ex)
             {
@@ -124,18 +126,25 @@ namespace FlexMVVM.WPF
             return null;
         }
 
+        private FrameworkElement GetTopLayout(string moduleName)
+        {
+            string namespaceStr = moduleName + ".Layout";
+            var temp = RegisterProvider.IsUrlRegistered (namespaceStr);
+            if (temp == false)
+                return null;
+
+            Type contentType = RegisterProvider.GetType (namespaceStr);
+            return (FrameworkElement)this._container.Resolve (contentType);
+        }
+
         public FrameworkElement ParentPress(string url, FrameworkElement children)
         {
             var layout = GetLayout (url);
 
-            bool _isGroupedWithLayout = IsGroupedWithLayout (url);
-            string typeNameSpace = _isGroupedWithLayout ? GetLayoutString (url) : GetContentString (url);
-            Type contentType = RegisterProvider.GetType (typeNameSpace);
-
             if (layout is DockPanel dockPanel)
             {
                 Contentemove (dockPanel);
-                ((DockPanel)dockPanel).Children.Add (children);
+                dockPanel.Children.Add (children);
             }
             else if (layout is ContentControl cc)
             {
@@ -154,16 +163,23 @@ namespace FlexMVVM.WPF
             bool _isGroupedWithContent = IsGroupedWithContent (url);
 
             if ((_isGroupedWithLayout || _isGroupedWithContent) == false)
-                throw new Exception ("등록 된 Layout 또는 Content가 없습니다.");
+                throw new Exception ("등록 된 Layout, Content 모두 존재하지 않습니다.");
 
-            string typeNameSpace = _isGroupedWithLayout ? GetLayoutString (url) : GetContentString (url);
-            Type contentType = RegisterProvider.GetType (typeNameSpace);
-            if (_isGroupedWithLayout && _isGroupedWithContent)
+            if (_isGroupedWithLayout)
             {
-                LayerPress (contentType);
+                Type layoutType = RegisterProvider.GetType (GetLayoutString (url));
+                var layoutFrameworkElement = (FrameworkElement)this._container.Resolve (layoutType);
+                ((IShellComponent)layoutFrameworkElement).RegionAttached ();
+
+                if (_isGroupedWithContent == false)
+                    return layoutFrameworkElement;
             }
 
-            return (FrameworkElement)this._container.Resolve (contentType);
+            Type contentType = RegisterProvider.GetType (GetContentString (url));
+            var contentFrameworkElement = (FrameworkElement)this._container.Resolve (contentType);
+             ((IShellComponent)contentFrameworkElement).RegionAttached ();
+
+            return contentFrameworkElement;
         }
 
         private string GetLayoutString(string url)
@@ -221,6 +237,7 @@ namespace FlexMVVM.WPF
                     dockofRegion = child;
                 }
             }
+
             if (dockofRegion != null)
             {
                 _dockPanel.Children.Remove (dockofRegion);
