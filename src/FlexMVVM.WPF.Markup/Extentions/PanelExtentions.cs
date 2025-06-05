@@ -38,6 +38,15 @@ namespace FlexMVVM.WPF.Markup
             }
             return panel;
         }
+
+        public static T Children<T>(this T panel, List<UIElement> elements) where T : Panel
+        {
+            foreach (var element in elements)
+            {
+                panel.Children.Add (element);
+            }
+            return panel;
+        }
     }
 
     public static class UniformExtentions

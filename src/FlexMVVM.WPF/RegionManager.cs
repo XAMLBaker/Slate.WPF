@@ -41,10 +41,10 @@ namespace FlexMVVM.WPF
                 host.Content = control;
             }
 
-            //if (control is IStatefulControl stateful)
-            //{
-            //    stateful.OnAttach ();
-            //}
+            if (control is IStatefulControl stateful)
+            {
+                stateful.OnAttach ();
+            }
         }
 
         public static void Detach(string name)

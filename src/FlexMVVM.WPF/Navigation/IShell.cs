@@ -2,6 +2,6 @@
 {
     public interface IShellComponent
     {
-        void RegionAttached();
+        void RegionAttached(object argu = null);
     }
 }

@@ -80,7 +80,7 @@ namespace FlexMVVM.WPF.Markup
         }
         protected abstract Visual Build();
 
-        public virtual void RegionAttached()
+        public virtual void RegionAttached(object argu)
         {
 
         }

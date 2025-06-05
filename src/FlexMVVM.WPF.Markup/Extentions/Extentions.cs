@@ -16,7 +16,7 @@ namespace FlexMVVM.WPF.Markup
                         string path,
                         object source = null,
                         RelativeSource relativeSource = null,
-                        UpdateSourceTrigger updateSourceTrigger = UpdateSourceTrigger.Default,
+                        UpdateSourceTrigger? updateSourceTrigger = null,
                         IValueConverter? converter = null) where T : FrameworkElement
         {
             var binding = new Binding (path);
@@ -37,7 +37,7 @@ namespace FlexMVVM.WPF.Markup
 
             if( updateSourceTrigger != null)
             {
-                binding.UpdateSourceTrigger = updateSourceTrigger;
+                binding.UpdateSourceTrigger = updateSourceTrigger.Value;
             }
 
             control.SetBinding (property, binding);
@@ -66,6 +66,11 @@ namespace FlexMVVM.WPF.Markup
             return control;
         }
         public static ItemsControl Link(this ItemsControl control, string viewModelProperty)
+        {
+            control.SetBinding (ItemsControl.ItemsSourceProperty, new Binding (viewModelProperty));
+            return control;
+        }
+        public static T Link<T>(this T control, string viewModelProperty) where T : ListBox
         {
             control.SetBinding (ItemsControl.ItemsSourceProperty, new Binding (viewModelProperty));
             return control;

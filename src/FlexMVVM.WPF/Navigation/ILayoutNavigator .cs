@@ -11,8 +11,8 @@ namespace FlexMVVM.WPF
     {
         void SetRootLayout();
         void Home();
-        Task NavigateToAsync(string url);
-        FrameworkElement CreateLayout(string url);
+        Task NavigateToAsync(string url, object argu = null);
+        FrameworkElement CreateLayout(string url, object argu = null);
     }
 
     public class LayoutNavigator : ILayoutNavigator
@@ -65,7 +65,7 @@ namespace FlexMVVM.WPF
             }
         }
 
-        public async Task NavigateToAsync(string url)
+        public async Task NavigateToAsync(string url, object argu = null)
         {
             if (url[0] == '/' || url[0] == '.')
             {
@@ -75,7 +75,7 @@ namespace FlexMVVM.WPF
 
             Type rootLayoutType = RegisterProvider.GetDefineNestedLayout();
 
-            var currentElement = CreateLayout (_url);
+            var currentElement = CreateLayout (_url, argu);
             if (rootLayoutType == null)
             {
                 if (RegisterProvider.Window is Window window)
@@ -93,7 +93,7 @@ namespace FlexMVVM.WPF
             }
         }
 
-        public FrameworkElement CreateLayout(string url)
+        public FrameworkElement CreateLayout(string url, object argu)
         {
             try
             {
@@ -113,9 +113,9 @@ namespace FlexMVVM.WPF
                 }
 
                 if (rootLayout == null)
-                    rootLayout = GetLayout (url);
+                    rootLayout = GetLayout (url, argu);
                 else
-                    GetLayout (url);
+                    GetLayout (url, argu);
 
 
                 FrameworkElement element = GetTopLayout (moduleName);
@@ -160,7 +160,7 @@ namespace FlexMVVM.WPF
             return layout;
         }
 
-        private FrameworkElement GetLayout(string url)
+        private FrameworkElement GetLayout(string url, object argu = null)
         {
             if (RegisterProvider.HasPartialKeyMatch (url) == false)
                 throw new Exception ("Module 등록되지 않은 url 입니다.");
@@ -175,7 +175,7 @@ namespace FlexMVVM.WPF
             {
                 Type layoutType = RegisterProvider.GetType (GetLayoutString (url));
                 var layoutFrameworkElement = (FrameworkElement)this._container.Resolve (layoutType);
-                ((IShellComponent)layoutFrameworkElement).RegionAttached ();
+                ((IShellComponent)layoutFrameworkElement).RegionAttached (argu);
 
                 if (_isGroupedWithContent == false)
                     return layoutFrameworkElement;
@@ -183,7 +183,7 @@ namespace FlexMVVM.WPF
 
             Type contentType = RegisterProvider.GetType (GetContentString (url));
             var contentFrameworkElement = (FrameworkElement)this._container.Resolve (contentType);
-             ((IShellComponent)contentFrameworkElement).RegionAttached ();
+             ((IShellComponent)contentFrameworkElement).RegionAttached (argu);
 
             return contentFrameworkElement;
         }
