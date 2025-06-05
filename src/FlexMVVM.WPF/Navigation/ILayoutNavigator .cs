@@ -97,25 +97,31 @@ namespace FlexMVVM.WPF
         {
             try
             {
-                var layout = GetLayout (url);
-
                 bool _isGroupedWithLayout = IsGroupedWithLayout (url);
                 bool _isGroupedWithContent = IsGroupedWithContent (url);
                 string typeNameSpace = _isGroupedWithLayout ? GetLayoutString (url) : GetContentString (url);
                 Type contentType = RegisterProvider.GetType (typeNameSpace);
+
                 string moduleName = contentType.Assembly.GetName ().Name;
                 int layoutCnt = (contentType.Namespace.Split ('.').Length - moduleName.Split ('.').Length);
 
-                for(int i=0; i< layoutCnt - 1; i++)
+                FrameworkElement rootLayout =null;
+                for (int i = 0; i < layoutCnt - 1; i++)
                 {
                     var str = RemoveLastSegment (contentType.Namespace);
-                    layout = GetLayout (str);
+                    rootLayout = GetLayout (str);
                 }
+
+                if (rootLayout == null)
+                    rootLayout = GetLayout (url);
+                else
+                    GetLayout (url);
+
 
                 FrameworkElement element = GetTopLayout (moduleName);
                 if (element == null)
                 {
-                    return layout;
+                    return rootLayout;
                 }
                 return element;
             }
