@@ -11,12 +11,14 @@ namespace FlexMVVM.WPF
     {
         private FlexAppBuilder builder;
         private Register _register;
-
+        private ViewModelMapper _viewModelMapper;
         public FlexFluent()
         {
             this.builder = FlexApp.CreateBuilder ();
             this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator> ();
             this.Services.AddSingleton<IWindowManager, WindowManager> ();
+            _viewModelMapper =new ViewModelMapper ();
+            this.Services.AddSingleton<IViewModelMapper> (_viewModelMapper);
 
             _register = new Register ();
             _register.RegisterMap["FlexFrameworkWindow"] = typeof (FlexWindow);
@@ -71,5 +73,7 @@ namespace FlexMVVM.WPF
         public IModuleCatalog ModuleCatalog => this.builder.ModuleCatalog ();
         public IServiceCollection Services => this.builder.Services;
         public IContainerRegistry ContainerRegistry => this.builder.ContainerRegistry;
+
+        public IViewModelMapper ViewModelMapper => this._viewModelMapper;
     }
 }

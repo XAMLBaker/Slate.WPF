@@ -182,4 +182,27 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:FlexRegion}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:FlexRegion}">
+                    <Border Background="Transparent">
+                        <Grid x:Name="PART_RootGrid" ClipToBounds="True">
+                            <ContentPresenter
+                                x:Name="PART_OldContent"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Visibility="Collapsed" />
+
+                            <ContentPresenter
+                                x:Name="PART_NewContent"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

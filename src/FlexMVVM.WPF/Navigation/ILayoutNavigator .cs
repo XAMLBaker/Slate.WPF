@@ -76,21 +76,21 @@ namespace FlexMVVM.WPF
             Type rootLayoutType = RegisterProvider.GetDefineNestedLayout();
 
             var currentElement = CreateLayout (_url, argu);
-            if (rootLayoutType == null)
-            {
-                if (RegisterProvider.Window is Window window)
-                {
-                    window.Content = currentElement;
-                }
-                return;
-            }
+            //if (rootLayoutType == null)
+            //{
+            //    if (RegisterProvider.Window is Window window)
+            //    {
+            //        window.Content = currentElement;
+            //    }
+            //    return;
+            //}
 
-            var layOutObject = (UIElement)this._container.Resolve (rootLayoutType);
-            if (layOutObject is DockPanel dockPanel)
-            {
-                Contentemove (dockPanel);
-                dockPanel.Children.Add (currentElement);
-            }
+            //var layOutObject = (UIElement)this._container.Resolve (rootLayoutType);
+            //if (layOutObject is DockPanel dockPanel)
+            //{
+            //    Contentemove (dockPanel);
+            //    dockPanel.Children.Add (currentElement);
+            //}
         }
 
         public FrameworkElement CreateLayout(string url, object argu)
@@ -169,7 +169,7 @@ namespace FlexMVVM.WPF
             bool _isGroupedWithContent = IsGroupedWithContent (url);
 
             if ((_isGroupedWithLayout || _isGroupedWithContent) == false)
-                throw new Exception ("등록 된 Layout, Content 모두 존재하지 않습니다.");
+                return null;
 
             if (_isGroupedWithLayout)
             {

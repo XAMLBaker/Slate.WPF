@@ -19,6 +19,7 @@ namespace FlexMVVM.WPF
 
             this.ModuleContext (this.flex.ModuleCatalog);
             this.Register (this.flex.ContainerRegistry);
+            this.ViewModelMapper (this.flex.ViewModelMapper);
 
             OnInitialized ();
         }
@@ -26,6 +27,8 @@ namespace FlexMVVM.WPF
         protected abstract void Render();
         protected virtual void ModuleContext(IModuleCatalog moduleCatalog){}
         protected virtual void Register(IContainerRegistry containerRegistry) {}
+
+        protected virtual void ViewModelMapper(IViewModelMapper modelMapper){}
 
         protected virtual void OnInitialized()
         {
