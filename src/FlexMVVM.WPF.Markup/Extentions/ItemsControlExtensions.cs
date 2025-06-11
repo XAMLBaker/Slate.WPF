@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Windows.Controls;
 
-namespace FlexMVVM.WPF.Markup.Extentions
+namespace FlexMVVM.WPF.Markup.Extensions
 {
-    public static class ItemsControlExtentions
+    public static class ItemsControlExtensions
     {
         public static T ItemsSource<T>(this T Ic, IEnumerable itemSource) where T : ItemsControl
         {

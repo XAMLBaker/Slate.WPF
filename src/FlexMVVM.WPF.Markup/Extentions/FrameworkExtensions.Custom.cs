@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 namespace FlexMVVM.WPF.Markup
 {
-    public static partial class FrameworkExtentions
+    public static partial class FrameworkExtensions
     {
         public static T Size<T>(this T fe, double width, double height) where T : FrameworkElement
         {

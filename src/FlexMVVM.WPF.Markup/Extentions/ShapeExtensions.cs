@@ -3,7 +3,7 @@ using System.Windows.Shapes;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class ShapeExtentions
+    public static class ShapeExtensions
     {
         public static T Fill<T>(this T shape, Brush color) where T : Shape
         {

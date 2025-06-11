@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static partial class BorderExtentions
+    public static partial class BorderExtensions
     {
         public static T Background<T>(this T bdr, string color) where T : Border
             => bdr.Background (BrushTool.Get (color));

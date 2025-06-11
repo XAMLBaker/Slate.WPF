@@ -2,10 +2,10 @@
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class ButtonExtentions
+    public static class ButtonExtensions
     {
     }
-    public static class TogglButtonExtentions
+    public static class TogglButtonExtensions
     {
 
         public static T IsChecked<T> (this T tb, bool? isChcked) where T : ToggleButton

@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static partial class ControlExtentions
+    public static partial class ControlExtensions
     {
         public static T Background<T>(this T ctrl, string color) where T : Control
            => ctrl.Background (BrushTool.Get (color));

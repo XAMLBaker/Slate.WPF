@@ -40,6 +40,10 @@ namespace FlexMVVM.WPF
             {
                 module.Initialize (container);
             }
+            foreach (var module in this.ModuleCatalog.GetModules ())
+            {
+                module.ViewModelMapper (_viewModelMapper);
+            }
             container.BuildServiceProvider ();
             return container;
         }
@@ -47,7 +51,8 @@ namespace FlexMVVM.WPF
         public void Run()
         {
             this.Init ();
-            ((Window)RegisterProvider.Window).Show();
+
+            ((Window)RegisterProvider.Window).Show ();
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
             if (this._register.NestedLayout != null)
@@ -66,8 +71,6 @@ namespace FlexMVVM.WPF
             IContainer container = this.CreateContainer ();
             RegisterProvider.SetContainer (container);
             RegisterProvider.SetServiceProvider (container.BuildServiceProvider());
-
-            builder.ModuleInitialize (RegisterProvider.ServiceProvider);
         }
 
         public IModuleCatalog ModuleCatalog => this.builder.ModuleCatalog ();

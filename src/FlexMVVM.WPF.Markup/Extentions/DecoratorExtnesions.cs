@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class DecoratorExtnetions
+    public static class DecoratorExtnesions
     {
         public static T Child<T>(this T fe, UIElement element) where T : Decorator
         {

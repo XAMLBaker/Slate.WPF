@@ -6,7 +6,7 @@ using System.Windows.Media.Animation;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static partial class MotionExtentions
+    public static partial class MotionExtensions
     {
         public static T MotionFade<T>(this T control, State<bool> state, double durationValue = 300) where T : FrameworkElement
         {
@@ -52,7 +52,7 @@ namespace FlexMVVM.WPF.Markup
             return tcs.Task;
         }
     }
-    public static partial class MotionExtentions
+    public static partial class MotionExtensions
     {
         public static T MotionSlide<T>(this T control, State<bool> state, double durationValue = 300, double? width = null) where T : FrameworkElement
         {
@@ -128,7 +128,7 @@ namespace FlexMVVM.WPF.Markup
         }
     }
 
-    public static partial class MotionExtentions
+    public static partial class MotionExtensions
     {
         public static T WithAnimation<T>(this T brush, Color value, double durationValue = 300) where T : Brush
         {

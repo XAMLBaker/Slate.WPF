@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class GridExtentions
+    public static class GridExtensions
     {
         public static T Columns<T>(this T grd, params string[] columns) where T : Grid
         {

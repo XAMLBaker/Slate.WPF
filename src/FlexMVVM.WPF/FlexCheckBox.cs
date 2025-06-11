@@ -84,14 +84,14 @@ namespace FlexMVVM.WPF
             if (e.OldValue == e.NewValue)
                 return;
 
-            ((FlexCheckBox)d)._checkMarkPath.Data = PathExtentions.Data ((string)e.NewValue);
+            ((FlexCheckBox)d)._checkMarkPath.Data = PathExtensions.Data ((string)e.NewValue);
         }
         private static void OnInderminateMarkDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue == e.NewValue)
                 return;
 
-            ((FlexCheckBox)d)._inderminateMarkPath.Data = PathExtentions.Data ((string)e.NewValue);
+            ((FlexCheckBox)d)._inderminateMarkPath.Data = PathExtensions.Data ((string)e.NewValue);
         }
 
         public Path _checkMarkPath;
@@ -116,13 +116,13 @@ namespace FlexMVVM.WPF
 
             if (GetTemplateChild ("CheckMark") is Path check)
             {
-                check.Data = PathExtentions.Data ("M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z");
+                check.Data = PathExtensions.Data ("M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z");
                 _checkMarkPath = check;
             }
 
             if (GetTemplateChild ("InderminateMark") is Path inderminate)
             {
-                inderminate.Data = PathExtentions.Data ("M 0 7 L 7 0");
+                inderminate.Data = PathExtensions.Data ("M 0 7 L 7 0");
                 _inderminateMarkPath = inderminate;
             }
             this.baseBrush = this.BorderBrush;

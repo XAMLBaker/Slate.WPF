@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class PanelExtentions
+    public static class PanelExtensions
     {
         public static T Background<T>(this T pnl, Brush color) where T : Panel
         {
@@ -49,7 +49,7 @@ namespace FlexMVVM.WPF.Markup
         }
     }
 
-    public static class UniformExtentions
+    public static class UniformExtensions
     {
         public static T Columns<T>(this T panel, int columnCount) where T : UniformGrid
         {

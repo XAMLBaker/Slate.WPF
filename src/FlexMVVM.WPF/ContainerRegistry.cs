@@ -34,23 +34,6 @@ namespace FlexMVVM.WPF
             return this;
         }
 
-        public IContainerRegistry RegisterLayout<T>()
-        {
-            Type type = typeof (T);
-            string _key = type.FullName;
-
-            RegisterProvider.AddRegister (_key, type);
-            return this;
-        }
-
-        public IContainerRegistry RegisterLayout<T>(Func<T> layout)
-        {
-            string _key = layout.GetType ().FullName;
-
-            RegisterProvider.AddRegister (_key, layout.GetType ());
-            return this;
-        }
-
         public IContainerRegistry RegisterComponent<T>()
         {
             Type type = typeof (T);

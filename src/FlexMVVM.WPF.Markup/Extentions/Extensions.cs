@@ -76,7 +76,7 @@ namespace FlexMVVM.WPF.Markup
             return control;
         }
     }
-    public static class ButtonBaseExtentions
+    public static class ButtonBaseExtensions
     {
         //public static T OnTapped<T>(this T bb, Action action) where T : ButtonBase
         //{
@@ -114,7 +114,7 @@ namespace FlexMVVM.WPF.Markup
         //    return bb;
         //}
     }
-    public static class CommonElementExtentions
+    public static class CommonElementExtensions
     {
         public static T OnTapped<T>(this T element, Action action) where T : UIElement
         {
@@ -225,7 +225,7 @@ namespace FlexMVVM.WPF.Markup
         }
 
     }
-    public static class TextBoxExtentions
+    public static class TextBoxExtensions
     {
         public static T OnFocus<T>(this T element, Action action) where T : TextBox
         {
@@ -322,7 +322,7 @@ namespace FlexMVVM.WPF.Markup
 
     
   
-    public static class FlexCheckBoxExtentions
+    public static class FlexCheckBoxExtensions
     {
         public static T CheckBoxColor<T>(this T fcb, Color color) where T : FlexCheckBox
         {
@@ -448,7 +448,7 @@ namespace FlexMVVM.WPF.Markup
         }
     }
 
-    public static class FlexPanelExtentions
+    public static class FlexPanelExtensions
     {
         /// <summary>
         /// height가 설정되었거나 되지 않아도 height값을 추가적으로 더할 수 있습니다.
@@ -482,7 +482,7 @@ namespace FlexMVVM.WPF.Markup
         
     }
 
-    public static class FlexControlExtentions
+    public static class FlexControlExtensions
     {
         public static T WaterMarkText<T>(this T ftb, string text) where T : FlexTextBox
         {

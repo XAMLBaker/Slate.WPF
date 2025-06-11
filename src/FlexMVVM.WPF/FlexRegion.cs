@@ -265,7 +265,7 @@ namespace FlexMVVM.WPF
         }
     }
 
-    public static class FlexRegionExtentions
+    public static class FlexRegionExtensions
     {
         public static FlexRegion BindingControl<T>(this FlexRegion control)
         {

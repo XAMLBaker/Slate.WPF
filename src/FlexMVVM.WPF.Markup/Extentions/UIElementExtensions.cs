@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 namespace FlexMVVM.WPF.Markup
 {
-    public static class UIElementExtentions
+    public static class UIElementExtensions
     {
         public static T SetDock<T>(this T element, Dock dock) where T : UIElement
         {

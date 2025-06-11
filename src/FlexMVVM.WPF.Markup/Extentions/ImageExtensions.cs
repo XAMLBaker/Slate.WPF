@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class ImageExtentions
+    public static class ImageExtensions
     {
         public static T Source<T>(this T image, string Source) where T : Image
         {

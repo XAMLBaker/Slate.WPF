@@ -2,7 +2,7 @@
 
 namespace FlexMVVM.WPF
 {
-    public static class PathExtentions
+    public static class PathExtensions
     {
         // 봉인 클래스라서 확장이안된다네 ..ㅠ
         //public static T Data<T>(this T path, string pathData) where T : Path

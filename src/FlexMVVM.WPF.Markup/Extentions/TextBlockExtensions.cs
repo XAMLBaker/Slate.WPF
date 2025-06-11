@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace FlexMVVM.WPF.Markup
 {
-    public static class TextBlockExtentions
+    public static class TextBlockExtensions
     {
         public static T Text<T>(this T tb, string text) where T : TextBlock
         {
