@@ -106,7 +106,7 @@ namespace FlexMVVM.WPF
                 int layoutCnt = (contentType.Namespace.Split ('.').Length - moduleName.Split ('.').Length);
 
                 FrameworkElement rootLayout =null;
-                for (int i = 0; i < layoutCnt - 1; i++)
+                for (int i = 0; i < layoutCnt; i++)
                 {
                     var str = RemoveLastSegment (contentType.Namespace);
                     rootLayout = GetLayout (str);

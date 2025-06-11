@@ -23,7 +23,7 @@ namespace FlexMVVM.WPF
     {
         public static readonly DependencyProperty TransitionProperty =
        DependencyProperty.Register (nameof (Transition), typeof (TransitionType), typeof (FlexRegion),
-           new PropertyMetadata (TransitionType.Scale));
+           new PropertyMetadata (TransitionType.None));
 
         public TransitionType Transition
         {
