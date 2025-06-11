@@ -8,7 +8,10 @@ namespace FlexMVVM.WPF
         public VStack()
         {
             this.Orientation = Orientation.Vertical;
-            
+        }
+        public VStack(double spacing) : this ()
+        {
+            this.Spacing = spacing;
         }
         protected override Size ArrangeOverride(Size finalSize)
         {

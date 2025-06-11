@@ -38,8 +38,10 @@ namespace FlexMVVM.WPF.Markup
             element.SetValue (UIElement.VisibilityProperty, visibility);
             return element;
         }
-        public static T Visibility<T>(this T element) where T : UIElement
+
+        public static T IsHitTestVisible<T>(this T element, bool isHitTestVisible) where T : UIElement
         {
+            element.SetValue (UIElement.IsHitTestVisibleProperty, isHitTestVisible);
             return element;
         }
     }

@@ -63,6 +63,10 @@ namespace FlexMVVM.WPF
         {
             this.Orientation = Orientation.Horizontal;
         }
+        public HStack(double spacing) : this()
+        {
+            this.Spacing = spacing;
+        }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
