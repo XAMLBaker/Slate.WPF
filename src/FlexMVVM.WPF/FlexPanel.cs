@@ -339,11 +339,11 @@ namespace FlexMVVM.WPF
             }
             else if (Justify == JustifyContent.Center)
             {
-                yOffset = (finalSize.Width - (maxHeight * childrenCount)) / 2;
+                yOffset = (finalSize.Height - (maxHeight * childrenCount)) / 2;
             }
             else if (Justify == JustifyContent.End)
             {
-                yOffset = finalSize.Width - (maxHeight * childrenCount);
+                yOffset = finalSize.Height - (maxHeight * childrenCount);
             }
 
             for (int i = 0; i < childrenCount; i++)
