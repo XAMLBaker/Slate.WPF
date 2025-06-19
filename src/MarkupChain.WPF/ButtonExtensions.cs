@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls.Primitives;
 
-namespace Slate.WPF.Markup
+namespace MarkupChain.WPF
 {
     public static class ButtonExtensions
     {

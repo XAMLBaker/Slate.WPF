@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net6.0-windows;net7.0-windows;net8.0-windows;</TargetFrameworks>
@@ -9,9 +9,5 @@
   <PropertyGroup>
     <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MarkupChain.WPF\MarkupChain.WPF.csproj" />
-    <ProjectReference Include="..\Slate.WPF\Slate.WPF.csproj" />
-  </ItemGroup>
 
 </Project>

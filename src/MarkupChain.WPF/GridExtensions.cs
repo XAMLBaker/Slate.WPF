@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
 
-namespace Slate.WPF.Markup
+namespace MarkupChain.WPF
 {
     public static class GridExtensions
     {
@@ -54,7 +52,7 @@ namespace Slate.WPF.Markup
             return grd;
         }
 
-        private static bool TryParseGridLength(string input, out GridLength length)
+        public static bool TryParseGridLength(string input, out GridLength length)
         {
             if (input.Equals ("Auto", StringComparison.OrdinalIgnoreCase))
             {

@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace Slate.WPF.Markup
+﻿namespace MarkupChain.WPF
 {
     public static class ContentControlExtensions
     {

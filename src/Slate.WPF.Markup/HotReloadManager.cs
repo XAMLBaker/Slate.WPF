@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Media;
-
-[assembly: System.Reflection.Metadata.MetadataUpdateHandler (typeof (Slate.WPF.Markup.HotReloadManager))]
+﻿[assembly: System.Reflection.Metadata.MetadataUpdateHandler (typeof (Slate.WPF.Markup.HotReloadManager))]
 
 namespace Slate.WPF.Markup
 {

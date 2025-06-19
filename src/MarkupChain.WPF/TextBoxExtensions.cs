@@ -1,8 +1,4 @@
-﻿using Slate.WPF.Markup;
-using System.Windows.Controls;
-using System.Windows.Media;
-
-namespace Slate.WPF.Markup
+﻿namespace MarkupChain.WPF
 {
     public static class TextBoxExtensions
     {
@@ -50,11 +46,13 @@ namespace Slate.WPF.Markup
             tb.SelectionBrush (BrushTool.Get (color));
             return tb;
         }
+
         public static T SelectionBrush<T>(this T tb, Color color) where T : TextBox
         {
             tb.SelectionBrush (BrushTool.Get (color));
             return tb;
         }
+
         public static T SelectionBrush<T>(this T tb, Brush brush) where T : TextBox
         {
             tb.SelectionBrush = brush;

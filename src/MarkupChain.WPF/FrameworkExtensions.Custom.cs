@@ -1,5 +1,4 @@
-﻿using System.Windows;
-namespace Slate.WPF.Markup
+﻿namespace MarkupChain.WPF
 {
     public static partial class FrameworkExtensions
     {

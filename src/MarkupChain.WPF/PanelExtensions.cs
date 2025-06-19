@@ -1,9 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
+﻿using System.Windows.Controls.Primitives;
 
-namespace Slate.WPF.Markup
+namespace MarkupChain.WPF
 {
     public static class PanelExtensions
     {
@@ -13,7 +10,7 @@ namespace Slate.WPF.Markup
             return pnl;
         }
         public static T Background<T>(this T pnl, Color color) where T : Panel
-            => pnl.Background(BrushTool.Get(color));
+            => pnl.Background (BrushTool.Get (color));
 
         public static T Background<T>(this T pnl, string color) where T : Panel
             => pnl.Background (BrushTool.Get (color));
@@ -26,7 +23,7 @@ namespace Slate.WPF.Markup
 
         public static T ZIndex<T>(this T pnl, int index) where T : Panel
         {
-            pnl.SetValue(Panel.ZIndexProperty, index);
+            pnl.SetValue (Panel.ZIndexProperty, index);
             return pnl;
         }
 
@@ -41,11 +38,15 @@ namespace Slate.WPF.Markup
 
         public static T Children<T>(this T panel, List<UIElement> elements) where T : Panel
         {
-            foreach (var element in elements)
-            {
-                panel.Children.Add (element);
-            }
-            return panel;
+            return panel.Children(elements);
+        }
+    }
+
+    public static class PanelCutomExtensions
+    {
+        public static T HasChild<T>(this T panel, List<UIElement> elements) where T : Panel
+        {
+            return panel.Children (elements);
         }
     }
 

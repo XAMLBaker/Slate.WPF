@@ -1,8 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows;
-using System.Windows.Media;
-
-namespace Slate.WPF.Markup
+﻿namespace Slate.WPF.Markup
 {
     public interface IComponent
     {

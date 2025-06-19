@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace Slate.WPF.Markup
+﻿namespace MarkupChain.WPF
 {
     public static class ColorTool
     {

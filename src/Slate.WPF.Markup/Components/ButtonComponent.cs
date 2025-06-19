@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace Slate.WPF.Markup
+﻿namespace Slate.WPF.Markup
 {
     public static class ButtonComponentExtention
     {

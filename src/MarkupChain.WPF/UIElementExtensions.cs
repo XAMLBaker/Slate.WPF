@@ -1,7 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-namespace Slate.WPF.Markup
+﻿using System.Windows.Input;
+namespace MarkupChain.WPF
 {
     public static class UIElementExtensions
     {

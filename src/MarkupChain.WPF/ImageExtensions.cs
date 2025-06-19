@@ -1,9 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 
-namespace Slate.WPF.Markup
+namespace MarkupChain.WPF
 {
     public static class ImageExtensions
     {
