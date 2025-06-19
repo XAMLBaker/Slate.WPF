@@ -1,8 +1,7 @@
 using System.Windows;
 using System.Windows.Markup;
 
-[assembly: XmlnsDefinition ("https://lukewire129.github.io/blog", "Slate.WPF")]
-[assembly: XmlnsPrefix ("https://lukewire129.github.io/blog", "slate")]
+[assembly: XmlnsDefinition ("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "Slate.WPF")]
 [assembly: ThemeInfo (
     ResourceDictionaryLocation.None,            //where theme specific resource dictionaries are located
                                                 //(used if a resource is not found in the page,
