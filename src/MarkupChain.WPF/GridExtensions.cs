@@ -88,20 +88,26 @@ namespace MarkupChain.WPF
             return false;
         }
 
+        public static T AddChild<T>(this T grid, UIElement child) where T : Grid
+        {
+            grid.Children.Add (child);
+            return grid;
+        }
+
         public static T AddChild<T>(this T grid, UIElement child, int row = 0, int column = 0) where T : Grid
         {
-            Grid.SetRow (child, row);
-            Grid.SetColumn (child, column);
+            child.Row (row);
+            child.Column (column);
             grid.Children.Add (child);
             return grid;
         }
 
         public static T AddChild<T>(this T grid, UIElement child, int row, int column, int rowSpan, int columnSpan) where T : Grid
         {
-            Grid.SetRow (child, row);
-            Grid.SetColumn (child, column);
-            Grid.SetRowSpan (child, rowSpan);
-            Grid.SetColumnSpan (child, columnSpan);
+            child.Row (row);
+            child.Column (column);
+            child.RowSpan (rowSpan);
+            child.ColumnSpan (columnSpan);
             grid.Children.Add (child);
             return grid;
         }

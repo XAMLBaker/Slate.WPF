@@ -15,9 +15,21 @@ namespace MarkupChain.WPF
             return element;
         }
 
+        public static T RowSpan<T>(this T element, int value) where T : UIElement
+        {
+            Grid.SetRowSpan (element, value);
+            return element;
+        }
+
         public static T Column<T>(this T element, int idx) where T : UIElement
         {
             Grid.SetColumn (element, idx);
+            return element;
+        }
+
+        public static T ColumnSpan<T>(this T element, int value) where T : UIElement
+        {
+            Grid.SetColumnSpan (element, value);
             return element;
         }
 
