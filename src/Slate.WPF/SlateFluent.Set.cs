@@ -5,6 +5,12 @@ namespace Slate.WPF
 {
     public partial class SlateFluent
     {
+        public SlateFluent Window<T>() where T : Window
+        {
+            _register.RegisterMap["SlateFrameworkWindow"] = typeof (T);
+            return this;
+        }
+
         public SlateFluent Window<T>(Func<T> window) where T : Window
         {
             _register.RegisterMap["SlateFrameworkWindow"] = typeof (T);

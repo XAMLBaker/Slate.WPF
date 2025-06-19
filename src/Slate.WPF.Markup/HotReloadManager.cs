@@ -4,8 +4,8 @@ namespace Slate.WPF.Markup
 {
     public static class HotReloadManager
     {
-        public static SlateApplication app;
-        public static void Init(SlateApplication application)
+        public static Application app;
+        public static void Init(Application application)
         {
             app = application;
         }
@@ -21,7 +21,7 @@ namespace Slate.WPF.Markup
                     if (!typeof (IComponent).IsAssignableFrom (type))
                         continue;
 
-                    foreach (Window window in SlateApplication.Current.Windows)
+                    foreach (Window window in Application.Current.Windows)
                     {
                         if (window.ToString ().Contains ("AdornerWindow"))
                             continue;
