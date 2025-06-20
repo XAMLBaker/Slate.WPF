@@ -4,6 +4,14 @@ namespace Slate.WPF.Markup
 {
     public static class BindingExtensions
     {
+        public static T Content<T>(this T control, IState state) where T : ContentControl
+        {
+            control.SetBinding (ContentControl.ContentProperty, new Binding ("Value")
+            {
+                Source = state,
+            });
+            return control;
+        }
         public static T Link<T>(
                         this T control,
                         DependencyProperty property,
