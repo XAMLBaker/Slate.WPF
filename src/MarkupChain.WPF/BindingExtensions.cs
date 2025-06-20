@@ -1,6 +1,6 @@
 ﻿using System.Windows.Data;
 
-namespace Slate.WPF.Markup
+namespace MarkupChain.WPF
 {
     public static class BindingExtensions
     {
