@@ -1,38 +1,7 @@
-﻿using System.Windows.Input;
-namespace MarkupChain.WPF
+﻿namespace MarkupChain.WPF
 {
-    public static class UIElementExtensions
+    public static partial class UIElementExtensions
     {
-        public static T SetDock<T>(this T element, Dock dock) where T : UIElement
-        {
-            DockPanel.SetDock (element, dock);
-            return element;
-        }
-
-        public static T Row<T>(this T element, int idx) where T : UIElement
-        {
-            Grid.SetRow (element, idx);
-            return element;
-        }
-
-        public static T RowSpan<T>(this T element, int value) where T : UIElement
-        {
-            Grid.SetRowSpan (element, value);
-            return element;
-        }
-
-        public static T Column<T>(this T element, int idx) where T : UIElement
-        {
-            Grid.SetColumn (element, idx);
-            return element;
-        }
-
-        public static T ColumnSpan<T>(this T element, int value) where T : UIElement
-        {
-            Grid.SetColumnSpan (element, value);
-            return element;
-        }
-
         public static T AllowDrop<T>(this T element, bool allowDrop) where T : UIElement
         {
             element.SetValue (UIElement.AllowDropProperty, allowDrop);
@@ -50,77 +19,164 @@ namespace MarkupChain.WPF
             return element;
         }
 
+        public static T Uid<T>(this T element, string uid) where T : UIElement
+        {
+            element.SetValue (UIElement.UidProperty, uid);
+            return element;
+        }
+        public static T OpacityMask<T>(this T element, Brush opacityMask) where T : UIElement
+        {
+            element.SetValue (UIElement.OpacityMaskProperty, opacityMask);
+            return element;
+        }
+        public static T SnapsToDevicePixels<T>(this T element, bool snapsToDevicePixels) where T : UIElement
+        {
+            element.SetValue (UIElement.SnapsToDevicePixelsProperty, snapsToDevicePixels);
+            return element;
+        }
+        public static T RenderTransform<T>(this T element, Transform renderTransform) where T : UIElement
+        {
+            element.SetValue (UIElement.RenderTransformProperty, renderTransform);
+            return element;
+        }
+        public static T RenderTransformOrigin<T>(this T element, Point renderTransformOrigin) where T : UIElement
+        {
+            element.SetValue (UIElement.RenderTransformOriginProperty, renderTransformOrigin);
+            return element;
+        }
+
+        public static T IsKeyboardFocusWithin<T>(this T element, bool isKeyboardFocusWithin) where T : UIElement
+        {
+            element.SetValue (UIElement.IsKeyboardFocusWithinProperty, isKeyboardFocusWithin);
+            return element;
+        }
+        public static T IsKeyboardFocused<T>(this T element, bool isKeyboardFocused) where T : UIElement
+        {
+            element.SetValue (UIElement.IsKeyboardFocusedProperty, isKeyboardFocused);
+            return element;
+        }
+
         public static T IsHitTestVisible<T>(this T element, bool isHitTestVisible) where T : UIElement
         {
             element.SetValue (UIElement.IsHitTestVisibleProperty, isHitTestVisible);
             return element;
         }
 
-
-        public static T OnTapped<T>(this T element, Action action) where T : UIElement
+        public static T IsFocused<T>(this T element, bool isFocused) where T : UIElement
         {
-            element.PreviewMouseDown += (_, __) => action ();
-
+            element.SetValue (UIElement.IsFocusedProperty, isFocused);
             return element;
         }
-        public static T OnTappedAsync<T>(this T element, Func<Task> asyncAction) where T : UIElement
+        public static T IsEnabled<T>(this T element, bool isEnabled) where T : UIElement
         {
-            element.PreviewMouseDown += async (_, __) => await asyncAction ();
-
-            return element;
-        }
-        public static T OnTapped<T>(this T element, MouseButtonEventHandler action) where T : UIElement
-        {
-            element.PreviewMouseDown += (sender, e) =>
-            {
-                action (sender, e);
-                Mouse.Capture (element);
-            };
-            return element;
-        }
-        public static T OnTappedRelease<T>(this T element, Action action) where T : UIElement
-        {
-            element.PreviewMouseUp += (_, __) => action ();
-            return element;
-        }
-        public static T OnTappedReleaseAsync<T>(this T element, Func<Task> asyncAction) where T : UIElement
-        {
-            element.PreviewMouseUp += async (_, __) => await asyncAction ();
-
-            return element;
-        }
-        public static T OnTappedRelease<T>(this T element, MouseButtonEventHandler action) where T : UIElement
-        {
-            element.MouseUp += (sender, e) =>
-            {
-                if (e.ButtonState != MouseButtonState.Released)
-                    return;
-                if (Mouse.Captured == element)
-                    Mouse.Capture (null); // 캡처 해제
-                                          // ...기타 작업
-                action (sender, e);
-            };
+            element.SetValue (UIElement.IsEnabledProperty, isEnabled);
             return element;
         }
 
-        public static T OnHover<T>(this T element, Action action) where T : UIElement
+        public static T Focusable<T>(this T element, bool focusable) where T : UIElement
         {
-            element.MouseEnter += (_, __) => action ();
+            element.SetValue (UIElement.FocusableProperty, focusable);
             return element;
         }
-        public static T OnRelease<T>(this T element, Action action) where T : UIElement
+
+        public static T IsManipulationEnabled<T>(this T element, bool isManipulationEnabled) where T : UIElement
         {
-            element.MouseLeave += (_, __) => action ();
+            element.SetValue (UIElement.IsManipulationEnabledProperty, isManipulationEnabled);
             return element;
         }
-        public static T OnHover<T>(this T element, Action<T> action) where T : UIElement
+        public static T ClipToBounds<T>(this T element, bool clipToBounds) where T : UIElement
         {
-            element.MouseEnter += (_, __) => action (element);
+            element.SetValue (UIElement.ClipToBoundsProperty, clipToBounds);
             return element;
         }
-        public static T OnRelease<T>(this T element, Action<T> action) where T : UIElement
+
+        public static T Clip<T>(this T element, Geometry clip) where T : UIElement
         {
-            element.MouseLeave += (_, __) => action (element);
+            element.SetValue (UIElement.ClipProperty, clip);
+            return element;
+        }
+
+        public static T AreAnyTouchesOver<T>(this T element, bool areAnyTouchesOver) where T : UIElement
+        {
+            element.SetValue (UIElement.AreAnyTouchesOverProperty, areAnyTouchesOver);
+            return element;
+        }
+
+        public static T AreAnyTouchesDirectlyOver<T>(this T element, bool areAnyTouchesDirectlyOver) where T : UIElement
+        {
+            element.SetValue (UIElement.AreAnyTouchesDirectlyOverProperty, areAnyTouchesDirectlyOver);
+            return element;
+        }
+
+        public static T AreAnyTouchesCapturedWithin<T>(this T element, bool areAnyTouchesCapturedWithin) where T : UIElement
+        {
+            element.SetValue (UIElement.AreAnyTouchesCapturedWithinProperty, areAnyTouchesCapturedWithin);
+            return element;
+        }
+
+        public static T AreAnyTouchesCaptured<T>(this T element, bool areAnyTouchesCaptured) where T : UIElement
+        {
+            element.SetValue (UIElement.AreAnyTouchesCapturedProperty, areAnyTouchesCaptured);
+            return element;
+        }
+
+        public static T IsMouseCaptured<T>(this T element, bool isMouseCaptured) where T : UIElement
+        {
+            element.SetValue (UIElement.IsMouseCapturedProperty, isMouseCaptured);
+            return element;
+        }
+
+        public static T CacheMode<T>(this T element, CacheMode cacheMode) where T : UIElement
+        {
+            element.SetValue (UIElement.CacheModeProperty, cacheMode);
+            return element;
+        }
+
+        public static T IsMouseDirectlyOver<T>(this T element, bool isMouseDirectlyOver) where T : UIElement
+        {
+            element.SetValue (UIElement.IsMouseDirectlyOverProperty, isMouseDirectlyOver);
+            return element;
+        }
+
+        public static T IsMouseCaptureWithin<T>(this T element, bool isMouseCaptureWithin) where T : UIElement
+        {
+            element.SetValue (UIElement.IsMouseCaptureWithinProperty, isMouseCaptureWithin);
+            return element;
+        }
+
+        public static T IsStylusCaptured<T>(this T element, bool isStylusCaptured) where T : UIElement
+        {
+            element.SetValue (UIElement.IsStylusCapturedProperty, isStylusCaptured);
+            return element;
+        }
+
+        public static T IsMouseOver<T>(this T element, bool isMouseOver) where T : UIElement
+        {
+            element.SetValue (UIElement.IsMouseOverProperty, isMouseOver);
+            return element;
+        }
+
+        public static T IsStylusDirectlyOver<T>(this T element, bool isStylusDirectlyOver) where T : UIElement
+        {
+            element.SetValue (UIElement.IsStylusDirectlyOverProperty, isStylusDirectlyOver);
+            return element;
+        }
+
+        public static T IsStylusOver<T>(this T element, bool isStylusOver) where T : UIElement
+        {
+            element.SetValue (UIElement.IsStylusOverProperty, isStylusOver);
+            return element;
+        }
+
+        public static T IsStylusCaptureWithin<T>(this T element, bool isStylusCaptureWithin) where T : UIElement
+        {
+            element.SetValue (UIElement.IsStylusCaptureWithinProperty, isStylusCaptureWithin);
+            return element;
+        }
+
+        public static T IsVisible<T>(this T element, bool isVisible) where T : UIElement
+        {
+            element.SetValue (UIElement.IsVisibleProperty, isVisible);
             return element;
         }
     }

@@ -1,98 +1,58 @@
 ﻿namespace MarkupChain.WPF
 {
-    public static class TextBoxExtensions
+    public static partial class TextBoxExtensions
     {
-        public static T OnFocus<T>(this T element, Action action) where T : TextBox
+        public static T CharacterCasing<T>(this T tb, CharacterCasing characterCasing) where T : TextBox
         {
-            element.GotFocus += (_, __) => action ();
-            return element;
-        }
-        public static T OnLostFocus<T>(this T element, Action action) where T : TextBox
-        {
-            element.LostFocus += (_, __) => action ();
-            return element;
-        }
-        public static T OnFocus<T>(this T element, Action<T> action) where T : TextBox
-        {
-            element.GotFocus += (_, __) => action (element);
-            return element;
-        }
-        public static T OnLostFocus<T>(this T element, Action<T> action) where T : TextBox
-        {
-            element.LostFocus += (_, __) => action (element);
-            return element;
-        }
-        public static T OnPreviewText<T>(this T tb, Action action) where T : TextBox
-        {
-            tb.PreviewTextInput += (_, __) => action ();
-
+            tb.SetValue (TextBox.CharacterCasingProperty, characterCasing);
             return tb;
         }
-        public static T OnTextChanged<T>(this T tb, Action action) where T : TextBox
+
+        public static T MaxLength<T>(this T tb, int maxLength) where T : TextBox
         {
-            tb.TextChanged += (_, __) => action ();
+            tb.SetValue(TextBox.MaxLengthProperty, maxLength);
 
             return tb;
         }
 
-        public static T OnTextChanged<T>(this T tb, TextChangedEventHandler action) where T : TextBox
+        public static T MaxLines<T>(this T tb, int maxLines) where T : TextBox
         {
-            tb.TextChanged += (_, __) => action (_, __);
-
-            return tb;
-        }
-        public static T SelectionBrush<T>(this T tb, string color) where T : TextBox
-        {
-            tb.SelectionBrush (BrushTool.Get (color));
-            return tb;
-        }
-
-        public static T SelectionBrush<T>(this T tb, Color color) where T : TextBox
-        {
-            tb.SelectionBrush (BrushTool.Get (color));
-            return tb;
-        }
-
-        public static T SelectionBrush<T>(this T tb, Brush brush) where T : TextBox
-        {
-            tb.SelectionBrush = brush;
-            return tb;
-        }
-
-        public static T SelectionTextBrush<T>(this T tb, string color) where T : TextBox
-        {
-            tb.SelectionTextBrush(BrushTool.Get (color));
-
-            return tb;
-        }
-        public static T SelectionTextBrush<T>(this T tb, Color color) where T : TextBox
-        {
-            tb.SelectionTextBrush (BrushTool.Get (color));
-            return tb;
-        }
-
-        public static T SelectionTextBrush<T>(this T tb, Brush brush) where T : TextBox
-        {
-            tb.SelectionTextBrush = brush;
-            return tb;
-        }
-
-        public static T CaretBrush<T>(this T tb, string color) where T : TextBox
-        {
-            tb.CaretBrush (BrushTool.Get (color));
+            tb.SetValue (TextBox.MaxLinesProperty, maxLines);
 
             return tb;
         }
 
-        public static T CaretBrush<T>(this T tb, Color color) where T : TextBox
+        public static T MinLines<T>(this T tb, int minLines) where T : TextBox
         {
-            tb.CaretBrush (BrushTool.Get (color));
+            tb.SetValue (TextBox.MinLinesProperty, minLines);
+
             return tb;
         }
 
-        public static T CaretBrush<T>(this T tb, Brush brush) where T : TextBox
+        public static T TextAlignment<T>(this T tb, TextAlignment textAlignment) where T : TextBox
         {
-            tb.CaretBrush = brush;
+            tb.SetValue (TextBox.TextAlignmentProperty, textAlignment);
+
+            return tb;
+        }
+
+        public static T TextDecorations<T>(this T tb, TextDecorationCollection textDecorations) where T : TextBox
+        {
+            tb.SetValue (TextBox.TextDecorationsProperty, textDecorations);
+
+            return tb;
+        }
+        public static T Text<T>(this T tb, string text) where T : TextBox
+        {
+            tb.SetValue (TextBox.TextProperty, text);
+
+            return tb;
+        }
+
+        public static T TextWrapping<T>(this T tb, string textWrapping) where T : TextBox
+        {
+            tb.SetValue (TextBox.TextWrappingProperty, textWrapping);
+
             return tb;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace MarkupChain.WPF
 {
-    public static class GridExtensions
+    public static partial class GridExtensions
     {
         public static T Columns<T>(this T grd, params string[] columns) where T : Grid
         {

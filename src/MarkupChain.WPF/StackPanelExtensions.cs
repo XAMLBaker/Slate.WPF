@@ -2,11 +2,10 @@
 {
     public static class StackPanelExtensions
     {
-        public static T Orientation<T>(this T fp, Orientation orientation) where T : StackPanel
+        public static T Orientation<T>(this T sp, Orientation orientation) where T : StackPanel
         {
-            fp.Orientation = orientation;
-            return fp;
+            sp.SetValue (StackPanel.OrientationProperty, orientation);
+            return sp;
         }
-
     }
 }

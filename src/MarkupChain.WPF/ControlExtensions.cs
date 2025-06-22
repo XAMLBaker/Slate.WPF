@@ -19,6 +19,7 @@
             ctrl.SetValue (Control.TabIndexProperty, tabIndex);
             return ctrl;
         }
+
         public static T Padding<T>(this T ctrl, Thickness padding) where T : Control
         {
             ctrl.SetValue (Control.PaddingProperty, padding);

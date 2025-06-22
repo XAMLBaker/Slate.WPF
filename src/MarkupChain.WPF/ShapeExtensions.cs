@@ -2,30 +2,19 @@
 
 namespace MarkupChain.WPF
 {
-    public static class ShapeExtensions
+    public static partial class ShapeExtensions
     {
         public static T Fill<T>(this T shape, Brush color) where T : Shape
         {
             shape.SetValue (Shape.FillProperty, color);
             return shape;
         }
-        public static T Fill<T>(this T shape, string color) where T : Shape
-            => shape.Fill(BrushTool.Get (color));
-
-        public static T Fill<T>(this T shape, Color color) where T : Shape
-            => shape.Fill (BrushTool.Get (color));
 
         public static T Stroke<T>(this T shape, Brush color) where T : Shape
         {
             shape.SetValue (Shape.StrokeProperty, color);
             return shape;
         }
-
-        public static T Stroke<T>(this T shape, string color) where T : Shape
-             => shape.Stroke (BrushTool.Get (color));
-
-        public static T Stroke<T>(this T shape, Color color) where T : Shape
-            => shape.Stroke (BrushTool.Get (color));
 
         public static T StrokeDashArray<T>(this T shape, DoubleCollection strokeDashArray) where T : Shape
         {
@@ -55,7 +44,6 @@ namespace MarkupChain.WPF
             shape.SetValue (Shape.StrokeDashOffsetProperty, strokeDashOffset);
             return shape;
         }
-
         public static T StrokeDashCap<T>(this T shape, PenLineJoin strokeDashCap) where T : Shape
         {
             shape.SetValue (Shape.StrokeDashCapProperty, strokeDashCap);
@@ -76,14 +64,6 @@ namespace MarkupChain.WPF
         public static T Stretch<T>(this T shape, Stretch stretch) where T : Shape
         {
             shape.SetValue (Shape.StretchProperty, stretch);
-            return shape;
-        }
-
-        public static T StrokeLineCap<T>(this T shape, PenLineCap lineCap) where T : Shape
-        {
-            shape.StrokeStartLineCap(lineCap);
-            shape.StrokeLineCap(lineCap);
-
             return shape;
         }
     }
