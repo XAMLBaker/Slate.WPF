@@ -3,7 +3,7 @@
 
 namespace Slate.WPF.Markup
 {
-    public static class BindingExtensions
+    public static partial class BindingExtensions
     {
 
         // 1) Expression<Func<>> 받아서 자동으로 path 추출 → 내부에서 Func 오버로드 호출
@@ -81,14 +81,6 @@ namespace Slate.WPF.Markup
             }
         }
 
-        public static T Content<T>(this T control, IState state) where T : ContentControl
-        {
-            control.SetBinding (ContentControl.ContentProperty, new Binding ("Value")
-            {
-                Source = state,
-            });
-            return control;
-        }
         public static T Link<T>(
                         this T control,
                         DependencyProperty property,
