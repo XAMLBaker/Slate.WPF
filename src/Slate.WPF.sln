@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slate.WPF.Markup", "Slate.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupChain.WPF", "MarkupChain.WPF\MarkupChain.WPF.csproj", "{17B7D2F1-ECE2-4B0B-B5E6-4EEF6D9B5EBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupChain.WinUI3", "MarkupChain.WinUI3\MarkupChain.WinUI3.csproj", "{0558D161-A212-5482-7226-267204C3051D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{17B7D2F1-ECE2-4B0B-B5E6-4EEF6D9B5EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17B7D2F1-ECE2-4B0B-B5E6-4EEF6D9B5EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17B7D2F1-ECE2-4B0B-B5E6-4EEF6D9B5EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0558D161-A212-5482-7226-267204C3051D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0558D161-A212-5482-7226-267204C3051D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0558D161-A212-5482-7226-267204C3051D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0558D161-A212-5482-7226-267204C3051D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
