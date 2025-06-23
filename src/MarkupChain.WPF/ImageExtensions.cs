@@ -1,6 +1,4 @@
-﻿using System.Windows.Media.Imaging;
-
-namespace MarkupChain.WPF
+﻿namespace MarkupChain.WPF
 {
     public static partial class ImageExtensions
     {
