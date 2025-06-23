@@ -84,5 +84,9 @@
         {
 
         }
+        protected void RegionSet(string regionName)
+        {
+            RegionManager.Attach (regionName, this);
+        }
     }
 }
