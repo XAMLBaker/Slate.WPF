@@ -25,9 +25,33 @@
         }
         public static T Center<T>(this T fe) where T : FrameworkElement
         {
-            fe.VCenter ();
-            fe.HCenter ();
-            return fe;
+            return fe.VCenter () 
+                     .HCenter ();
+        }
+
+        public static T VCenter<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.VerticalAlignment (System.Windows.VerticalAlignment.Center);
+        }
+        public static T Top<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.VerticalAlignment (System.Windows.VerticalAlignment.Top);
+        }
+        public static T Bottom<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.VerticalAlignment (System.Windows.VerticalAlignment.Bottom);
+        }
+        public static T HCenter<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.HorizontalAlignment (System.Windows.HorizontalAlignment.Center);
+        }
+        public static T Left<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.HorizontalAlignment (System.Windows.HorizontalAlignment.Left);
+        }
+        public static T Right<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.HorizontalAlignment (System.Windows.HorizontalAlignment.Right);
         }
     }
 }
