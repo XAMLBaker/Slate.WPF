@@ -2,7 +2,7 @@
 
 namespace Slate.WPF.Markup
 {
-    public static partial class BindingExtensions
+    public static partial class BorderExtensions
     {
         public static T Background<T>(this T bdr, IState state) where T : Border
         {

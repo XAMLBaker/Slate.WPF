@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace Slate.WPF.Markup
 {
-    public static partial class BindingExtensions
+    public static partial class ButtonExtensions
     {
         public static T IsChecked<T>(this T tb, IState state) where T : ToggleButton
         {

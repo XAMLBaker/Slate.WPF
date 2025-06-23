@@ -7,6 +7,7 @@
             ftb.WaterMarkText = text;
             return ftb;
         }
+
         public static T WaterMarkTextColor<T>(this T ftb, string colorString) where T : SlateTextBox
         {
             ftb.WaterMarkTextColor = BrushTool.Get (colorString);
