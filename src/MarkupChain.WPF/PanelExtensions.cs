@@ -23,7 +23,37 @@ namespace MarkupChain.WPF
         }
     }
 
-    public static class UniformExtensions
+    public static class WrapPanelExtensions
+    {
+        public static T ItemHeight<T>(this T pnl, double itemHeight) where T : WrapPanel
+        {
+            pnl.SetValue (WrapPanel.ItemHeightProperty, itemHeight);
+            return pnl;
+        }
+
+        public static T ItemWidth<T>(this T pnl, double itemWidth) where T : WrapPanel
+        {
+            pnl.SetValue (WrapPanel.ItemWidthProperty, itemWidth);
+            return pnl;
+        }
+
+        public static T Orientation<T>(this T pnl, Orientation orientation) where T : WrapPanel
+        {
+            pnl.SetValue (WrapPanel.OrientationProperty, orientation);
+            return pnl;
+        }
+    }
+
+    public static class DockPanelExtensions
+    {
+        public static T LastChildFill<T>(this T pnl, bool lastChildFill) where T : DockPanel
+        {
+            pnl.SetValue (DockPanel.LastChildFillProperty, lastChildFill);
+            return pnl;
+        }
+    }
+
+    public static class UniformGridExtensions
     {
         public static T Columns<T>(this T pnl, int columnCount) where T : UniformGrid
         {
