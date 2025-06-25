@@ -28,7 +28,15 @@
             return fe.VCenter () 
                      .HCenter ();
         }
-
+        public static T Stretch<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.VStretch ()
+                     .HStretch ();
+        }
+        public static T VStretch<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.VerticalAlignment (System.Windows.VerticalAlignment.Stretch);
+        }
         public static T VCenter<T>(this T fe) where T : FrameworkElement
         {
             return fe.VerticalAlignment (System.Windows.VerticalAlignment.Center);
@@ -40,6 +48,10 @@
         public static T Bottom<T>(this T fe) where T : FrameworkElement
         {
             return fe.VerticalAlignment (System.Windows.VerticalAlignment.Bottom);
+        }
+        public static T HStretch<T>(this T fe) where T : FrameworkElement
+        {
+            return fe.HorizontalAlignment (System.Windows.HorizontalAlignment.Stretch);
         }
         public static T HCenter<T>(this T fe) where T : FrameworkElement
         {

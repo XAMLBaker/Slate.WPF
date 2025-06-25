@@ -24,6 +24,12 @@ namespace MarkupChain.WPF
 
             return tb;
         }
+        public static T OnTextChanged<T>(this T tb, Action<string> action) where T : TextBoxBase
+        {
+            tb.TextChanged += (_, __) => action (((TextBox)_).Text);
+
+            return tb;
+        }
 
         public static T OnTextChanged<T>(this T tb, TextChangedEventHandler action) where T : TextBoxBase
         {

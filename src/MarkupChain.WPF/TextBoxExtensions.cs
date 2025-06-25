@@ -1,4 +1,6 @@
-﻿namespace MarkupChain.WPF
+﻿using System.Windows.Controls.Primitives;
+
+namespace MarkupChain.WPF
 {
     public static partial class TextBoxExtensions
     {
@@ -49,7 +51,7 @@
             return tb;
         }
 
-        public static T TextWrapping<T>(this T tb, string textWrapping) where T : TextBox
+        public static T TextWrapping<T>(this T tb, TextWrapping textWrapping) where T : TextBox
         {
             tb.SetValue (TextBox.TextWrappingProperty, textWrapping);
 
