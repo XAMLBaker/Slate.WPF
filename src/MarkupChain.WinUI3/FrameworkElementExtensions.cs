@@ -1,7 +1,4 @@
-﻿
-using Microsoft.UI.Xaml.Data;
-
-namespace MarkupChain.WinUI3
+﻿namespace MarkupChain.WinUI3
 {
     //an extension class which able to chaining -Property(=DependencyProperty) affix Properties.
     public static class FrameworkElementExtensions
