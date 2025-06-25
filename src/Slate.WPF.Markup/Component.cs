@@ -52,7 +52,6 @@
 
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
-            this.InitilzedForms ();
             this.Render ();
             if (this.ComponentStyleKey != null)
                 this.SetResourceReference (StyleProperty, this.ComponentStyleKey);
