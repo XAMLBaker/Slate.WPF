@@ -7,9 +7,12 @@ namespace Slate.WPF
 {
     public interface IWindowManager
     {
-        void CornerRadius(double all);
-        void CornerRadius(double leftRight, double topBottom);
-        void CornerRadius(double left, double top, double right, double bottom);
+        IWindowManager CornerRadius(double all);
+        IWindowManager CornerRadius(double leftRight, double topBottom);
+        IWindowManager CornerRadius(double left= 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0);
+
+        IWindowManager SizeToContent(SizeToContent sizeToContent);
+        IWindowManager Size(double width, double height);
     }
 
     public class WindowManager : IWindowManager
@@ -20,19 +23,46 @@ namespace Slate.WPF
         {
             this._container = container;
         }
-        public void CornerRadius(double all)
+        public IWindowManager CornerRadius(double all)
         {
             CornerRadius (new CornerRadius (all));
+
+            return this;
         }
 
-        public void CornerRadius(double leftRight, double topBottom)
+        public IWindowManager CornerRadius(double leftRight, double topBottom)
         {
             CornerRadius (new CornerRadius (leftRight, topBottom, leftRight, topBottom));
+
+            return this;
         }
 
-        public void CornerRadius(double left, double top, double right, double bottom)
+        public IWindowManager CornerRadius(double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0)
         {
             CornerRadius (new CornerRadius (left, top, right, bottom));
+
+            return this;
+        }
+
+        public IWindowManager Size(double width, double height)
+        {
+            Type winType = RegisterProvider.GetWindow ();
+            var window = (Window)this._container.Resolve (winType);
+
+            window.Width = width;
+            window.Height = height;
+
+            return this;
+        }
+
+        public IWindowManager SizeToContent(SizeToContent sizeToContent)
+        {
+            Type winType = RegisterProvider.GetWindow ();
+            var window = (Window)this._container.Resolve (winType);
+
+            window.SizeToContent =sizeToContent;
+
+            return this;
         }
 
         private void CornerRadius(CornerRadius cornerRadius)

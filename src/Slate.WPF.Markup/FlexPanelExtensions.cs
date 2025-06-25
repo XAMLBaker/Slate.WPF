@@ -9,26 +9,27 @@
         /// <param name="fp"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static T AddHeight<T>(this T fp, double value) where T : FlexPanel
-        {
-            fp.AddHeight = value;
-            return fp;
-        }
         public static T Justify<T>(this T fp, JustifyContent justify) where T : FlexPanel
         {
-            fp.Justify = justify;
+            fp.SetValue(FlexPanel.JustifyContentProperty, justify);
             return fp;
         }
 
-        public static T Align<T>(this T fp, AlignContent align) where T : FlexPanel
+        public static T AlignContent<T>(this T fp, AlignContent alignContent) where T : FlexPanel
         {
-            fp.Align = align;
+            fp.SetValue (FlexPanel.AlignContentProperty, alignContent);
             return fp;
         }
 
         public static T Orientation<T>(this T fp, Orientation orientation) where T : FlexPanel
         {
-            fp.Orientation = orientation;
+            fp.SetValue (FlexPanel.OrientationProperty, orientation);
+            return fp;
+        }
+
+        public static T AlignItems<T>(this T fp, AlignItems alignItems) where T : FlexPanel
+        {
+            fp.SetValue (FlexPanel.AlignItemsProperty, alignItems);
             return fp;
         }
     }
