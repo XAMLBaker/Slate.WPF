@@ -1,18 +1,17 @@
 ﻿using DryIoc;
 using System;
 using System.Windows;
-using System.Windows.Shell;
+using System.Windows.Media;
 
 namespace Slate.WPF
 {
     public interface IWindowManager
     {
-        IWindowManager CornerRadius(double all);
-        IWindowManager CornerRadius(double leftRight, double topBottom);
-        IWindowManager CornerRadius(double left= 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0);
 
         IWindowManager SizeToContent(SizeToContent sizeToContent);
         IWindowManager Size(double width, double height);
+        IWindowManager Background(Brush brush);
+
     }
 
     public class WindowManager : IWindowManager
@@ -23,24 +22,12 @@ namespace Slate.WPF
         {
             this._container = container;
         }
-        public IWindowManager CornerRadius(double all)
+        public IWindowManager Background(Brush brush)
         {
-            CornerRadius (new CornerRadius (all));
+            Type winType = RegisterProvider.GetWindow ();
+            var window = (Window)this._container.Resolve (winType);
 
-            return this;
-        }
-
-        public IWindowManager CornerRadius(double leftRight, double topBottom)
-        {
-            CornerRadius (new CornerRadius (leftRight, topBottom, leftRight, topBottom));
-
-            return this;
-        }
-
-        public IWindowManager CornerRadius(double left = 0.0, double top = 0.0, double right = 0.0, double bottom = 0.0)
-        {
-            CornerRadius (new CornerRadius (left, top, right, bottom));
-
+            window.Background = brush;
             return this;
         }
 
@@ -63,15 +50,6 @@ namespace Slate.WPF
             window.SizeToContent =sizeToContent;
 
             return this;
-        }
-
-        private void CornerRadius(CornerRadius cornerRadius)
-        {
-            Type winType = RegisterProvider.GetWindow ();
-            var window = (Window)this._container.Resolve (winType);
-
-            var windowChrome = WindowChrome.GetWindowChrome (window);
-            windowChrome.CornerRadius = cornerRadius;
         }
     }
 }
