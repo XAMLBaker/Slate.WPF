@@ -360,4 +360,6 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
-FodyWeavers.xsd
+
+# Rider (cross platform .NET IDE) working folder
+.idea/
