@@ -1,6 +1,6 @@
 using Windows.UI.Text;
 
-namespace MarkupChain.WinUI3;
+namespace MarkupChain.WinUI3.Controls;
 
 //an extension class which able to chaining -Property(=DependencyProperty) affix Properties.
 public static class ControlExtensions
