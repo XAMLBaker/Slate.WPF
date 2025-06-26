@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-windows10.0.19041.0;net7.0-windows10.0.19041.0;net8.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>Slate.WinUI3</RootNamespace>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="attached\PaddingSize.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="SlateWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="attached\PaddingSize.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
+    <PackageReference Include="DryIoc.Microsoft.DependencyInjection.Extension" Version="1.0.0.2" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Slate\src\Slate\Slate.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SlateWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  
+</Project>

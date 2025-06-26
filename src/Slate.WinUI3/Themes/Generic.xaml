@@ -1,0 +1,46 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Slate.WinUI3.Converters"
+    xmlns:slate="using:Slate.WinUI3">
+    <converters:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+    <Style TargetType="slate:SlateComponent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="slate:SlateComponent">
+                    <Border
+                        Margin="{TemplateBinding Margin}"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="slate:SlateRegionControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="slate:SlateRegionControl">
+                    <Border Background="Transparent">
+                        <Grid x:Name="PART_RootGrid">
+                            <ContentPresenter
+                                x:Name="PART_OldContent"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Visibility="Collapsed" />
+                            <ContentPresenter
+                                x:Name="PART_NewContent"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
