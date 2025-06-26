@@ -39,7 +39,7 @@
             element.SetValue (UIElement.RenderTransformProperty, renderTransform);
             return element;
         }
-        public static T RenderTransformOrigin<T>(this T element, Point renderTransformOrigin) where T : UIElement
+        pSublic static T RenderTransformOrigin<T>(this T element, Point renderTransformOrigin) where T : UIElement
         {
             element.SetValue (UIElement.RenderTransformOriginProperty, renderTransformOrigin);
             return element;
