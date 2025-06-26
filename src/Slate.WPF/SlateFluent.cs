@@ -51,8 +51,8 @@ namespace Slate.WPF
         public void Run()
         {
             this.Init ();
-
-            ((Window)RegisterProvider.Window).Show ();
+            Application.Current.MainWindow = (Window)RegisterProvider.Window;
+            Application.Current.MainWindow.Show ();
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
             if (this._register.NestedLayout != null)

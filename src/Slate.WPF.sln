@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupChain.WPF", "MarkupCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkupChain.WinUI3", "MarkupChain.WinUI3\MarkupChain.WinUI3.csproj", "{0558D161-A212-5482-7226-267204C3051D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slate.WinUI3", "Slate.WinUI3\Slate.WinUI3.csproj", "{304A8303-08BE-4A88-B2BF-E4A3044A59EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slate.WinUI3.Markup", "Slate.WinUI3.Markup\Slate.WinUI3.Markup.csproj", "{DD338415-6A0D-4739-AF1E-762AF827906C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{0558D161-A212-5482-7226-267204C3051D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0558D161-A212-5482-7226-267204C3051D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0558D161-A212-5482-7226-267204C3051D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304A8303-08BE-4A88-B2BF-E4A3044A59EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304A8303-08BE-4A88-B2BF-E4A3044A59EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304A8303-08BE-4A88-B2BF-E4A3044A59EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304A8303-08BE-4A88-B2BF-E4A3044A59EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD338415-6A0D-4739-AF1E-762AF827906C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD338415-6A0D-4739-AF1E-762AF827906C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD338415-6A0D-4739-AF1E-762AF827906C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD338415-6A0D-4739-AF1E-762AF827906C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
