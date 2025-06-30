@@ -65,7 +65,7 @@
         public void Render()
         {
             this.InitilzedForms ();
-            Visual visual = this.Build ();
+            UIElement visual = this.Build ();
             if (visual != null)
             {
                 this.Content = visual;
@@ -77,7 +77,7 @@
         {
 
         }
-        protected abstract Visual Build();
+        protected abstract UIElement Build();
 
         public virtual void RegionAttached(object argu)
         {
