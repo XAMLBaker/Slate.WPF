@@ -1,7 +1,7 @@
 ﻿namespace MarkupChain.WinUI3
 {
     //an extension class which able to chaining -Property(=DependencyProperty) affix Properties.
-    public static class FrameworkElementExtensions
+    public static partial class FrameworkElementExtensions
     {
         public static T FlowDirection<T>(this T element, FlowDirection direction) where T : FrameworkElement
         {
