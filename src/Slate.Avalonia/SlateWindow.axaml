@@ -1,0 +1,16 @@
+<Window
+    Title="SlateWindow"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="Slate.Avalonia.SlateWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:Slate.Avalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Window.Styles>
+        <StyleInclude Source="avares://Slate.Avalonia/Themes/Generic.axaml" />
+    </Window.Styles>
+    <avalonia:SlateRegionControl RegionName="Root" Transition="None" />
+</Window>

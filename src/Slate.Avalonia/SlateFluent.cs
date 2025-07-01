@@ -21,6 +21,7 @@ namespace Slate.Avalonia
             this.Services.AddSingleton<IViewModelMapper> (_viewModelMapper);
 
             _register = new Register ();
+            _register.RegisterMap["SlateFrameworkWindow"] = typeof (SlateWindow);
 
             RegisterProvider.SetRegister (this._register);
         }

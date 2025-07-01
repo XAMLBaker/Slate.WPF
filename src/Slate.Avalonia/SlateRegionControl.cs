@@ -5,10 +5,8 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia.Animation.Easings;
 using Avalonia.Controls.Presenters;
 using Avalonia.Threading;
 
@@ -96,26 +94,6 @@ namespace Slate.Avalonia
 
         private object _previousContent;
 
-        public SlateRegionControl()
-        {
-            this.GetObservable(BindableContentProperty)
-                .Subscribe(async newContent =>
-                {
-                    var oldContent = _previousContent;
-                    _previousContent = newContent;
-                    await TransitionAsync(oldContent, newContent);
-                });
-        }
-
-        // protected override async void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-        // {
-        //     base.OnPropertyChanged(change);
-        //     if (change.Property.Name == nameof(Content))
-        //     {
-        //         await TransitionAsync(change.OldValue, change.NewValue);
-        //     }
-        // }
-
         private ContentPresenter? _oldPresenter;
         private ContentPresenter? _newPresenter;
         private Grid? _rootGrid;
@@ -131,9 +109,14 @@ namespace Slate.Avalonia
 
             if (_oldPresenter == null || _newPresenter == null)
                 throw new InvalidOperationException("PART_OldContent, PART_NewContent가 필요합니다.");
-
-            _newPresenter.Content = Content;
-            _oldPresenter.IsVisible = false;
+            
+             this.GetObservable(BindableContentProperty)
+                            .Subscribe(async newContent =>
+                            {
+                                var oldContent = _previousContent;
+                                _previousContent = newContent;
+                                await TransitionAsync(oldContent, newContent);
+                            });
         }
 
         private async Task TransitionAsync(object? oldContent, object? newContent)

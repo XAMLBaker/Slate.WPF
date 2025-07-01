@@ -22,4 +22,10 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Slate\src\Slate\Slate.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaXaml Update="SlateWindow.axaml">
+        <DependentUpon>ModuleCatalog.cs</DependentUpon>
+      </AvaloniaXaml>
+    </ItemGroup>
 </Project>
