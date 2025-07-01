@@ -1,0 +1,25 @@
+<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:avalonia="clr-namespace:Slate.Avalonia"
+    xmlns:slate="clr-namespace:Slate.Avalonia;assembly=Slate"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="avalonia|SlateRegionControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="Transparent">
+                    <Grid x:Name="PART_RootGrid">
+                        <ContentPresenter
+                            HorizontalAlignment="Stretch"
+                            IsVisible="False"
+                            VerticalAlignment="Stretch"
+                            x:Name="PART_OldContent" />
+                        <ContentPresenter
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            x:Name="PART_NewContent" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
