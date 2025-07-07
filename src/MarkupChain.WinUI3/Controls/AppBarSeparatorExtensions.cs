@@ -2,21 +2,21 @@ namespace MarkupChain.WinUI3.Controls;
 
 public static class AppBarSeparatorExtensions
 {
-    public static T DynamicOverflowOrder<T>(this T appBarButton, int dynamicOverflowOrder) where T : AppBarButton
+    public static T DynamicOverflowOrder<T>(this T appBarSeparator, int dynamicOverflowOrder) where T : AppBarButton
     {
-        appBarButton.DynamicOverflowOrder = dynamicOverflowOrder;
-        return appBarButton;
+        appBarSeparator.DynamicOverflowOrder = dynamicOverflowOrder;
+        return appBarSeparator;
     }
     
-    public static T IsCompact<T>(this T appBarButton, bool isCompact) where T : AppBarButton
+    public static T IsCompact<T>(this T appBarSeparator, bool isCompact) where T : AppBarButton
     {
-        appBarButton.IsCompact = isCompact;
-        return appBarButton;
+        appBarSeparator.IsCompact = isCompact;
+        return appBarSeparator;
     }
 
-    public static T IsInOverflow<T>(this T appBarButton, bool isInOverflow) where T : AppBarButton
+    public static T IsInOverflow<T>(this T appBarSeparator, bool isInOverflow) where T : AppBarButton
     {
-        appBarButton.SetValue(AppBarButton.IsInOverflowProperty, isInOverflow);
-        return appBarButton;
+        appBarSeparator.SetValue(AppBarButton.IsInOverflowProperty, isInOverflow);
+        return appBarSeparator;
     }
 }
