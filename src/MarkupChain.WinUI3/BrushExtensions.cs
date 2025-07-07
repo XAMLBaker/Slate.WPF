@@ -1,6 +1,6 @@
 ﻿namespace MarkupChain.WinUI3
 {
-    //an extension class which able to chaining -Property(=DependencyProperty) affix Properties.
+    // A set of extension methods to allow chaining of dependency property setters.
     public static class BrushExtensions
     {
         public static T Opacity<T>(this T brush, double opacity) where T : Brush

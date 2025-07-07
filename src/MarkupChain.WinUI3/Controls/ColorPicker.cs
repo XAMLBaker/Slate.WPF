@@ -49,7 +49,7 @@ public static class ColorPickerExtensions
     
     public static T IsColorSliderVisible <T>(this T colorPicker, bool isVisible) where T : ColorPicker
     {
-        colorPicker.SetValue(ColorPicker.IsColorPreviewVisibleProperty, isVisible);
+        colorPicker.SetValue(ColorPicker.IsColorSliderVisibleProperty, isVisible);
         return colorPicker;
     }
     
