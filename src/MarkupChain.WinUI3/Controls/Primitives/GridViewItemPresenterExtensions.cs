@@ -1,6 +1,6 @@
 namespace MarkupChain.WinUI3.Controls.Primitives;
 
-public static class GridViewItemPresenter
+public static class GridViewItemPresenterExtensions
 {
     public static T CheckBrush<T>(this T gridViewItemPresenter, Brush checkBrush)
         where T : Microsoft.UI.Xaml.Controls.Primitives.GridViewItemPresenter
