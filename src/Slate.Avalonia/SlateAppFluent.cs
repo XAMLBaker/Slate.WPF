@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Slate.Avalonia
 {
-    internal class SlateFluent : Fluent
+    internal class SlateAppFluent : SlateFluent
     {
         Application _app;
-        public SlateFluent(Application app)
+        public SlateAppFluent(Application app)
         {
             this._app = app;
             this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator<Control>> ();
@@ -25,7 +25,7 @@ namespace Slate.Avalonia
             }
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
-            navi.NavigateToAsync (this._register.InitialLayout.Namespace);
+            navi.NavigateToAsync (RegisterProvider.GetDefineNestedLayout.Namespace);
         }
     }
 }

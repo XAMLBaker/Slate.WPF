@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace Slate.OpenSilver
 {
-    internal class SlateFluent : Fluent
+    internal class SlateAppFluent : SlateFluent
     {
-        public SlateFluent()
+        public SlateAppFluent()
         {
             this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator<FrameworkElement>> ();
         }
@@ -15,7 +15,7 @@ namespace Slate.OpenSilver
             this.Init ();
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
-            navi.NavigateToAsync (this._register.InitialLayout.Namespace);
+            navi.NavigateToAsync (RegisterProvider.GetDefineNestedLayout.Namespace);
         }
     }
 }

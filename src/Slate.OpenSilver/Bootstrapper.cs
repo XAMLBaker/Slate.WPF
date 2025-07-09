@@ -6,7 +6,7 @@ namespace Slate.OpenSilver
     {
         public Bootstrapper()
         {
-            this._fluent = new SlateFluent ();
+            this._fluent = new SlateAppFluent ();
         }
     }
 }

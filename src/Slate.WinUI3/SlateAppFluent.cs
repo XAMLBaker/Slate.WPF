@@ -3,9 +3,9 @@ using Microsoft.UI.Xaml;
 
 namespace Slate.WinUI3;
 
-internal class SlateFluent : Fluent
+internal class SlateAppFluent : SlateFluent
 {
-    public SlateFluent()
+    public SlateAppFluent()
     {
         this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator<FrameworkElement>> ();
         RegisterProvider.SetWindow<SlateWindow> ();
@@ -19,6 +19,6 @@ internal class SlateFluent : Fluent
         main.Activate ();
         var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
-        navi.NavigateToAsync (this._register.InitialLayout.Namespace);
+        navi.NavigateToAsync (RegisterProvider.GetDefineNestedLayout.Namespace);
     }
 }

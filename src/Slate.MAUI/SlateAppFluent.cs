@@ -1,8 +1,8 @@
 ﻿namespace Slate.MAUI
 {
-    internal class SlateFluent : Fluent
+    internal class SlateAppFluent : SlateFluent
     {
-        public SlateFluent()
+        public SlateAppFluent()
         {
             this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator<View>> ();
         }
@@ -14,7 +14,7 @@
             //Application.Current.MainWindow.Show ();
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
-            navi.NavigateToAsync (this._register.InitialLayout.Namespace);
+            navi.NavigateToAsync (RegisterProvider.GetDefineNestedLayout.Namespace);
         }
     }
 }

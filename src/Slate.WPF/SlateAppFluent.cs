@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace Slate.WPF
 {
-    internal class SlateFluent : Fluent
+    internal class SlateAppFluent : SlateFluent
     {
-        public SlateFluent()
+        public SlateAppFluent()
         {
             this.Services.AddSingleton<ILayoutNavigator, LayoutNavigator<FrameworkElement>> ();
             this.Services.AddSingleton<IWindowManager, WindowManager> ();
@@ -19,7 +19,7 @@ namespace Slate.WPF
             Application.Current.MainWindow = (Window)RegisterProvider.Window;
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
-            navi.NavigateToAsync (this._register.InitialLayout.Namespace);
+            navi.NavigateToAsync (RegisterProvider.GetDefineNestedLayout.Namespace);
             Application.Current.MainWindow.Show ();
         }
     }
