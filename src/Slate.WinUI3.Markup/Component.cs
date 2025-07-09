@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-
-namespace Slate.WinUI3.Markup
+﻿namespace Slate.WinUI3.Markup
 {
     public interface IComponent
     {
@@ -9,22 +7,18 @@ namespace Slate.WinUI3.Markup
 
     // CommunityToolkit.Mvvm의 [INotifyPropertyChanged] 사용한다고 가정
     [INotifyPropertyChanged]
-    public abstract partial class Component : ContentControl, IComponent, IShellComponent
+    public abstract partial class Component : SlateComponent, IComponent, IShellComponent
     {
         public object? ComponentStyleKey { get; set; }
 
-        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+        protected Component()
         {
-
-        }
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate ();
-
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
+        }
+        protected virtual void OnLoaded(object sender, RoutedEventArgs e)
+        {
             this.Render ();
-
         }
 
         // WPF의 OnInitialized는 없으니 필요하면 생성자나 Loaded에서 처리

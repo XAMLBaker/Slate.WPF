@@ -7,14 +7,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="slate:SlateComponent">
-                    <Border
+                    <ContentPresenter
                         Margin="{TemplateBinding Margin}"
                         Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter />
-                    </Border>
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Background="{TemplateBinding Background}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -24,19 +24,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="slate:SlateRegionControl">
-                    <Border Background="Transparent">
-                        <Grid x:Name="PART_RootGrid">
-                            <ContentPresenter
-                                x:Name="PART_OldContent"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Visibility="Collapsed" />
-                            <ContentPresenter
-                                x:Name="PART_NewContent"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                        </Grid>
-                    </Border>
+                    <Grid x:Name="PART_RootGrid">
+                        <ContentPresenter
+                            x:Name="PART_OldContent"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Visibility="Collapsed" />
+                        <ContentPresenter
+                            x:Name="PART_NewContent"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

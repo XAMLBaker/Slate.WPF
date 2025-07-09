@@ -92,8 +92,6 @@ namespace Slate.WinUI3
             if (_oldPresenter == null || _newPresenter == null)
                 throw new InvalidOperationException ("PART_OldContent, PART_NewContent가 필요합니다.");
 
-            _newPresenter.Content = Content;
-
             _oldPresenter.Visibility = Visibility.Collapsed;
             _oldPresenter.Opacity = 1;
             _oldPresenter.RenderTransform = new TranslateTransform { X = 0, Y = 0 };
@@ -101,6 +99,7 @@ namespace Slate.WinUI3
             _newPresenter.Visibility = Visibility.Visible;
             _newPresenter.Opacity = 1;
             _newPresenter.RenderTransform = new TranslateTransform { X = 0, Y = 0 };
+            _newPresenter.Content = Content;
         }
 
         public void RegisterControl<T>()
@@ -124,7 +123,9 @@ namespace Slate.WinUI3
         private async Task TransitionAsync(object oldContent, object newContent)
         {
             if (_oldPresenter == null || _newPresenter == null)
+            {
                 return;
+            }
 
             _cts.Cancel ();
             _cts = new CancellationTokenSource ();

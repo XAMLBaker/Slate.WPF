@@ -13,5 +13,9 @@
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <local:SlateRegionControl RegionName="Root" Transition="None" />
+    <local:SlateRegionControl
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        RegionName="Root"
+        Transition="None" />
 </Window>
