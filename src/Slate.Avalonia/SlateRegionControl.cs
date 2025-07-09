@@ -99,6 +99,10 @@ namespace Slate.Avalonia
         private Grid? _rootGrid;
         private CancellationTokenSource _cts = new();
 
+        public SlateRegionControl()
+        {
+        }
+
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
@@ -110,20 +114,21 @@ namespace Slate.Avalonia
             if (_oldPresenter == null || _newPresenter == null)
                 throw new InvalidOperationException("PART_OldContent, PART_NewContent가 필요합니다.");
             
-             this.GetObservable(BindableContentProperty)
-                            .Subscribe(async newContent =>
-                            {
-                                var oldContent = _previousContent;
-                                _previousContent = newContent;
-                                await TransitionAsync(oldContent, newContent);
-                            });
+            this.GetObservable(BindableContentProperty)
+                .Subscribe(async newContent =>
+                {
+                    var oldContent = _previousContent;
+                    _previousContent = newContent;
+                    await TransitionAsync(oldContent, newContent);
+                });
         }
 
         private async Task TransitionAsync(object? oldContent, object? newContent)
         {
             if (_rootGrid == null || _oldPresenter == null || _newPresenter == null)
                 return;
-            _cts.Cancel();
+            if(_cts != null)
+                _cts.Cancel();
             _cts = new CancellationTokenSource();
             var token = _cts.Token;
 
@@ -259,7 +264,7 @@ namespace Slate.Avalonia
         {
             var element = RegisterProvider.Get<T>() as Control;
             if (element != null)
-                RegionManager.Attach(this.RegionName, element);
+                RegionManager.Attach(this.RegionName, (SlateRegionControl)element);
         }
 
         public void Set() => RegionManager.Attach(this.RegionName, this);

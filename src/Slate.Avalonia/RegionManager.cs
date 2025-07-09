@@ -11,10 +11,10 @@ namespace Slate.Avalonia
 
     public partial class RegionManager
     {
-        private static readonly Dictionary<string, SlateRegionControl> _regions = new Dictionary<string, SlateRegionControl> ();
-        private static readonly Dictionary<string, Control> _attachedControls = new Dictionary<string, Control> ();
+        private static readonly Dictionary<string, ContentControl> _regions = new Dictionary<string, ContentControl> ();
+        private static readonly Dictionary<string, ContentControl> _attachedControls = new Dictionary<string, ContentControl> ();
 
-        public static void RegisterRegion(string name, SlateRegionControl host)
+        public static void RegisterRegion(string name, ContentControl host)
         {
             _regions[name] = host;
 
@@ -24,7 +24,7 @@ namespace Slate.Avalonia
             }
         }
 
-        public static void Attach(string name, Control control)
+        public static void Attach(string name, ContentControl control)
         {
             // 기존 부모에서 제거 (필수! WPF는 동시에 하나의 부모만 허용)
             if (control.Parent is ContentControl parent)
@@ -36,7 +36,7 @@ namespace Slate.Avalonia
 
             if (_regions.TryGetValue (name, out var host))
             {
-                host.BindableContent = control;
+                ((SlateRegionControl)host).BindableContent = control;
             }
 
             //if (control is IStatefulControl stateful)

@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slate.OpenSilver", "Slate.O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slate.Avalonia", "Slate.Avalonia\Slate.Avalonia.csproj", "{3DBE8963-CD3A-43C7-821D-58E2AEA1AAEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slate.MAUI", "Slate.MAUI\Slate.MAUI.csproj", "{71DF3E20-0D45-1923-0611-EB69D2B929C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markup", "Markup", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,9 +67,19 @@ Global
 		{3DBE8963-CD3A-43C7-821D-58E2AEA1AAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DBE8963-CD3A-43C7-821D-58E2AEA1AAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DBE8963-CD3A-43C7-821D-58E2AEA1AAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71DF3E20-0D45-1923-0611-EB69D2B929C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71DF3E20-0D45-1923-0611-EB69D2B929C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71DF3E20-0D45-1923-0611-EB69D2B929C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71DF3E20-0D45-1923-0611-EB69D2B929C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F4668ED-1B86-3587-ED69-F6A45436D278} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
+		{17B7D2F1-ECE2-4B0B-B5E6-4EEF6D9B5EBA} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
+		{0558D161-A212-5482-7226-267204C3051D} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
+		{DD338415-6A0D-4739-AF1E-762AF827906C} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A72C9F6B-EDD5-4971-99C5-5B10B9EDEB49}

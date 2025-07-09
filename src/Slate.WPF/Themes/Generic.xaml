@@ -170,14 +170,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type slate:SlateComponent}">
-                    <Border
-                        Margin="{TemplateBinding Margin}"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter />
-                    </Border>
+                    <ContentPresenter />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -187,20 +180,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type slate:SlateRegionControl}">
-                    <Border Background="Transparent">
-                        <Grid x:Name="PART_RootGrid" ClipToBounds="True">
-                            <ContentPresenter
-                                x:Name="PART_OldContent"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Visibility="Collapsed" />
+                    <Grid x:Name="PART_RootGrid" ClipToBounds="True">
+                        <ContentPresenter
+                            x:Name="PART_OldContent"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Visibility="Collapsed" />
 
-                            <ContentPresenter
-                                x:Name="PART_NewContent"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                        </Grid>
-                    </Border>
+                        <ContentPresenter
+                            x:Name="PART_NewContent"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

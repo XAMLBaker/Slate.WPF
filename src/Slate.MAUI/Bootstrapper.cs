@@ -1,4 +1,4 @@
-﻿namespace Slate.WinUI3
+﻿namespace Slate.MAUI
 {
     public class Bootstrapper : BootStrapperBase
     {

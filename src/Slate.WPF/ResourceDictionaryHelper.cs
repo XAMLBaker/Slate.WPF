@@ -17,7 +17,7 @@ namespace Slate.WPF
         /// <param name="resourcePath">리소스 딕셔너리 경로 (예: "Themes/Generic.xaml")</param>
         public static void MergeResourceDictionary(string assemblyName, string resourcePath)
         {
-            if (SlateApplication.Current == null)
+            if (Application.Current == null)
             {
                 // Application 객체가 없으면 처리 불가
                 return;
@@ -33,14 +33,14 @@ namespace Slate.WPF
             var resourceUri = new Uri (uriString, UriKind.Absolute);
 
             // 이미 같은 URI가 포함되어 있는지 확인
-            bool alreadyAdded = SlateApplication.Current.Resources.MergedDictionaries
+            bool alreadyAdded = Application.Current.Resources.MergedDictionaries
                 .OfType<ResourceDictionary> ()
                 .Any (rd => rd.Source != null && rd.Source.Equals (resourceUri));
 
             if (!alreadyAdded)
             {
                 var dict = new ResourceDictionary { Source = resourceUri };
-                SlateApplication.Current.Resources.MergedDictionaries.Add (dict);
+                Application.Current.Resources.MergedDictionaries.Add (dict);
             }
         }
     }

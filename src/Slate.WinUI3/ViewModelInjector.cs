@@ -1,6 +1,5 @@
 ﻿using DryIoc;
 using Microsoft.UI.Xaml;
-using System.Windows;
 
 namespace Slate.WinUI3
 {

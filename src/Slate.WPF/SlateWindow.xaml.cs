@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shell;
 
 namespace Slate.WPF
 {
@@ -21,3 +22,4 @@ namespace Slate.WPF
         }
     }
 }
+

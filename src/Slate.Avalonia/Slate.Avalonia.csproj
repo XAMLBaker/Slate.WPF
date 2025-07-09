@@ -15,17 +15,11 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="DryIoc.dll" Version="5.4.3" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
         <PackageReference Include="ReactiveUI" Version="20.4.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Slate\src\Slate\Slate.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <AvaloniaXaml Update="SlateWindow.axaml">
-        <DependentUpon>ModuleCatalog.cs</DependentUpon>
-      </AvaloniaXaml>
     </ItemGroup>
 </Project>
