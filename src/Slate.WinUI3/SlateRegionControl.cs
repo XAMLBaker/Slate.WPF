@@ -80,7 +80,6 @@ namespace Slate.WinUI3
 
         private ContentPresenter _newPresenter;
         private ContentPresenter _oldPresenter;
-        private UIElement element;
 
         protected override void OnApplyTemplate()
         {
@@ -91,7 +90,8 @@ namespace Slate.WinUI3
 
             if (_oldPresenter == null || _newPresenter == null)
                 throw new InvalidOperationException ("PART_OldContent, PART_NewContent가 필요합니다.");
-
+          
+            _newPresenter.Content = Content;
             _oldPresenter.Visibility = Visibility.Collapsed;
             _oldPresenter.Opacity = 1;
             _oldPresenter.RenderTransform = new TranslateTransform { X = 0, Y = 0 };
@@ -99,9 +99,10 @@ namespace Slate.WinUI3
             _newPresenter.Visibility = Visibility.Visible;
             _newPresenter.Opacity = 1;
             _newPresenter.RenderTransform = new TranslateTransform { X = 0, Y = 0 };
-            _newPresenter.Content = Content;
+
         }
 
+        private UIElement element;
         public void RegisterControl<T>()
         {
             element = (UIElement)RegisterProvider.Get<T> ();

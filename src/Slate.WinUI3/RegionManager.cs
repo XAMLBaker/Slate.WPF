@@ -28,7 +28,6 @@ namespace Slate.WinUI3
 
         public static void Attach(string name, UIElement control)
         {
-            // 기존 부모에서 제거 (필수! WPF는 동시에 하나의 부모만 허용)
             if (VisualTreeHelper.GetParent (control) is ContentControl parent)
             {
                 parent.Content = null;

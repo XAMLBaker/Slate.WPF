@@ -7,14 +7,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="slate:SlateComponent">
-                    <ContentPresenter
+                    <!--<ContentPresenter
                         Margin="{TemplateBinding Margin}"
                         Padding="{TemplateBinding Padding}"
                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                        Background="{TemplateBinding Background}" />
+                        Background="{TemplateBinding Background}" />-->
+                    <ContentPresenter />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
