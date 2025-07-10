@@ -3,23 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:Slate.WinUI3.Converters"
     xmlns:slate="using:Slate.WinUI3">
-    <Style TargetType="slate:SlateComponent">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="slate:SlateComponent">
-                    <!--<ContentPresenter
-                        Margin="{TemplateBinding Margin}"
-                        Padding="{TemplateBinding Padding}"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                        Background="{TemplateBinding Background}" />-->
-                    <ContentPresenter />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
     <Style TargetType="slate:SlateRegionControl">
         <Setter Property="Template">

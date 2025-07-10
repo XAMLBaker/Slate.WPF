@@ -1,4 +1,6 @@
-﻿namespace Slate.WinUI3.Markup
+﻿using Microsoft.UI.Xaml.Controls;
+
+namespace Slate.WinUI3.Markup
 {
     public interface IComponent
     {
@@ -7,12 +9,12 @@
 
     // CommunityToolkit.Mvvm의 [INotifyPropertyChanged] 사용한다고 가정
     [INotifyPropertyChanged]
-    public abstract partial class Component : SlateComponent, IComponent, IShellComponent
+    public abstract partial class Component : ContentControl, IComponent, IShellComponent
     {
         public object? ComponentStyleKey { get; set; }
-
         protected Component()
         {
+            this.DefaultStyleKey = typeof (SlateComponent);
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
         }
