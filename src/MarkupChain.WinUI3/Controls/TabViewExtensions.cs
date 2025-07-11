@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.Foundation;
 
 namespace MarkupChain.WinUI3.Controls
@@ -98,6 +99,21 @@ namespace MarkupChain.WinUI3.Controls
         public static T OnTabClosed<T>(this T tabView, TypedEventHandler<TabView, TabViewTabCloseRequestedEventArgs> action) where T : TabView
         {
             tabView.TabCloseRequested += action;
+            return tabView;
+        }
+
+        public static T KeyboardAccelerators<T>(this T tabView, params KeyboardAccelerator[] keyboardAccelerator) where T : TabView
+        {
+            foreach (var item in keyboardAccelerator)
+            {
+                tabView.KeyboardAccelerators.Add (item);
+            }
+            return tabView;
+        }
+
+        public static T KeyboardAccelerators<T>(this T tabView, IList<KeyboardAccelerator> keyboardAccelerator) where T : TabView
+        {
+            tabView.KeyboardAccelerators (keyboardAccelerator.ToArray ());
             return tabView;
         }
     }
