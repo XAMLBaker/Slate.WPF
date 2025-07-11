@@ -45,16 +45,44 @@ namespace MarkupChain.WinUI3.Controls
             pivot.SetValue (TabView.SelectedItemProperty, selectedItem);
             return pivot;
         }
+        public static T TabItemTemplate<T>(this T pivot, object selectedItem) where T : TabView
+        {
+            pivot.SetValue (TabView.TabItemTemplateProperty, selectedItem);
+            return pivot;
+        }
+        public static T TabItemTemplateSelector<T>(this T pivot, object selectedItem) where T : TabView
+        {
+            pivot.SetValue (TabView.TabItemTemplateSelectorProperty, selectedItem);
+            return pivot;
+        }
+        public static T TabItemsSource<T>(this T pivot, object tabItemsSource) where T : TabView
+        {
+            pivot.SetValue (TabView.TabItemsSourceProperty, tabItemsSource);
+            return pivot;
+        }
+
         public static T TabStripFooter<T>(this T pivot, object tabStripFooter) where T : TabView
         {
             pivot.SetValue (TabView.TabStripFooterProperty, tabStripFooter);
             return pivot;
         }
+        public static T TabStripFooterTemplate<T>(this T pivot, DataTemplate tabStripFooterTemplate) where T : TabView
+        {
+            pivot.SetValue (TabView.TabStripFooterTemplateProperty, tabStripFooterTemplate);
+            return pivot;
+        }
+
         public static T TabStripHeader<T>(this T pivot, object tabStripHeader) where T : TabView
         {
             pivot.SetValue (TabView.TabStripHeaderProperty, tabStripHeader);
             return pivot;
         }
+        public static T TabStripHeaderTemplate<T>(this T pivot, DataTemplate tabStripHeaderTemplate) where T : TabView
+        {
+            pivot.SetValue (TabView.TabStripHeaderTemplateProperty, tabStripHeaderTemplate);
+            return pivot;
+        }
+
         public static T TabWidthMode<T>(this T pivot, TabViewWidthMode tabWidthMode) where T : TabView
         {
             pivot.SetValue (TabView.TabWidthModeProperty, tabWidthMode);
