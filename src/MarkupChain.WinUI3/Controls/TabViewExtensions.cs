@@ -1,103 +1,104 @@
-﻿using Windows.Foundation;
+﻿using System;
+using Windows.Foundation;
 
 namespace MarkupChain.WinUI3.Controls
 {
     public static class TabViewExtensions
     {
-        public static T AllowDropTabs<T>(this T pivot, bool allowDropTabs) where T : TabView
+        public static T AllowDropTabs<T>(this T tabView, bool allowDropTabs) where T : TabView
         {
-            pivot.SetValue (TabView.AllowDropTabsProperty, allowDropTabs);
-            return pivot;
+            tabView.SetValue (TabView.AllowDropTabsProperty, allowDropTabs);
+            return tabView;
         }
 
-        public static T CanDragTabs<T>(this T pivot, bool canDragTabs) where T : TabView
+        public static T CanDragTabs<T>(this T tabView, bool canDragTabs) where T : TabView
         {
-            pivot.SetValue (TabView.CanDragTabsProperty, canDragTabs);
-            return pivot;
+            tabView.SetValue (TabView.CanDragTabsProperty, canDragTabs);
+            return tabView;
         }
-        public static T CanReorderTabs<T>(this T pivot, bool canReorderTabs) where T : TabView
+        public static T CanReorderTabs<T>(this T tabView, bool canReorderTabs) where T : TabView
         {
-            pivot.SetValue (TabView.CanReorderTabsProperty, canReorderTabs);
-            return pivot;
+            tabView.SetValue (TabView.CanReorderTabsProperty, canReorderTabs);
+            return tabView;
         }
-        public static T CanTearOutTabs<T>(this T pivot, bool canTearOutTabs) where T : TabView
+        public static T CanTearOutTabs<T>(this T tabView, bool canTearOutTabs) where T : TabView
         {
-            pivot.SetValue (TabView.CanTearOutTabsProperty, canTearOutTabs);
-            return pivot;
+            tabView.SetValue (TabView.CanTearOutTabsProperty, canTearOutTabs);
+            return tabView;
         }
-        public static T CloseButtonOverlayMode<T>(this T pivot, TabViewCloseButtonOverlayMode closeButtonOverlayMode) where T : TabView
+        public static T CloseButtonOverlayMode<T>(this T tabView, TabViewCloseButtonOverlayMode closeButtonOverlayMode) where T : TabView
         {
-            pivot.SetValue (TabView.CloseButtonOverlayModeProperty, closeButtonOverlayMode);
-            return pivot;
+            tabView.SetValue (TabView.CloseButtonOverlayModeProperty, closeButtonOverlayMode);
+            return tabView;
         }
-        public static T IsAddTabButtonVisible<T>(this T pivot, bool isAddTabButtonVisible) where T : TabView
+        public static T IsAddTabButtonVisible<T>(this T tabView, bool isAddTabButtonVisible) where T : TabView
         {
-            pivot.SetValue (TabView.IsAddTabButtonVisibleProperty, isAddTabButtonVisible);
-            return pivot;
+            tabView.SetValue (TabView.IsAddTabButtonVisibleProperty, isAddTabButtonVisible);
+            return tabView;
         }
-        public static T SelectedIndex<T>(this T pivot, int selectedIndex) where T : TabView
+        public static T SelectedIndex<T>(this T tabView, int selectedIndex) where T : TabView
         {
-            pivot.SetValue (TabView.SelectedIndexProperty, selectedIndex);
-            return pivot;
+            tabView.SetValue (TabView.SelectedIndexProperty, selectedIndex);
+            return tabView;
         }
-        public static T SelectedItem<T>(this T pivot, object selectedItem) where T : TabView
+        public static T SelectedItem<T>(this T tabView, object selectedItem) where T : TabView
         {
-            pivot.SetValue (TabView.SelectedItemProperty, selectedItem);
-            return pivot;
+            tabView.SetValue (TabView.SelectedItemProperty, selectedItem);
+            return tabView;
         }
-        public static T TabItemTemplate<T>(this T pivot, object selectedItem) where T : TabView
+        public static T TabItemTemplate<T>(this T tabView, object selectedItem) where T : TabView
         {
-            pivot.SetValue (TabView.TabItemTemplateProperty, selectedItem);
-            return pivot;
+            tabView.SetValue (TabView.TabItemTemplateProperty, selectedItem);
+            return tabView;
         }
-        public static T TabItemTemplateSelector<T>(this T pivot, object selectedItem) where T : TabView
+        public static T TabItemTemplateSelector<T>(this T tabView, object selectedItem) where T : TabView
         {
-            pivot.SetValue (TabView.TabItemTemplateSelectorProperty, selectedItem);
-            return pivot;
+            tabView.SetValue (TabView.TabItemTemplateSelectorProperty, selectedItem);
+            return tabView;
         }
-        public static T TabItemsSource<T>(this T pivot, object tabItemsSource) where T : TabView
+        public static T TabItemsSource<T>(this T tabView, object tabItemsSource) where T : TabView
         {
-            pivot.SetValue (TabView.TabItemsSourceProperty, tabItemsSource);
-            return pivot;
-        }
-
-        public static T TabStripFooter<T>(this T pivot, object tabStripFooter) where T : TabView
-        {
-            pivot.SetValue (TabView.TabStripFooterProperty, tabStripFooter);
-            return pivot;
-        }
-        public static T TabStripFooterTemplate<T>(this T pivot, DataTemplate tabStripFooterTemplate) where T : TabView
-        {
-            pivot.SetValue (TabView.TabStripFooterTemplateProperty, tabStripFooterTemplate);
-            return pivot;
+            tabView.SetValue (TabView.TabItemsSourceProperty, tabItemsSource);
+            return tabView;
         }
 
-        public static T TabStripHeader<T>(this T pivot, object tabStripHeader) where T : TabView
+        public static T TabStripFooter<T>(this T tabView, object tabStripFooter) where T : TabView
         {
-            pivot.SetValue (TabView.TabStripHeaderProperty, tabStripHeader);
-            return pivot;
+            tabView.SetValue (TabView.TabStripFooterProperty, tabStripFooter);
+            return tabView;
         }
-        public static T TabStripHeaderTemplate<T>(this T pivot, DataTemplate tabStripHeaderTemplate) where T : TabView
+        public static T TabStripFooterTemplate<T>(this T tabView, DataTemplate tabStripFooterTemplate) where T : TabView
         {
-            pivot.SetValue (TabView.TabStripHeaderTemplateProperty, tabStripHeaderTemplate);
-            return pivot;
-        }
-
-        public static T TabWidthMode<T>(this T pivot, TabViewWidthMode tabWidthMode) where T : TabView
-        {
-            pivot.SetValue (TabView.TabWidthModeProperty, tabWidthMode);
-            return pivot;
+            tabView.SetValue (TabView.TabStripFooterTemplateProperty, tabStripFooterTemplate);
+            return tabView;
         }
 
-        public static T OnAddTab<T>(this T pivot, TypedEventHandler<TabView, object> action ) where T : TabView
+        public static T TabStripHeader<T>(this T tabView, object tabStripHeader) where T : TabView
         {
-            pivot.AddTabButtonClick += action;
-            return pivot;
+            tabView.SetValue (TabView.TabStripHeaderProperty, tabStripHeader);
+            return tabView;
         }
-        public static T OnTabClosed<T>(this T pivot, TypedEventHandler<TabView, TabViewTabCloseRequestedEventArgs> action) where T : TabView
+        public static T TabStripHeaderTemplate<T>(this T tabView, DataTemplate tabStripHeaderTemplate) where T : TabView
         {
-            pivot.TabCloseRequested += action;
-            return pivot;
+            tabView.SetValue (TabView.TabStripHeaderTemplateProperty, tabStripHeaderTemplate);
+            return tabView;
+        }
+
+        public static T TabWidthMode<T>(this T tabView, TabViewWidthMode tabWidthMode) where T : TabView
+        {
+            tabView.SetValue (TabView.TabWidthModeProperty, tabWidthMode);
+            return tabView;
+        }
+
+        public static T OnAddTab<T>(this T tabView, TypedEventHandler<TabView, object> action ) where T : TabView
+        {
+            tabView.AddTabButtonClick += action;
+            return tabView;
+        }
+        public static T OnTabClosed<T>(this T tabView, TypedEventHandler<TabView, TabViewTabCloseRequestedEventArgs> action) where T : TabView
+        {
+            tabView.TabCloseRequested += action;
+            return tabView;
         }
     }
 }
