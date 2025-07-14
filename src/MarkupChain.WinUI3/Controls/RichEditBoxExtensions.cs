@@ -1,4 +1,6 @@
-﻿namespace MarkupChain.WinUI3.Controls
+﻿using Windows.Foundation;
+
+namespace MarkupChain.WinUI3.Controls
 {
     public static partial class RichEditBoxExtensions
     {
@@ -115,6 +117,18 @@
         public static T TextWrapping<T>(this T richEditBox, TextWrapping textWrapping) where T : RichEditBox
         {
             richEditBox.SetValue (RichEditBox.TextWrappingProperty, textWrapping);
+            return richEditBox;
+        }
+
+        public static T OnTextChanged<T>(this T richEditBox, RoutedEventHandler action) where T : RichEditBox
+        {
+            richEditBox.TextChanged += action;
+            return richEditBox;
+        }
+
+        public static T OnTextChanging<T>(this T richEditBox, TypedEventHandler<RichEditBox, RichEditBoxTextChangingEventArgs> action) where T : RichEditBox
+        {
+            richEditBox.TextChanging += action;
             return richEditBox;
         }
     }

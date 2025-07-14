@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace MarkupChain.WinUI3;
 
 public static class UIElementExtensions
@@ -274,6 +276,23 @@ public static class UIElementExtensions
     {
         element.SetValue(UIElement.XYFocusUpProperty, xyFocusUp);
         return element;
+    }
+
+
+
+    public static T KeyboardAccelerators<T>(this T tabView, params KeyboardAccelerator[] keyboardAccelerator) where T : UIElement
+    {
+        foreach (var item in keyboardAccelerator)
+        {
+            tabView.KeyboardAccelerators.Add (item);
+        }
+        return tabView;
+    }
+
+    public static T KeyboardAccelerators<T>(this T tabView, IList<KeyboardAccelerator> keyboardAccelerator) where T : UIElement
+    {
+        tabView.KeyboardAccelerators (keyboardAccelerator.ToArray ());
+        return tabView;
     }
 
 }
