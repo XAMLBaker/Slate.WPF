@@ -51,11 +51,7 @@
         private View _newContent;
         private CancellationTokenSource _cts = new ();
         private ContentView content;
-        public void RegisterControl<T>()
-        {
-            content = (ContentView)RegisterProvider.Get<T> ();
-            RegionManager.Attach (this.RegionName, content);
-        }
+
         protected override async void OnBindingContextChanged()
         {
             base.OnBindingContextChanged ();
@@ -142,15 +138,6 @@
                 default:
                     return view.FadeTo (1, duration);
             }
-        }
-    }
-
-    public static class RegionControlExtensions
-    {
-        public static SlateRegionControl BindingControl<T>(this SlateRegionControl control)
-        {
-            control.RegisterControl<T> ();
-            return control;
         }
     }
 }
