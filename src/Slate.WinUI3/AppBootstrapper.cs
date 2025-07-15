@@ -9,8 +9,9 @@ namespace Slate.WinUI3
     {
         public AppBootstrapper() {
 
-            this._containerRegistry.Services.AddSingleton<ILayoutNavigator, LayoutNavigator<FrameworkElement>> ();
             RegisterProvider.SetWindow<SlateWindow> ();
+
+            Services = new ServiceCollection ();
         }
         public AppBootstrapper Window<T>()
         {
@@ -26,10 +27,13 @@ namespace Slate.WinUI3
                     "초기 Layout이 설정되지 않았습니다. Slate.StartLayout<T>()를 Render() 안에서 반드시 호출하세요."
                 );
 
-            Load ();
+            RegisterServices (Services);
+
+            ViewModelMapperLoad ();
 
             IContainer container = this.CreateContainer ();
             RegisterProvider.SetContainer (container);
+            ViewModelInjector.SetContainer (container);
 
             var main = (Window)container.Resolve (RegisterProvider.Window);
             WindowManager.Register (main);
@@ -37,6 +41,12 @@ namespace Slate.WinUI3
             var navi = (ILayoutNavigator)RegisterProvider.Get<ILayoutNavigator> ();
 
             navi.NavigateToAsync (RegisterProvider.GetDefineNestedLayout.Namespace);
+        }
+
+        protected override void RegisterServices(IServiceCollection services)
+        {
+            Services.AddSingleton<ILayoutNavigator, LayoutNavigator<FrameworkElement>> ();
+            base.RegisterServices (services);
         }
     }
 }
