@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using DryIoc;
 
 namespace Slate.Avalonia
 {
@@ -21,7 +20,7 @@ namespace Slate.Avalonia
             {
                 if ((bool)e.OldValue || control is not Control view)
                     return;
-                var mapper = RegisterProvider.Container.Resolve<IViewModelMapper>();
+                var mapper = RegisterProvider.Get<IViewModelMapper>();
                 var mapping = mapper.GetViewModel(control.GetType());
                 if (mapping is null)
                     return;
@@ -29,7 +28,6 @@ namespace Slate.Avalonia
                 var (vmType, reuse) = mapping.Value;
                 var vm = ViewModelFactory.ResolveOrCreate(vmType, reuse);
                 control.DataContext = vm;
-                    
             });
         }
     }

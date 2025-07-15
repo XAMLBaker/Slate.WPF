@@ -2,9 +2,9 @@
 
 public  static class Extensions
 {
-    public static MauiAppBuilder UseSlate<T>(this MauiAppBuilder builder) where T : Bootstrapper
+    public static MauiAppBuilder UseSlate<T>(this MauiAppBuilder builder) where T : AppBootstrapper
     {
-        var bootstrapper = (Bootstrapper)Activator.CreateInstance(typeof(T));
+        var bootstrapper = (AppBootstrapper)Activator.CreateInstance(typeof(T));
         bootstrapper.Run ();
         return builder;
     }

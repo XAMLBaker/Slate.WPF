@@ -23,7 +23,7 @@ namespace Slate.WPF
         }
         public IWindowManager Background(Brush brush)
         {
-            var window = (Window)RegisterProvider.Window;
+            var window = (Window)this._container.Resolve(RegisterProvider.Window);
 
             window.Background = brush;
             return this;
@@ -31,7 +31,7 @@ namespace Slate.WPF
 
         public IWindowManager Size(double width, double height)
         {
-            var window = (Window)RegisterProvider.Window;
+            var window = (Window)this._container.Resolve (RegisterProvider.Window);
 
             window.Width = width;
             window.Height = height;
@@ -41,7 +41,7 @@ namespace Slate.WPF
 
         public IWindowManager SizeToContent(SizeToContent sizeToContent)
         {
-            var window = (Window)RegisterProvider.Window;
+            var window = (Window)this._container.Resolve (RegisterProvider.Window);
 
             window.SizeToContent =sizeToContent;
 

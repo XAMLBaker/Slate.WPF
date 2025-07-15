@@ -110,11 +110,6 @@ namespace Slate.WPF
 
 
         private UIElement element;
-        public void RegisterControl<T>()
-        {
-            element = (UIElement)RegisterProvider.Get<T> ();
-            RegionManager.Attach (this.RegionName, element);
-        }
 
         public void Set()
         {
@@ -261,15 +256,6 @@ namespace Slate.WPF
 
             sb.Children.Add (animX);
             sb.Children.Add (animY);
-        }
-    }
-
-    public static class RegionControlExtensions
-    {
-        public static SlateRegionControl BindingControl<T>(this SlateRegionControl control)
-        {
-            control.RegisterControl<T> ();
-            return control;
         }
     }
 }

@@ -5,6 +5,13 @@ namespace Slate.WPF
 {
     public static class ViewModelInjector
     {
+        public static IContainer _container { get; private set; }
+
+        public static void SetContainer(IContainer container)
+        {
+            _container = container;
+        }
+
         public static readonly DependencyProperty AutoWireViewModelProperty =
           DependencyProperty.RegisterAttached (
               "AutoWireViewModel",
@@ -23,7 +30,7 @@ namespace Slate.WPF
             if (d is not FrameworkElement view || (bool)e.NewValue != true)
                 return;
 
-            var mapper = RegisterProvider.Container.Resolve<IViewModelMapper> ();
+            var mapper = _container.Resolve<IViewModelMapper> ();
             var mapping = mapper.GetViewModel (view.GetType ());
             if (mapping is null)
                 return;
