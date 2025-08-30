@@ -14,7 +14,7 @@ namespace Slate.WinUI3.Markup
         public object? ComponentStyleKey { get; set; }
         protected Component()
         {
-            this.DefaultStyleKey = typeof (SlateComponent);
+            this.DefaultStyleKey = typeof (Component);
             this.DataContext = this;
             this.Loaded += this.OnLoaded;
         }
