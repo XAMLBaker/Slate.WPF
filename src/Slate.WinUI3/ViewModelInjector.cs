@@ -35,8 +35,7 @@ namespace Slate.WinUI3
             if (mapping is null)
                 return;
 
-            var (vmType, reuse) = mapping.Value;
-            var vm = ViewModelFactory.ResolveOrCreate (vmType, reuse);
+            var vm = ViewModelFactory.ResolveOrCreate (mapping);
             view.DataContext = vm;
         }
     }
