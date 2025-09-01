@@ -5,8 +5,12 @@
         void Render();
     }
     [INotifyPropertyChanged]
-    public abstract partial class BaseComponent : SlateComponent, IComponent, IShellComponent
+    public abstract partial class BaseComponent : ContentControl, IComponent, IShellComponent
     {
+        static BaseComponent()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata (typeof (BaseComponent), new FrameworkPropertyMetadata (typeof (BaseComponent)));
+        }
         public BaseComponent()
         {
             this.DataContext = this;
@@ -37,8 +41,12 @@
 
 
     [INotifyPropertyChanged]
-    public abstract partial class Component : SlateComponent, IComponent, IShellComponent
+    public abstract partial class Component : ContentControl, IComponent, IShellComponent
     {
+        static Component()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata (typeof (Component), new FrameworkPropertyMetadata (typeof (Component)));
+        }
         public object? ComponentStyleKey { get; set; }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
