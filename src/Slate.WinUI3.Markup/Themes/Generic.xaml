@@ -2,12 +2,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:Slate.WinUI3.Converters"
-    xmlns:slate="using:Slate.WinUI3.Markup">
-    <Style TargetType="slate:Component">
+    xmlns:markup="using:Slate.WinUI3.Markup">
+    <Style TargetType="markup:Component">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="slate:Component">
-                    <ContentPresenter
+                <ControlTemplate TargetType="markup:Component">
+
+                    <!--<ContentPresenter
                         x:Name="PART_Content"
                         Margin="{TemplateBinding Margin}"
                         Padding="{TemplateBinding Padding}"
@@ -16,9 +19,7 @@
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                         Background="{TemplateBinding Background}"
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                        ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                        Content="{TemplateBinding Content}" />-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

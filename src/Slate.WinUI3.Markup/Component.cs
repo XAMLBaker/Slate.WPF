@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Markup;
 
 namespace Slate.WinUI3.Markup
 {
@@ -8,6 +9,7 @@ namespace Slate.WinUI3.Markup
     }
 
     // CommunityToolkit.Mvvm의 [INotifyPropertyChanged] 사용한다고 가정
+    [ContentProperty (Name = "Content")]
     [INotifyPropertyChanged]
     public abstract partial class Component : ContentControl, IComponent, IShellComponent
     {
@@ -39,7 +41,16 @@ namespace Slate.WinUI3.Markup
 
             if (element != null)
             {
-                this.Content = element;
+                if (!DispatcherQueue.HasThreadAccess)
+                {
+                    DispatcherQueue.TryEnqueue (() => this.Content = element);
+                    (element as FrameworkElement)?.UpdateLayout ();
+                }
+                else
+                {
+                    this.Content = element;
+                    (element as FrameworkElement)?.UpdateLayout ();
+                }
             }
 
             OnRender (this);

@@ -14,5 +14,15 @@ namespace MarkupChain.WinUI3.Controls
             panel.Background(BrushTool.Get(color));
             return panel;
         }
+
+        public static T Children<T>(this T panel, params FrameworkElement[] elements) where T :Panel
+        {
+            foreach(var children in elements)
+            {
+                panel.Children.Add (children);
+            }
+
+            return panel;
+        }
     }
 }

@@ -104,27 +104,29 @@ namespace MarkupChain.WinUI3.Controls
             return false;
         }
 
-        public static T AddChild<T>(this T grid, FrameworkElement child) where T : Grid
+        public static T AddChild<T>(this T grid, UIElement element) where T : Grid
         {
-            grid.Children.Add (child);
+            grid.Children.Add (element);
             return grid;
         }
 
-        public static T AddChild<T>(this T grid, FrameworkElement child, int row = 0, int column = 0) where T : Grid
+        public static T AddChild<T>(this T grid, UIElement element, int row = 0, int column = 0) where T : Grid
         {
-            child.Row (row);
-            child.Column (column);
-            grid.Children.Add (child);
+            var _element = (FrameworkElement)element;
+            _element.Row (row);
+            _element.Column (column);
+            grid.Children.Add (element);
             return grid;
         }
 
-        public static T AddChild<T>(this T grid, FrameworkElement child, int row, int column, int rowSpan, int columnSpan) where T : Grid
+        public static T AddChild<T>(this T grid, UIElement element, int row, int column, int rowSpan, int columnSpan) where T : Grid
         {
-            child.Row (row);
-            child.Column (column);
-            child.RowSpan (rowSpan);
-            child.ColumnSpan (columnSpan);
-            grid.Children.Add (child);
+            var _element = (FrameworkElement)element;
+            _element.Row (row);
+            _element.Column (column);
+            _element.RowSpan (rowSpan);
+            _element.ColumnSpan (columnSpan);
+            grid.Children.Add (element);
             return grid;
         }
     }

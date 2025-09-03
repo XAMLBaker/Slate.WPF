@@ -1,13 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Windows.Foundation;
 
 namespace MarkupChain.WinUI3.Controls
 {
-    public static class TextBoxExtensions
+    public static partial class TextBoxExtensions
     {
+        public static T BorderBrush<T>(this T textBox, Brush color) where T : TextBox
+        {
+            textBox.SetValue (TextBox.BorderBrushProperty, color);
+            return textBox;
+        }
+
+        public static T BorderThickness<T>(this T textBox, Thickness thickness) where T : TextBox
+        {
+            textBox.SetValue (TextBox.BorderThicknessProperty, thickness);
+            return textBox;
+        }
         public static T AcceptsReturn<T>(this T textBox, bool acceptsReturn) where T : TextBox
         {
             textBox.SetValue (TextBox.AcceptsReturnProperty, acceptsReturn);
@@ -151,6 +158,18 @@ namespace MarkupChain.WinUI3.Controls
         public static T TextWrapping<T>(this T textBox, TextWrapping textWrapping) where T : TextBox
         {
             textBox.SetValue (TextBox.TextWrappingProperty, textWrapping);
+            return textBox;
+        }
+
+        public static T OnTextChanged<T>(this T textBox, TextChangedEventHandler action) where T : TextBox
+        {
+            textBox.TextChanged += action;
+            return textBox;
+        }
+
+        public static T OnTextChanging<T>(this T textBox, TypedEventHandler<TextBox, TextBoxTextChangingEventArgs> action) where T : TextBox
+        {
+            textBox.TextChanging += action;
             return textBox;
         }
     }
